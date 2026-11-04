@@ -2,13 +2,21 @@ import { Project, SkillCategory, TimelineItem } from '../types';
 
 export const PERSONAL_INFO = {
   name: 'Jhon Noel Baculpo',
-  initials: 'JB',
+  initials: 'JNB',
   title: 'Full-Stack Developer | Software Developer | IT Enthusiast',
+  roles: [
+    'Full-Stack Developer',
+    'Software Developer',
+    'Mobile App Developer',
+    'IT Enthusiast',
+  ],
+  profileImage: '/images/profile.jpg',
+  logoImage: '/images/logo-jnb.jpg',
   shortIntro:
     'I build modern web and mobile applications, intelligent software solutions, and practical digital experiences. I enjoy transforming ideas into functional applications through clean code, thoughtful design, and modern technologies.',
   status: 'Open to Internships, Junior Roles & Freelance Projects',
   isAvailable: true,
-  email: 'jhonnoel.dev@gmail.com', // Editable placeholder
+  email: 'baculpojhonnoele@gmail.com',
   github: 'https://github.com/JanNowel',
   linkedin: 'https://linkedin.com/in/jhonnoelbaculpo', // Editable placeholder
   location: 'Philippines', // Editable placeholder

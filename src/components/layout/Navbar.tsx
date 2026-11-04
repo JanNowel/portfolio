@@ -29,14 +29,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Background blur toggle
       if (window.scrollY > 30) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
 
-      // Active section detection
       const sections = NAV_ITEMS.map((item) => item.href.substring(1));
       const scrollPosition = window.scrollY + 200;
 
@@ -71,7 +69,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
     if (onOpenCVModal) {
       onOpenCVModal();
     } else {
-      // Fallback action: Alert / open link
       window.open('#contact', '_self');
     }
   };
@@ -79,15 +76,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
             ? 'py-3.5 bg-[#080808]/80 backdrop-blur-xl border-b border-white/[0.07] shadow-lg shadow-black/40'
             : 'py-6 bg-transparent'
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Brand Monogram */}
+            {/* Brand Monogram / Logo */}
             <a
               href="#home"
               onClick={(e) => {
@@ -96,13 +92,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
               }}
               className="group flex items-center gap-3 relative focus:outline-none"
             >
-              <div className="w-10 h-10 rounded-xl bg-[#141418] border border-white/10 flex items-center justify-center font-mono font-black text-lg tracking-tight text-white group-hover:border-accent-violet/60 group-hover:shadow-glow-violet transition-all duration-300">
-                <span className="bg-gradient-to-br from-white via-purple-200 to-accent-violet bg-clip-text text-transparent">
-                  {PERSONAL_INFO.initials}
-                </span>
+              <div className="w-10 h-10 rounded-xl bg-[#141418] border border-white/10 overflow-hidden flex items-center justify-center p-0.5 group-hover:border-cyan-400/60 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.35)] transition-all duration-300">
+                <img
+                  src={PERSONAL_INFO.logoImage}
+                  alt="JNB Logo"
+                  className="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
+                />
               </div>
               <div className="hidden sm:block">
-                <div className="text-sm font-bold text-white tracking-tight group-hover:text-accent-violet-light transition-colors">
+                <div className="text-sm font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">
                   {PERSONAL_INFO.name}
                 </div>
                 <div className="text-[10px] font-mono text-zinc-400 tracking-wider uppercase">
@@ -121,9 +119,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
                   <button
                     key={item.name}
                     onClick={() => handleNavClick(item.href)}
-                    className={`relative px-4 py-1.5 text-xs font-medium tracking-wide transition-colors duration-200 rounded-full focus:outline-none ${
-                      isActive ? 'text-white' : 'text-zinc-400 hover:text-white'
-                    }`}
+                    className={`relative px-4 py-1.5 text-xs font-medium tracking-wide transition-colors duration-200 rounded-full focus:outline-none ${isActive ? 'text-white' : 'text-zinc-400 hover:text-white'
+                      }`}
                   >
                     {isActive && (
                       <motion.div
@@ -194,11 +191,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
                   <button
                     key={item.name}
                     onClick={() => handleNavClick(item.href)}
-                    className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-colors text-left ${
-                      isActive
+                    className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-colors text-left ${isActive
                         ? 'bg-accent-violet/20 text-white border border-accent-violet/30'
                         : 'text-zinc-300 hover:text-white hover:bg-white/5'
-                    }`}
+                      }`}
                   >
                     <span>{item.name}</span>
                     {isActive && <div className="w-1.5 h-1.5 rounded-full bg-accent-violet" />}

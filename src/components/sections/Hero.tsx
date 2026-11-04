@@ -1,10 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, FileDown, Code2 } from 'lucide-react';
+import { Github, Linkedin, FileDown, Code2, Sparkles, CheckCircle2, Terminal } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 import { InteractiveHeroCanvas } from '../3d/InteractiveHeroCanvas';
 import { FloatingTechElements } from '../3d/FloatingTechElements';
 import { MagneticButton } from '../ui/MagneticButton';
+import { TiltCard } from '../ui/TiltCard';
+import { TypewriterText } from '../ui/TypewriterText';
 import { triggerConfetti } from '../../utils/confetti';
 import { fadeInUp, staggerContainer } from '../../utils/animations';
 
@@ -36,12 +38,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden bg-[#080808]"
+      className="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden bg-[#080808]"
     >
       {/* 1. Atmospheric Ambient Lighting / Gradients */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-gradient-to-tr from-accent-violet/20 via-purple-600/10 to-accent-blue/15 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/3 left-10 w-[300px] h-[300px] bg-accent-violet/10 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-20 right-10 w-[350px] h-[350px] bg-accent-blue/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-gradient-to-tr from-cyan-500/15 via-accent-violet/15 to-accent-blue/15 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 right-10 w-[380px] h-[380px] bg-accent-violet/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-20 left-10 w-[350px] h-[350px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
 
       {/* 2. Interactive 3D / Cybernetic Canvas */}
       <InteractiveHeroCanvas />
@@ -50,107 +52,215 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
       <FloatingTechElements />
 
       {/* 4. Hero Content */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
-          className="flex flex-col items-center"
-        >
-          {/* Availability Status Badge */}
-          <motion.div variants={fadeInUp} className="mb-6">
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md text-xs font-mono text-zinc-300 shadow-lg shadow-black/40">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          {/* Left Column: Heading, Dynamic Typing Name & Current Roles, CTA (7 cols) */}
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+            className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1"
+          >
+            {/* Availability Status Badge */}
+            <motion.div variants={fadeInUp} className="mb-5">
+              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#121216]/90 border border-white/10 backdrop-blur-md text-xs font-mono text-zinc-300 shadow-lg shadow-black/40">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
+                </span>
+                <span>Available for Opportunities & Collaborations</span>
+              </div>
+            </motion.div>
+
+            {/* Typing Name Greeting */}
+            <motion.div variants={fadeInUp} className="mb-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/10 text-xs sm:text-sm font-mono text-zinc-300">
+                <Terminal className="w-3.5 h-3.5 text-cyan-400" />
+                <span>Hi, I'm</span>
+                <span className="text-white font-bold tracking-tight">
+                  <TypewriterText
+                    words={[PERSONAL_INFO.name]}
+                    typingSpeed={80}
+                    pauseDuration={15000}
+                    cursorClassName="text-cyan-400"
+                  />
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Dynamic Typing Current Role */}
+            <motion.div variants={fadeInUp} className="mb-4">
+              <div className="text-lg sm:text-2xl md:text-3xl font-extrabold tracking-tight text-zinc-200">
+                <span>I'm a </span>
+                <span className="bg-gradient-to-r from-cyan-400 via-purple-300 to-accent-blue bg-clip-text text-transparent underline decoration-cyan-400/40 decoration-2 underline-offset-4">
+                  <TypewriterText
+                    words={PERSONAL_INFO.roles}
+                    typingSpeed={85}
+                    deletingSpeed={45}
+                    pauseDuration={2400}
+                    cursorClassName="text-accent-violet"
+                  />
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Main Editorial Headline */}
+            <motion.h1
+              variants={fadeInUp}
+              className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-[1.1] mb-6"
+            >
+              Building Digital Experiences{' '}
+              <span className="relative inline-block">
+                <span className="bg-gradient-to-r from-accent-violet via-purple-300 to-accent-blue bg-clip-text text-transparent">
+                  Through Code.
+                </span>
               </span>
-              <span>Available for Opportunities & Collaborations</span>
-            </div>
+            </motion.h1>
+
+            {/* Supporting Description */}
+            <motion.p
+              variants={fadeInUp}
+              className="text-sm sm:text-base md:text-lg text-zinc-400 max-w-xl font-normal leading-relaxed mb-8"
+            >
+              {PERSONAL_INFO.shortIntro}
+            </motion.p>
+
+            {/* Call to Actions & Social Links */}
+            <motion.div
+              variants={fadeInUp}
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-4 w-full"
+            >
+              {/* Primary Action: View Projects */}
+              <MagneticButton strength={0.2}>
+                <button
+                  onClick={scrollToProjects}
+                  className="group relative inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm text-black bg-white hover:bg-zinc-100 shadow-xl shadow-white/10 transition-all duration-300 cursor-pointer"
+                >
+                  <Code2 className="w-4 h-4 text-black group-hover:scale-110 transition-transform" />
+                  <span>View Projects</span>
+                </button>
+              </MagneticButton>
+
+              {/* Secondary Action: Download CV */}
+              <MagneticButton strength={0.2}>
+                <button
+                  onClick={handleDownloadCV}
+                  className="group inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-medium font-mono text-sm text-white bg-white/[0.06] border border-white/15 hover:border-accent-violet/60 hover:bg-accent-violet/10 hover:shadow-glow-violet transition-all duration-300 cursor-pointer backdrop-blur-md"
+                >
+                  <FileDown className="w-4 h-4 text-accent-violet group-hover:translate-y-[2px] transition-transform" />
+                  <span>Download CV</span>
+                </button>
+              </MagneticButton>
+
+              {/* GitHub & LinkedIn Link Icons */}
+              <div className="flex items-center gap-2.5">
+                <a
+                  href={PERSONAL_INFO.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3.5 rounded-xl bg-white/[0.04] border border-white/10 text-zinc-400 hover:text-white hover:border-cyan-400/50 hover:bg-white/10 transition-all duration-200"
+                  aria-label="GitHub Profile"
+                  title="GitHub Profile"
+                >
+                  <Github className="w-5 h-5" />
+                </a>
+
+                <a
+                  href={PERSONAL_INFO.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3.5 rounded-xl bg-white/[0.04] border border-white/10 text-zinc-400 hover:text-white hover:border-accent-blue/50 hover:bg-accent-blue/10 transition-all duration-200"
+                  aria-label="LinkedIn Profile"
+                  title="LinkedIn Profile"
+                >
+                  <Linkedin className="w-5 h-5" />
+                </a>
+              </div>
+            </motion.div>
           </motion.div>
 
-          {/* Subtitle / Intro Greeting */}
-          <motion.div variants={fadeInUp} className="mb-4">
-            <span className="text-sm sm:text-base font-mono uppercase tracking-widest text-zinc-400">
-              Hi, I'm <span className="text-white font-semibold">{PERSONAL_INFO.name}</span>
-            </span>
-          </motion.div>
-
-          {/* Main Editorial Heading */}
-          <motion.h1
-            variants={fadeInUp}
-            className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[1.08] mb-6 max-w-4xl"
-          >
-            Building Digital Experiences{' '}
-            <span className="relative inline-block">
-              <span className="bg-gradient-to-r from-accent-violet via-purple-300 to-accent-blue bg-clip-text text-transparent">
-                Through Code.
-              </span>
-              {/* Subtle underline flare */}
-              <span className="absolute left-0 bottom-1 w-full h-[3px] bg-gradient-to-r from-accent-violet/60 to-accent-blue/60 rounded-full blur-[1px] -z-10" />
-            </span>
-          </motion.h1>
-
-          {/* Supporting Description */}
-          <motion.p
-            variants={fadeInUp}
-            className="text-base sm:text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto font-normal leading-relaxed mb-10"
-          >
-            {PERSONAL_INFO.shortIntro}
-          </motion.p>
-
-          {/* Call to Actions & Social Links */}
+          {/* Right Column: User Portrait Picture with High-End Futuristic Frame (5 cols) */}
           <motion.div
             variants={fadeInUp}
-            className="flex flex-wrap items-center justify-center gap-4 w-full max-w-lg mb-12"
+            initial="hidden"
+            animate="visible"
+            className="lg:col-span-5 flex justify-center order-1 lg:order-2"
           >
-            {/* Primary Action: View Projects */}
-            <MagneticButton strength={0.2}>
-              <button
-                onClick={scrollToProjects}
-                className="group relative inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm text-black bg-white hover:bg-zinc-100 shadow-xl shadow-white/10 transition-all duration-300 cursor-pointer"
-              >
-                <Code2 className="w-4 h-4 text-black group-hover:scale-110 transition-transform" />
-                <span>View Projects</span>
-              </button>
-            </MagneticButton>
+            <div className="relative w-full max-w-[320px] sm:max-w-[370px]">
+              {/* Backlight Glow Rings */}
+              <div className="absolute -inset-4 bg-gradient-to-tr from-cyan-500/25 via-accent-violet/20 to-accent-blue/20 rounded-3xl blur-2xl opacity-75 animate-pulse-slow pointer-events-none" />
 
-            {/* Secondary Action: Download CV */}
-            <MagneticButton strength={0.2}>
-              <button
-                onClick={handleDownloadCV}
-                className="group inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-medium font-mono text-sm text-white bg-white/[0.06] border border-white/15 hover:border-accent-violet/60 hover:bg-accent-violet/10 hover:shadow-glow-violet transition-all duration-300 cursor-pointer backdrop-blur-md"
-              >
-                <FileDown className="w-4 h-4 text-accent-violet group-hover:translate-y-[2px] transition-transform" />
-                <span>Download CV</span>
-              </button>
-            </MagneticButton>
+              <TiltCard maxTilt={8} glareOpacity={0.2} className="relative z-10">
+                <div className="relative rounded-3xl bg-[#111116] border border-white/15 p-3 sm:p-4 shadow-2xl shadow-black/80 overflow-hidden group">
+                  {/* Outer subtle cyber border accent */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 via-transparent to-accent-violet/20 pointer-events-none" />
 
-            {/* GitHub & LinkedIn Link Icons */}
-            <div className="flex items-center gap-2">
-              <a
-                href={PERSONAL_INFO.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3.5 rounded-xl bg-white/[0.04] border border-white/10 text-zinc-400 hover:text-white hover:border-white/30 hover:bg-white/10 transition-all duration-200"
-                aria-label="GitHub Profile"
-                title="GitHub Profile"
-              >
-                <Github className="w-5 h-5" />
-              </a>
+                  {/* Profile Picture */}
+                  <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-[#0c0c10] border border-white/10">
+                    <img
+                      src={PERSONAL_INFO.profileImage}
+                      alt={PERSONAL_INFO.name}
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
 
-              <a
-                href={PERSONAL_INFO.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3.5 rounded-xl bg-white/[0.04] border border-white/10 text-zinc-400 hover:text-white hover:border-accent-blue/50 hover:bg-accent-blue/10 transition-all duration-200"
-                aria-label="LinkedIn Profile"
-                title="LinkedIn Profile"
+                    {/* Gradient overlay at bottom of photo for text contrast */}
+                    <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
+
+                    {/* Bottom overlay badge inside photo */}
+                    <div className="absolute bottom-3 left-3 right-3 z-10 flex items-center justify-between">
+                      <div>
+                        <div className="text-xs font-bold text-white flex items-center gap-1.5 drop-shadow-md">
+                          <span>{PERSONAL_INFO.name}</span>
+                          <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 fill-cyan-400/20" />
+                        </div>
+                        <div className="text-[10px] font-mono text-zinc-300 drop-shadow-md">
+                          Full-Stack & Systems
+                        </div>
+                      </div>
+
+                      <div className="w-8 h-8 rounded-xl bg-black/60 border border-white/15 backdrop-blur-md overflow-hidden p-0.5 shadow-md">
+                        <img
+                          src={PERSONAL_INFO.logoImage}
+                          alt="JNB Logo"
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Profile Footer Info Strip */}
+                  <div className="mt-3 px-1.5 py-1 flex items-center justify-between text-[11px] font-mono text-zinc-400">
+                    <span className="flex items-center gap-1.5 text-zinc-300">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                      <span>Online & Coding</span>
+                    </span>
+                    <span className="text-cyan-400/90 font-medium">@JanNowel</span>
+                  </div>
+                </div>
+              </TiltCard>
+
+              {/* Floating Mini Tech Badge 1 */}
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute -top-3 -left-4 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#121218]/90 border border-white/10 backdrop-blur-md shadow-xl"
               >
-                <Linkedin className="w-5 h-5" />
-              </a>
+                <div className="w-2 h-2 rounded-full bg-cyan-400" />
+                <span className="text-[11px] font-mono text-zinc-200">React & TypeScript</span>
+              </motion.div>
+
+              {/* Floating Mini Tech Badge 2 */}
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+                className="absolute -bottom-3 -right-4 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#121218]/90 border border-white/10 backdrop-blur-md shadow-xl"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-accent-violet" />
+                <span className="text-[11px] font-mono text-zinc-200">Flutter & Python</span>
+              </motion.div>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
 
       {/* 5. Scroll Down Indicator */}
@@ -164,11 +274,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
         <span className="text-[11px] font-mono tracking-widest text-zinc-400 uppercase group-hover:text-zinc-300 transition-colors">
           Explore Portfolio
         </span>
-        <div className="w-5 h-9 rounded-full border border-white/20 flex items-start justify-center p-1 group-hover:border-accent-violet/50 transition-colors">
+        <div className="w-5 h-9 rounded-full border border-white/20 flex items-start justify-center p-1 group-hover:border-cyan-400/50 transition-colors">
           <motion.div
             animate={{ y: [0, 14, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-1 h-2 rounded-full bg-accent-violet"
+            className="w-1 h-2 rounded-full bg-cyan-400"
           />
         </div>
       </motion.div>

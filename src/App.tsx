@@ -19,19 +19,12 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#080808] text-white selection:bg-purple-600/30 selection:text-purple-200 relative selection:overflow-hidden">
-      {/* 1. Custom Interactive Desktop Trailing Cursor */}
-      <CustomCursor />
 
-      {/* 2. Top Scroll Neon Progress Bar */}
+      <CustomCursor />
       <ScrollProgressBar />
 
-      {/* 3. Initial Brand Preloader / Splash Intro */}
       {loading && <Preloader onComplete={() => setLoading(false)} />}
-
-      {/* 4. Navigation Header */}
       <Navbar onOpenCVModal={() => setCvModalOpen(true)} />
-
-      {/* 5. Main Portfolio Content Sections */}
       <main className="relative z-10">
         <Hero onOpenCVModal={() => setCvModalOpen(true)} />
         <About />
@@ -42,10 +35,8 @@ export const App: React.FC = () => {
         <Contact />
       </main>
 
-      {/* 6. Footer */}
       <Footer />
 
-      {/* 7. Curriculum Vitae Interactive Modal */}
       <CVModal isOpen={cvModalOpen} onClose={() => setCvModalOpen(false)} />
     </div>
   );

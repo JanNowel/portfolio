@@ -62,3 +62,4 @@ export interface GitHubUser {
   following: number;
   location: string | null;
 }
+

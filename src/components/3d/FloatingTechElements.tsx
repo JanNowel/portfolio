@@ -111,3 +111,4 @@ export const FloatingTechElements: React.FC = () => {
     </div>
   );
 };
+

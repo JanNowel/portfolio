@@ -163,3 +163,4 @@ All personal data, projects, skills, and links are cleanly separated in:
 ## 📄 License
 
 MIT License — Feel free to use and modify for personal branding.
+

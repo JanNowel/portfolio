@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Layers, Smartphone, Brain, Cloud, Terminal, CheckCircle2, Sparkles, Compass } from 'lucide-react';
+import { Layers, Smartphone, Brain, Cloud, CheckCircle2, Sparkles, Compass } from 'lucide-react';
 import { PERSONAL_INFO, ABOUT_DATA } from '../../data/portfolioData';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Counter } from '../ui/Counter';
@@ -77,11 +77,28 @@ export const About: React.FC = () => {
             className="lg:col-span-5 rounded-2xl bg-[#121216]/80 border border-white/[0.08] p-8 relative overflow-hidden backdrop-blur-md flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-9 h-9 rounded-xl bg-accent-blue/10 border border-accent-blue/20 flex items-center justify-center">
-                  <Terminal className="w-4 h-4 text-accent-blue" />
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl overflow-hidden border border-cyan-400/30 p-0.5 bg-[#14141a]">
+                    <img
+                      src={PERSONAL_INFO.profileImage}
+                      alt={PERSONAL_INFO.name}
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-white tracking-tight">{PERSONAL_INFO.name}</h3>
+                    <div className="text-xs font-mono text-cyan-400">@JanNowel</div>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-white tracking-tight">Developer Snapshot</h3>
+
+                <div className="w-9 h-9 rounded-xl overflow-hidden border border-white/10 p-0.5 bg-[#14141a]">
+                  <img
+                    src={PERSONAL_INFO.logoImage}
+                    alt="JNB Logo"
+                    className="w-full h-full object-cover rounded-lg"
+                  />
+                </div>
               </div>
 
               <div className="space-y-4">
@@ -183,3 +200,4 @@ export const About: React.FC = () => {
     </section>
   );
 };
+

@@ -23,10 +23,12 @@ export const Footer: React.FC = () => {
           {/* Brand Col */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#141418] border border-white/10 flex items-center justify-center font-mono font-black text-lg text-white">
-                <span className="bg-gradient-to-br from-white via-purple-200 to-accent-violet bg-clip-text text-transparent">
-                  {PERSONAL_INFO.initials}
-                </span>
+              <div className="w-11 h-11 rounded-xl bg-[#141418] border border-cyan-400/30 overflow-hidden flex items-center justify-center p-0.5 shadow-md shadow-cyan-500/10">
+                <img
+                  src={PERSONAL_INFO.logoImage}
+                  alt="JNB Logo"
+                  className="w-full h-full object-cover rounded-lg"
+                />
               </div>
               <div>
                 <span className="text-base font-bold text-white tracking-tight">

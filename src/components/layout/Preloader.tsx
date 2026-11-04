@@ -16,7 +16,6 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           setTimeout(onComplete, 400);
           return 100;
         }
-        // Smooth random increment
         const increment = Math.floor(Math.random() * 12) + 6;
         return Math.min(prev + increment, 100);
       });
@@ -40,20 +39,21 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         <div className="absolute w-96 h-96 rounded-full bg-accent-violet/10 blur-[120px] pointer-events-none" />
 
         <div className="relative flex flex-col items-center">
-          {/* Animated JB Monogram */}
+          {/* Animated JNB Logo */}
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
             className="relative mb-8"
           >
-            <div className="w-24 h-24 rounded-2xl bg-[#121216] border border-white/10 flex items-center justify-center shadow-2xl shadow-accent-violet/20 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-accent-violet/20 to-transparent" />
-              <span className="text-4xl font-black font-mono tracking-tighter bg-gradient-to-br from-white via-purple-200 to-accent-violet bg-clip-text text-transparent">
-                JB
-              </span>
+            <div className="w-28 h-28 rounded-2xl bg-[#121216] border border-cyan-400/30 overflow-hidden flex items-center justify-center shadow-2xl shadow-cyan-500/20 relative p-1">
+              <img
+                src="/images/logo-jnb.jpg"
+                alt="JNB Logo"
+                className="w-full h-full object-cover rounded-xl"
+              />
               <motion.div
-                className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-accent-violet to-accent-blue"
+                className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-cyan-400 via-accent-violet to-accent-blue"
                 style={{ width: `${progress}%` }}
               />
             </div>

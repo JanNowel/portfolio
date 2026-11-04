@@ -241,3 +241,4 @@ export const ProjectVisualPreview: React.FC<ProjectVisualPreviewProps> = ({ proj
       );
   }
 };
+

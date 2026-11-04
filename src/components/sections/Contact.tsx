@@ -72,14 +72,12 @@ export const Contact: React.FC = () => {
 
     setIsSubmitting(true);
 
-    // Realistic processing state
     await new Promise((resolve) => setTimeout(resolve, 800));
 
     setIsSubmitting(false);
     setIsSuccess(true);
     triggerConfetti();
 
-    // Prepare mailto link as client-side fallback
     const mailtoUrl = `mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(
       formData.subject
     )}&body=${encodeURIComponent(
@@ -302,11 +300,10 @@ export const Contact: React.FC = () => {
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           placeholder="e.g. Alex Rivera"
-                          className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-sm text-white placeholder-zinc-400 focus:outline-none transition-colors ${
-                            errors.name
+                          className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-sm text-white placeholder-zinc-400 focus:outline-none transition-colors ${errors.name
                               ? 'border-red-500/60 focus:border-red-500'
                               : 'border-white/10 focus:border-accent-violet/60 focus:bg-white/[0.05]'
-                          }`}
+                            }`}
                         />
                         {errors.name && (
                           <p className="text-[11px] text-red-400 mt-1.5 flex items-center gap-1 font-mono">
@@ -324,11 +321,10 @@ export const Contact: React.FC = () => {
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           placeholder="alex@company.com"
-                          className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-sm text-white placeholder-zinc-400 focus:outline-none transition-colors ${
-                            errors.email
+                          className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-sm text-white placeholder-zinc-400 focus:outline-none transition-colors ${errors.email
                               ? 'border-red-500/60 focus:border-red-500'
                               : 'border-white/10 focus:border-accent-violet/60 focus:bg-white/[0.05]'
-                          }`}
+                            }`}
                         />
                         {errors.email && (
                           <p className="text-[11px] text-red-400 mt-1.5 flex items-center gap-1 font-mono">
@@ -348,11 +344,10 @@ export const Contact: React.FC = () => {
                         value={formData.subject}
                         onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                         placeholder="Project Collaboration / Internship Opportunity"
-                        className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-sm text-white placeholder-zinc-400 focus:outline-none transition-colors ${
-                          errors.subject
+                        className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-sm text-white placeholder-zinc-400 focus:outline-none transition-colors ${errors.subject
                             ? 'border-red-500/60 focus:border-red-500'
                             : 'border-white/10 focus:border-accent-violet/60 focus:bg-white/[0.05]'
-                        }`}
+                          }`}
                       />
                       {errors.subject && (
                         <p className="text-[11px] text-red-400 mt-1.5 flex items-center gap-1 font-mono">
@@ -371,11 +366,10 @@ export const Contact: React.FC = () => {
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         placeholder="Tell me about your project, team, or opportunity..."
-                        className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-sm text-white placeholder-zinc-400 focus:outline-none transition-colors resize-none ${
-                          errors.message
+                        className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-sm text-white placeholder-zinc-400 focus:outline-none transition-colors resize-none ${errors.message
                             ? 'border-red-500/60 focus:border-red-500'
                             : 'border-white/10 focus:border-accent-violet/60 focus:bg-white/[0.05]'
-                        }`}
+                          }`}
                       />
                       {errors.message && (
                         <p className="text-[11px] text-red-400 mt-1.5 flex items-center gap-1 font-mono">

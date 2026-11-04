@@ -43,3 +43,4 @@ export const triggerConfetti = () => {
     colors: ['#FFFFFF', '#A855F7'],
   });
 };
+

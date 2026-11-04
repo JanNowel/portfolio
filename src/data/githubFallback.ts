@@ -3,7 +3,7 @@ import { GitHubRepo, GitHubUser } from '../types';
 export const FALLBACK_GITHUB_USER: GitHubUser = {
   login: 'JanNowel',
   name: 'Jhon Noel Baculpo',
-  avatar_url: 'https://avatars.githubusercontent.com/u/159496662?v=4',
+  avatar_url: '/images/profile.jpg',
   html_url: 'https://github.com/JanNowel',
   bio: 'Full-Stack Developer | Software Developer | IT Enthusiast. Building modern web and mobile applications.',
   public_repos: 12,
@@ -74,3 +74,4 @@ export const FALLBACK_REPOS: GitHubRepo[] = [
     topics: ['nodejs', 'express', 'experiments'],
   },
 ];
+
