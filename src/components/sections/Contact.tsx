@@ -128,7 +128,7 @@ export const Contact: React.FC = () => {
             viewport={{ once: true }}
             className="lg:col-span-5 space-y-6"
           >
-            <div className="p-8 rounded-2xl bg-[#121217]/90 border border-white/[0.08] backdrop-blur-md">
+            <div className="p-5 sm:p-8 rounded-2xl bg-[#121217]/90 border border-white/[0.08] backdrop-blur-md">
               <h3 className="text-xl font-bold text-white mb-2">Direct Contact Channels</h3>
               <p className="text-sm text-zinc-400 leading-relaxed mb-6">
                 Feel free to message me regarding internship openings, freelance projects, technical collaborations, or just to say hi.
@@ -232,7 +232,7 @@ export const Contact: React.FC = () => {
             viewport={{ once: true }}
             className="lg:col-span-7"
           >
-            <div className="p-8 sm:p-10 rounded-2xl bg-[#121217]/90 border border-white/[0.08] backdrop-blur-md">
+            <div className="p-5 sm:p-8 md:p-10 rounded-2xl bg-[#121217]/90 border border-white/[0.08] backdrop-blur-md">
               <AnimatePresence mode="wait">
                 {isSuccess ? (
                   <motion.div

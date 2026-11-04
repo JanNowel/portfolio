@@ -34,7 +34,7 @@ export const Experience: React.FC = () => {
         />
 
         {/* Timeline Container */}
-        <div className="relative border-l border-white/10 ml-4 sm:ml-6 md:ml-8 pl-6 sm:pl-8 space-y-12">
+        <div className="relative border-l border-white/10 ml-3 sm:ml-6 md:ml-8 pl-5 sm:pl-8 space-y-8 sm:space-y-12">
           {TIMELINE_DATA.map((item, index) => (
             <motion.div
               key={item.id}
@@ -46,12 +46,12 @@ export const Experience: React.FC = () => {
               className="relative group"
             >
               {/* Timeline Node Pin */}
-              <div className="absolute -left-[31px] sm:-left-[39px] md:-left-[47px] top-1.5 w-6 h-6 rounded-full bg-[#121216] border-2 border-white/20 group-hover:border-accent-violet group-hover:scale-110 transition-all duration-300 flex items-center justify-center shadow-md shadow-black">
-                <div className="w-2 h-2 rounded-full bg-accent-violet" />
+              <div className="absolute -left-[27px] sm:-left-[39px] md:-left-[47px] top-1.5 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#121216] border-2 border-white/20 group-hover:border-accent-violet group-hover:scale-110 transition-all duration-300 flex items-center justify-center shadow-md shadow-black">
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-accent-violet" />
               </div>
 
               {/* Main Timeline Card */}
-              <div className="p-6 sm:p-7 rounded-2xl bg-[#121217]/85 border border-white/[0.08] group-hover:border-white/20 transition-all duration-300 backdrop-blur-md shadow-lg shadow-black/40">
+              <div className="p-4 sm:p-7 rounded-xl sm:rounded-2xl bg-[#121217]/85 border border-white/[0.08] group-hover:border-white/20 transition-all duration-300 backdrop-blur-md shadow-lg shadow-black/40">
                 {/* Meta header: Category & Period */}
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                   <div className="flex items-center gap-2">

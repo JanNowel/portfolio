@@ -129,7 +129,7 @@ export const GitHubShowcase: React.FC = () => {
         {/* Profile Card & Stats Banner */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-12">
           {/* User Profile Card */}
-          <div className="lg:col-span-5 p-6 rounded-2xl bg-[#121217]/90 border border-white/[0.08] backdrop-blur-md flex flex-col justify-between">
+          <div className="lg:col-span-5 p-4 sm:p-6 rounded-2xl bg-[#121217]/90 border border-white/[0.08] backdrop-blur-md flex flex-col justify-between">
             <div className="flex items-center gap-4 mb-4">
               <img
                 src={user.avatar_url}
@@ -164,7 +164,7 @@ export const GitHubShowcase: React.FC = () => {
           </div>
 
           {/* Activity & Language Distribution */}
-          <div className="lg:col-span-7 p-6 rounded-2xl bg-[#121217]/90 border border-white/[0.08] backdrop-blur-md flex flex-col justify-between">
+          <div className="lg:col-span-7 p-4 sm:p-6 rounded-2xl bg-[#121217]/90 border border-white/[0.08] backdrop-blur-md flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-300 flex items-center gap-1.5">

@@ -38,23 +38,23 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden bg-[#080808]"
+      className="relative min-h-screen flex items-center justify-center pt-24 sm:pt-28 md:pt-32 pb-14 sm:pb-20 overflow-hidden bg-[#080808]"
     >
       {/* 1. Atmospheric Ambient Lighting / Gradients */}
-      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-gradient-to-tr from-cyan-500/15 via-accent-violet/15 to-accent-blue/15 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/3 right-10 w-[380px] h-[380px] bg-accent-violet/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-20 left-10 w-[350px] h-[350px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[500px] lg:w-[650px] h-[320px] sm:h-[500px] lg:h-[650px] bg-gradient-to-tr from-cyan-500/15 via-accent-violet/15 to-accent-blue/15 rounded-full blur-[100px] sm:blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 right-4 sm:right-10 w-[240px] sm:w-[350px] h-[240px] sm:h-[350px] bg-accent-violet/10 rounded-full blur-[90px] sm:blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-16 left-4 sm:left-10 w-[250px] sm:w-[350px] h-[250px] sm:h-[350px] bg-cyan-500/10 rounded-full blur-[90px] sm:blur-[120px] pointer-events-none" />
 
       {/* 2. Interactive 3D / Cybernetic Canvas */}
       <InteractiveHeroCanvas />
 
-      {/* 3. Floating Technology Badges with Parallax Physics */}
+      {/* 3. Floating Technology Badges (Safely hidden on mobile to avoid overlap) */}
       <FloatingTechElements />
 
       {/* 4. Hero Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left Column: Heading, Dynamic Typing Name & Current Roles, CTA (7 cols) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full my-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-8 items-center">
+          {/* Left Column: Heading, Dynamic Typing Name & Current Roles, CTA (7 cols on lg) */}
           <motion.div
             variants={staggerContainer}
             initial="hidden"
@@ -62,20 +62,20 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
             className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1"
           >
             {/* Availability Status Badge */}
-            <motion.div variants={fadeInUp} className="mb-5">
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#121216]/90 border border-white/10 backdrop-blur-md text-xs font-mono text-zinc-300 shadow-lg shadow-black/40">
-                <span className="relative flex h-2.5 w-2.5">
+            <motion.div variants={fadeInUp} className="mb-4 sm:mb-5">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#121216]/90 border border-white/10 backdrop-blur-md text-[11px] sm:text-xs font-mono text-zinc-300 shadow-lg shadow-black/40">
+                <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-emerald-400" />
                 </span>
                 <span>Available for Opportunities & Collaborations</span>
               </div>
             </motion.div>
 
             {/* Typing Name Greeting */}
-            <motion.div variants={fadeInUp} className="mb-3">
+            <motion.div variants={fadeInUp} className="mb-2.5 sm:mb-3">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/10 text-xs sm:text-sm font-mono text-zinc-300">
-                <Terminal className="w-3.5 h-3.5 text-cyan-400" />
+                <Terminal className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
                 <span>Hi, I'm</span>
                 <span className="text-white font-bold tracking-tight">
                   <TypewriterText
@@ -89,8 +89,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
             </motion.div>
 
             {/* Dynamic Typing Current Role */}
-            <motion.div variants={fadeInUp} className="mb-4">
-              <div className="text-lg sm:text-2xl md:text-3xl font-extrabold tracking-tight text-zinc-200">
+            <motion.div variants={fadeInUp} className="mb-3.5 sm:mb-4">
+              <div className="text-base sm:text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight text-zinc-200">
                 <span>I'm a </span>
                 <span className="bg-gradient-to-r from-cyan-400 via-purple-300 to-accent-blue bg-clip-text text-transparent underline decoration-cyan-400/40 decoration-2 underline-offset-4">
                   <TypewriterText
@@ -107,7 +107,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
             {/* Main Editorial Headline */}
             <motion.h1
               variants={fadeInUp}
-              className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-[1.1] mb-6"
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.15] mb-4 sm:mb-6 max-w-2xl break-words"
             >
               Building Digital Experiences{' '}
               <span className="relative inline-block">
@@ -120,83 +120,87 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
             {/* Supporting Description */}
             <motion.p
               variants={fadeInUp}
-              className="text-sm sm:text-base md:text-lg text-zinc-400 max-w-xl font-normal leading-relaxed mb-8"
+              className="text-xs sm:text-sm md:text-base text-zinc-400 max-w-xl font-normal leading-relaxed mb-6 sm:mb-8 px-2 sm:px-0"
             >
               {PERSONAL_INFO.shortIntro}
             </motion.p>
 
-            {/* Call to Actions & Social Links */}
+            {/* Call to Actions & Social Links (Adjusted for mobile responsiveness and z-index) */}
             <motion.div
               variants={fadeInUp}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-4 w-full"
+              className="relative z-30 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-3.5 w-full sm:w-auto"
             >
               {/* Primary Action: View Projects */}
-              <MagneticButton strength={0.2}>
-                <button
-                  onClick={scrollToProjects}
-                  className="group relative inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm text-black bg-white hover:bg-zinc-100 shadow-xl shadow-white/10 transition-all duration-300 cursor-pointer"
-                >
-                  <Code2 className="w-4 h-4 text-black group-hover:scale-110 transition-transform" />
-                  <span>View Projects</span>
-                </button>
-              </MagneticButton>
+              <div className="w-full sm:w-auto">
+                <MagneticButton strength={0.2} className="w-full sm:w-auto">
+                  <button
+                    onClick={scrollToProjects}
+                    className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm text-black bg-white hover:bg-zinc-100 shadow-xl shadow-white/10 hover:shadow-cyan-400/20 transition-all duration-300 cursor-pointer"
+                  >
+                    <Code2 className="w-4 h-4 text-black group-hover:scale-110 transition-transform" />
+                    <span>View Projects</span>
+                  </button>
+                </MagneticButton>
+              </div>
 
               {/* Secondary Action: Download CV */}
-              <MagneticButton strength={0.2}>
-                <button
-                  onClick={handleDownloadCV}
-                  className="group inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-medium font-mono text-sm text-white bg-white/[0.06] border border-white/15 hover:border-accent-violet/60 hover:bg-accent-violet/10 hover:shadow-glow-violet transition-all duration-300 cursor-pointer backdrop-blur-md"
-                >
-                  <FileDown className="w-4 h-4 text-accent-violet group-hover:translate-y-[2px] transition-transform" />
-                  <span>Download CV</span>
-                </button>
-              </MagneticButton>
+              <div className="w-full sm:w-auto">
+                <MagneticButton strength={0.2} className="w-full sm:w-auto">
+                  <button
+                    onClick={handleDownloadCV}
+                    className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 sm:py-3.5 rounded-xl font-medium font-mono text-xs sm:text-sm text-white bg-white/[0.06] border border-white/15 hover:border-accent-violet/60 hover:bg-accent-violet/10 hover:shadow-glow-violet transition-all duration-300 cursor-pointer backdrop-blur-md"
+                  >
+                    <FileDown className="w-4 h-4 text-accent-violet group-hover:translate-y-[2px] transition-transform" />
+                    <span>Download CV</span>
+                  </button>
+                </MagneticButton>
+              </div>
 
               {/* GitHub & LinkedIn Link Icons */}
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center justify-center gap-2.5 pt-1 sm:pt-0">
                 <a
                   href={PERSONAL_INFO.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3.5 rounded-xl bg-white/[0.04] border border-white/10 text-zinc-400 hover:text-white hover:border-cyan-400/50 hover:bg-white/10 transition-all duration-200"
+                  className="p-3 sm:p-3.5 rounded-xl bg-white/[0.04] border border-white/10 text-zinc-400 hover:text-white hover:border-cyan-400/50 hover:bg-white/10 transition-all duration-200"
                   aria-label="GitHub Profile"
                   title="GitHub Profile"
                 >
-                  <Github className="w-5 h-5" />
+                  <Github className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
                 </a>
 
                 <a
                   href={PERSONAL_INFO.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3.5 rounded-xl bg-white/[0.04] border border-white/10 text-zinc-400 hover:text-white hover:border-accent-blue/50 hover:bg-accent-blue/10 transition-all duration-200"
+                  className="p-3 sm:p-3.5 rounded-xl bg-white/[0.04] border border-white/10 text-zinc-400 hover:text-white hover:border-accent-blue/50 hover:bg-accent-blue/10 transition-all duration-200"
                   aria-label="LinkedIn Profile"
                   title="LinkedIn Profile"
                 >
-                  <Linkedin className="w-5 h-5" />
+                  <Linkedin className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
                 </a>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Right Column: User Portrait Picture with High-End Futuristic Frame (5 cols) */}
+          {/* Right Column: User Portrait Picture (Responsive scaling on all devices) */}
           <motion.div
             variants={fadeInUp}
             initial="hidden"
             animate="visible"
             className="lg:col-span-5 flex justify-center order-1 lg:order-2"
           >
-            <div className="relative w-full max-w-[320px] sm:max-w-[370px]">
+            <div className="relative w-full max-w-[240px] sm:max-w-[300px] md:max-w-[340px] lg:max-w-[380px]">
               {/* Backlight Glow Rings */}
-              <div className="absolute -inset-4 bg-gradient-to-tr from-cyan-500/25 via-accent-violet/20 to-accent-blue/20 rounded-3xl blur-2xl opacity-75 animate-pulse-slow pointer-events-none" />
+              <div className="absolute -inset-3 sm:-inset-4 bg-gradient-to-tr from-cyan-500/25 via-accent-violet/20 to-accent-blue/20 rounded-3xl blur-xl sm:blur-2xl opacity-75 animate-pulse-slow pointer-events-none" />
 
               <TiltCard maxTilt={8} glareOpacity={0.2} className="relative z-10">
-                <div className="relative rounded-3xl bg-[#111116] border border-white/15 p-3 sm:p-4 shadow-2xl shadow-black/80 overflow-hidden group">
+                <div className="relative rounded-2xl sm:rounded-3xl bg-[#111116] border border-white/15 p-2.5 sm:p-3.5 md:p-4 shadow-2xl shadow-black/80 overflow-hidden group">
                   {/* Outer subtle cyber border accent */}
                   <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 via-transparent to-accent-violet/20 pointer-events-none" />
 
                   {/* Profile Picture */}
-                  <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-[#0c0c10] border border-white/10">
+                  <div className="relative aspect-square w-full rounded-xl sm:rounded-2xl overflow-hidden bg-[#0c0c10] border border-white/10">
                     <img
                       src={PERSONAL_INFO.profileImage}
                       alt={PERSONAL_INFO.name}
@@ -204,34 +208,34 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
                     />
 
                     {/* Gradient overlay at bottom of photo for text contrast */}
-                    <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
+                    <div className="absolute inset-x-0 bottom-0 h-20 sm:h-28 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
 
                     {/* Bottom overlay badge inside photo */}
-                    <div className="absolute bottom-3 left-3 right-3 z-10 flex items-center justify-between">
+                    <div className="absolute bottom-2.5 sm:bottom-3 left-2.5 sm:left-3 right-2.5 sm:right-3 z-10 flex items-center justify-between">
                       <div>
-                        <div className="text-xs font-bold text-white flex items-center gap-1.5 drop-shadow-md">
+                        <div className="text-[11px] sm:text-xs font-bold text-white flex items-center gap-1.5 drop-shadow-md">
                           <span>{PERSONAL_INFO.name}</span>
-                          <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 fill-cyan-400/20" />
+                          <CheckCircle2 className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-cyan-400 fill-cyan-400/20" />
                         </div>
-                        <div className="text-[10px] font-mono text-zinc-300 drop-shadow-md">
+                        <div className="text-[9px] sm:text-[10px] font-mono text-zinc-300 drop-shadow-md">
                           Full-Stack & Systems
                         </div>
                       </div>
 
-                      <div className="w-8 h-8 rounded-xl bg-black/60 border border-white/15 backdrop-blur-md overflow-hidden p-0.5 shadow-md">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-black/60 border border-white/15 backdrop-blur-md overflow-hidden p-0.5 shadow-md">
                         <img
                           src={PERSONAL_INFO.logoImage}
                           alt="JNB Logo"
-                          className="w-full h-full object-cover rounded-lg"
+                          className="w-full h-full object-cover rounded-md sm:rounded-lg"
                         />
                       </div>
                     </div>
                   </div>
 
                   {/* Profile Footer Info Strip */}
-                  <div className="mt-3 px-1.5 py-1 flex items-center justify-between text-[11px] font-mono text-zinc-400">
+                  <div className="mt-2.5 sm:mt-3 px-1 py-0.5 flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-zinc-400">
                     <span className="flex items-center gap-1.5 text-zinc-300">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                      <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-ping" />
                       <span>Online & Coding</span>
                     </span>
                     <span className="text-cyan-400/90 font-medium">@JanNowel</span>
@@ -239,24 +243,24 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
                 </div>
               </TiltCard>
 
-              {/* Floating Mini Tech Badge 1 */}
+              {/* Floating Mini Tech Badge 1 (Visible on tablet & desktop, hidden on tiny mobile) */}
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-3 -left-4 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#121218]/90 border border-white/10 backdrop-blur-md shadow-xl"
+                className="absolute -top-3 -left-3 sm:-left-4 z-20 hidden md:flex items-center gap-2 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-[#121218]/90 border border-white/10 backdrop-blur-md shadow-xl"
               >
                 <div className="w-2 h-2 rounded-full bg-cyan-400" />
-                <span className="text-[11px] font-mono text-zinc-200">React & TypeScript</span>
+                <span className="text-[10px] sm:text-[11px] font-mono text-zinc-200">React & TypeScript</span>
               </motion.div>
 
               {/* Floating Mini Tech Badge 2 */}
               <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                className="absolute -bottom-3 -right-4 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#121218]/90 border border-white/10 backdrop-blur-md shadow-xl"
+                className="absolute -bottom-3 -right-3 sm:-right-4 z-20 hidden md:flex items-center gap-2 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-[#121218]/90 border border-white/10 backdrop-blur-md shadow-xl"
               >
-                <Sparkles className="w-3.5 h-3.5 text-accent-violet" />
-                <span className="text-[11px] font-mono text-zinc-200">Flutter & Python</span>
+                <Sparkles className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-accent-violet" />
+                <span className="text-[10px] sm:text-[11px] font-mono text-zinc-200">Flutter & Python</span>
               </motion.div>
             </div>
           </motion.div>
@@ -268,17 +272,17 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 cursor-pointer group"
+        className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 sm:gap-2 cursor-pointer group"
         onClick={scrollToAbout}
       >
-        <span className="text-[11px] font-mono tracking-widest text-zinc-400 uppercase group-hover:text-zinc-300 transition-colors">
+        <span className="text-[10px] sm:text-[11px] font-mono tracking-widest text-zinc-400 uppercase group-hover:text-zinc-300 transition-colors">
           Explore Portfolio
         </span>
-        <div className="w-5 h-9 rounded-full border border-white/20 flex items-start justify-center p-1 group-hover:border-cyan-400/50 transition-colors">
+        <div className="w-4 h-7 sm:w-5 sm:h-9 rounded-full border border-white/20 flex items-start justify-center p-1 group-hover:border-cyan-400/50 transition-colors">
           <motion.div
-            animate={{ y: [0, 14, 0] }}
+            animate={{ y: [0, 12, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-1 h-2 rounded-full bg-cyan-400"
+            className="w-1 h-1.5 sm:h-2 rounded-full bg-cyan-400"
           />
         </div>
       </motion.div>

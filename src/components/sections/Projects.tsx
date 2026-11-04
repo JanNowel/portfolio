@@ -109,9 +109,9 @@ export const Projects: React.FC = () => {
                     </div>
 
                     {/* Content Section */}
-                    <div className="p-6">
+                    <div className="p-4 sm:p-6">
                       <div className="flex items-start justify-between gap-4 mb-2">
-                        <h3 className="text-xl font-bold text-white group-hover:text-accent-violet-light transition-colors">
+                        <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-accent-violet-light transition-colors">
                           {project.title}
                         </h3>
                       </div>
@@ -142,7 +142,7 @@ export const Projects: React.FC = () => {
                   </div>
 
                   {/* Card Footer Actions */}
-                  <div className="px-6 pb-6 pt-2 border-t border-white/[0.05] flex items-center justify-between text-xs font-mono">
+                  <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-2 border-t border-white/[0.05] flex items-center justify-between text-xs font-mono">
                     <button
                       type="button"
                       onClick={(e) => {

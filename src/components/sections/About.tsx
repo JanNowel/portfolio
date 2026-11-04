@@ -36,7 +36,7 @@ export const About: React.FC = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="lg:col-span-7 rounded-2xl bg-[#121216]/80 border border-white/[0.08] p-8 md:p-10 relative overflow-hidden backdrop-blur-md"
+            className="lg:col-span-7 rounded-2xl bg-[#121216]/80 border border-white/[0.08] p-5 sm:p-8 md:p-10 relative overflow-hidden backdrop-blur-md"
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="w-9 h-9 rounded-xl bg-accent-violet/10 border border-accent-violet/20 flex items-center justify-center">
@@ -74,7 +74,7 @@ export const About: React.FC = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="lg:col-span-5 rounded-2xl bg-[#121216]/80 border border-white/[0.08] p-8 relative overflow-hidden backdrop-blur-md flex flex-col justify-between"
+            className="lg:col-span-5 rounded-2xl bg-[#121216]/80 border border-white/[0.08] p-5 sm:p-8 relative overflow-hidden backdrop-blur-md flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center justify-between mb-6">

@@ -32,7 +32,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
         </span>
       </div>
 
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight break-words">
         {title}{' '}
         {titleHighlight && (
           <span className="bg-gradient-to-r from-accent-violet via-purple-300 to-accent-blue bg-clip-text text-transparent">
@@ -42,7 +42,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       </h2>
 
       {subtitle && (
-        <p className="mt-4 text-base sm:text-lg text-zinc-400 font-normal leading-relaxed">
+        <p className="mt-3 sm:mt-4 text-xs sm:text-base md:text-lg text-zinc-400 font-normal leading-relaxed">
           {subtitle}
         </p>
       )}

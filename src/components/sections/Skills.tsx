@@ -55,10 +55,10 @@ export const Skills: React.FC = () => {
           transition={{ duration: 0.35 }}
           className="mb-14"
         >
-          <div className="p-6 sm:p-8 rounded-2xl bg-[#121217]/90 border border-white/[0.08] backdrop-blur-md">
+          <div className="p-4 sm:p-6 sm:p-8 rounded-2xl bg-[#121217]/90 border border-white/[0.08] backdrop-blur-md">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6 pb-4 border-b border-white/[0.06]">
               <div>
-                <h3 className="text-xl font-bold text-white flex items-center gap-2.5">
+                <h3 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2.5">
                   {iconMap[SKILL_CATEGORIES[activeTab].icon]}
                   <span>{SKILL_CATEGORIES[activeTab].title}</span>
                 </h3>
@@ -67,17 +67,17 @@ export const Skills: React.FC = () => {
                 </p>
               </div>
 
-              <span className="text-xs font-mono text-accent-violet-light self-start sm:self-auto px-2.5 py-1 rounded bg-accent-violet/10 border border-accent-violet/20">
+              <span className="text-[11px] sm:text-xs font-mono text-accent-violet-light self-start sm:self-auto px-2.5 py-1 rounded bg-accent-violet/10 border border-accent-violet/20">
                 {SKILL_CATEGORIES[activeTab].skills.length} Core Competencies
               </span>
             </div>
 
             {/* Grid of individual skills */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
               {SKILL_CATEGORIES[activeTab].skills.map((skill, index) => (
                 <div
                   key={index}
-                  className="group p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:border-accent-violet/40 hover:bg-accent-violet/[0.04] transition-all duration-200 flex items-center justify-between"
+                  className="group p-3 sm:p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:border-accent-violet/40 hover:bg-accent-violet/[0.04] transition-all duration-200 flex items-center justify-between"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center group-hover:scale-105 group-hover:border-accent-violet/30 transition-transform">
