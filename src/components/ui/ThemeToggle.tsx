@@ -17,19 +17,16 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
       whileTap={{ scale: 0.88 }}
       whileHover={{ scale: 1.05 }}
       onClick={toggleTheme}
-      className={`relative p-2.5 rounded-xl border transition-all duration-300 flex items-center justify-center overflow-hidden group focus:outline-none ${
-        isDark
+      className={`relative p-2.5 rounded-xl border transition-all duration-300 flex items-center justify-center overflow-hidden group focus:outline-none ${isDark
           ? 'bg-white/5 border-white/10 hover:border-cyan-400/50 hover:bg-cyan-500/10 text-cyan-300 shadow-sm shadow-cyan-500/10'
           : 'bg-zinc-100 border-zinc-200 hover:border-amber-500/50 hover:bg-amber-500/10 text-amber-600 shadow-sm shadow-amber-500/10'
-      } ${className}`}
+        } ${className}`}
       aria-label={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
       title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
     >
-      {/* Ambient background glow */}
       <span
-        className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm pointer-events-none ${
-          isDark ? 'bg-cyan-400/15' : 'bg-amber-400/20'
-        }`}
+        className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm pointer-events-none ${isDark ? 'bg-cyan-400/15' : 'bg-amber-400/20'
+          }`}
       />
 
       <AnimatePresence mode="wait" initial={false}>

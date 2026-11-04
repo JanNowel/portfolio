@@ -40,15 +40,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
       id="home"
       className="relative min-h-screen flex items-center justify-center pt-24 sm:pt-28 md:pt-32 pb-14 sm:pb-20 overflow-hidden bg-[#080808]"
     >
-      {/* 1. Atmospheric Ambient Lighting / Gradients */}
       <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[500px] lg:w-[650px] h-[320px] sm:h-[500px] lg:h-[650px] bg-gradient-to-tr from-cyan-500/15 via-accent-violet/15 to-accent-blue/15 rounded-full blur-[100px] sm:blur-[140px] pointer-events-none" />
       <div className="absolute top-1/3 right-4 sm:right-10 w-[240px] sm:w-[350px] h-[240px] sm:h-[350px] bg-accent-violet/10 rounded-full blur-[90px] sm:blur-[120px] pointer-events-none" />
       <div className="absolute bottom-16 left-4 sm:left-10 w-[250px] sm:w-[350px] h-[250px] sm:h-[350px] bg-cyan-500/10 rounded-full blur-[90px] sm:blur-[120px] pointer-events-none" />
-
-      {/* 2. Interactive 3D / Cybernetic Canvas */}
       <InteractiveHeroCanvas />
-
-      {/* 3. Floating Technology Badges (Safely hidden on mobile to avoid overlap) */}
       <FloatingTechElements />
 
       {/* 4. Hero Content */}
@@ -195,23 +190,26 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
               <div className="absolute -inset-3 sm:-inset-4 bg-gradient-to-tr from-cyan-500/25 via-accent-violet/20 to-accent-blue/20 rounded-3xl blur-xl sm:blur-2xl opacity-75 animate-pulse-slow pointer-events-none" />
 
               <TiltCard maxTilt={8} glareOpacity={0.2} className="relative z-10">
-                <div className="relative rounded-2xl sm:rounded-3xl bg-[#111116] border border-white/15 p-2.5 sm:p-3.5 md:p-4 shadow-2xl shadow-black/80 overflow-hidden group">
+                <div className="relative rounded-2xl sm:rounded-3xl bg-white/[0.03] backdrop-blur-md border border-cyan-400/30 p-2 sm:p-3 shadow-2xl shadow-cyan-500/10 overflow-hidden group">
                   {/* Outer subtle cyber border accent */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 via-transparent to-accent-violet/20 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/15 via-transparent to-accent-violet/20 pointer-events-none" />
 
-                  {/* Profile Picture */}
-                  <div className="relative aspect-square w-full rounded-xl sm:rounded-2xl overflow-hidden bg-[#0c0c10] border border-white/10">
+                  {/* Profile Picture with Transparent Background directly on system */}
+                  <div className="relative aspect-square w-full rounded-xl sm:rounded-2xl overflow-hidden bg-transparent flex items-center justify-center">
+                    {/* Ambient subtle backglow circle */}
+                    <div className="absolute w-44 h-44 rounded-full bg-gradient-to-tr from-cyan-500/20 via-accent-violet/20 to-transparent blur-xl pointer-events-none" />
+
                     <img
                       src={PERSONAL_INFO.profileImage}
                       alt={PERSONAL_INFO.name}
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                      className="w-full h-full object-contain object-bottom group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-[0_12px_24px_rgba(0,0,0,0.5)] relative z-10"
                     />
 
                     {/* Gradient overlay at bottom of photo for text contrast */}
-                    <div className="absolute inset-x-0 bottom-0 h-20 sm:h-28 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
+                    <div className="absolute inset-x-0 bottom-0 h-16 sm:h-20 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none z-10" />
 
                     {/* Bottom overlay badge inside photo */}
-                    <div className="absolute bottom-2.5 sm:bottom-3 left-2.5 sm:left-3 right-2.5 sm:right-3 z-10 flex items-center justify-between">
+                    <div className="absolute bottom-2 sm:bottom-2.5 left-2 sm:left-2.5 right-2 sm:right-2.5 z-20 flex items-center justify-between">
                       <div>
                         <div className="text-[11px] sm:text-xs font-bold text-white flex items-center gap-1.5 drop-shadow-md">
                           <span>{PERSONAL_INFO.name}</span>
@@ -233,12 +231,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
                   </div>
 
                   {/* Profile Footer Info Strip */}
-                  <div className="mt-2.5 sm:mt-3 px-1 py-0.5 flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-zinc-400">
+                  <div className="mt-2 sm:mt-2.5 px-1 py-0.5 flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-zinc-400 relative z-10">
                     <span className="flex items-center gap-1.5 text-zinc-300">
                       <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-ping" />
                       <span>Online & Coding</span>
                     </span>
-                    <span className="text-cyan-400/90 font-medium">@JanNowel</span>
+                    <span className="text-cyan-400 font-medium">@JanNowel</span>
                   </div>
                 </div>
               </TiltCard>

@@ -13,8 +13,6 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [, setHasStartedPlaying] = useState(false);
   const [statusMessage, setStatusMessage] = useState('INITIALIZING QUANTUM CORE...');
   const [isFinishing, setIsFinishing] = useState(false);
-
-  // Status updates matching progress
   useEffect(() => {
     if (progress < 25) {
       setStatusMessage('INITIALIZING QUANTUM CORE...');
@@ -25,11 +23,10 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     } else if (progress < 95) {
       setStatusMessage('SYNCHRONIZING REPOSITORIES...');
     } else {
-      setStatusMessage('SYSTEM READY // WELCOME');
+      setStatusMessage('PORTFOLIO IS READY // WELCOME TO MY LIFE');
     }
   }, [progress]);
 
-  // Video time tracking
   const handleTimeUpdate = () => {
     if (!videoRef.current) return;
     const { currentTime, duration } = videoRef.current;
@@ -52,7 +49,6 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     finishLoading();
   };
 
-  // Attempt autoplay with audio muted
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -68,8 +64,6 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           setHasStartedPlaying(true);
         });
     }
-
-    // Safety fallback timer: Ensure user enters portfolio even if video fails to play
     const fallbackTimer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {

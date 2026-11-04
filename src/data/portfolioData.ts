@@ -10,7 +10,7 @@ export const PERSONAL_INFO = {
     'Mobile App Developer',
     'IT Enthusiast',
   ],
-  profileImage: '/images/profile.jpg',
+  profileImage: '/images/profile-transparent.png',
   logoImage: '/images/logo-jnb.jpg',
   shortIntro:
     'I build modern web and mobile applications, intelligent software solutions, and practical digital experiences. I enjoy transforming ideas into functional applications through clean code, thoughtful design, and modern technologies.',

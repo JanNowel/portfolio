@@ -9,7 +9,6 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-// Synthesize a subtle, pleasant haptic click sound using Web Audio API
 const playThemeChirp = (toTheme: Theme) => {
   try {
     const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
@@ -34,7 +33,6 @@ const playThemeChirp = (toTheme: Theme) => {
     osc.start();
     osc.stop(ctx.currentTime + 0.08);
   } catch {
-    // Audio autoplay restrictions or unsupported
   }
 };
 
