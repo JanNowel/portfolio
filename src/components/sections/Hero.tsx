@@ -4,8 +4,6 @@ import { Github, Linkedin, FileDown, Code2, CheckCircle2, Terminal } from 'lucid
 import { PERSONAL_INFO } from '../../data/portfolioData';
 import { InteractiveHeroCanvas } from '../3d/InteractiveHeroCanvas';
 import { FloatingTechElements } from '../3d/FloatingTechElements';
-import { PortraitFloatingTech } from '../3d/PortraitFloatingTech';
-import { MobileTechDock } from '../3d/MobileTechDock';
 import { MagneticButton } from '../ui/MagneticButton';
 import { TiltCard } from '../ui/TiltCard';
 import { TypewriterText } from '../ui/TypewriterText';
@@ -244,13 +242,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
                   </div>
                 </div>
               </TiltCard>
-
-              {/* Intelligent Floating Technology Ecosystem surrounding the portrait */}
-              <PortraitFloatingTech />
             </div>
-
-            {/* Mobile Touch-Friendly Tech Pill Dock (Only on small screens, never overlaps face or buttons) */}
-            <MobileTechDock />
           </motion.div>
         </div>
       </div>

@@ -91,3 +91,4 @@ export const TechLogo: React.FC<TechLogoProps> = ({ techKey, className = 'w-4 h-
       );
   }
 };
+

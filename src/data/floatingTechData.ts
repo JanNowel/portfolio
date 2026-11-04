@@ -10,25 +10,28 @@ export interface FloatingTechItem {
     | 'typescript'
     | 'nodejs'
     | 'flutter'
-    | 'react-native'
     | 'python'
     | 'mongodb'
-    | 'supabase'
-    | 'git'
-    | 'docker'
     | 'cloudflare'
     | 'leaflet';
-  accentColor: string; // Hex color code for glow & borders
+  accentColor: string;
   glowClass: string;
-  borderClass: string;
   tagBgClass: string;
-  // Positioning classes relative to anchor
-  placementClass: string;
+  // Starting anchor placement classes
+  initialPlacement: string;
+  // Visibility on devices (visible on mobile too!)
   visibilityClass: string;
-  // Animation path parameters
-  motion: {
-    y: number[];
+  // Dynamic wandering amplitudes
+  desktopWander: {
     x: number[];
+    y: number[];
+    rotate: number[];
+    duration: number;
+    delay: number;
+  };
+  mobileWander: {
+    x: number[];
+    y: number[];
     rotate: number[];
     duration: number;
     delay: number;
@@ -36,187 +39,235 @@ export interface FloatingTechItem {
 }
 
 export const FLOATING_TECH_ECOSYSTEM: FloatingTechItem[] = [
-  // 1. TOP-LEFT OF PORTRAIT: MERN Stack
+  // 1. MERN Stack (Top Left quadrant, wanders gracefully)
   {
     id: 'mern-stack',
     name: 'MERN Stack',
     shortTag: 'Full-Stack',
-    category: 'Full-Stack Web Architecture',
-    description: 'MongoDB, Express, React, and Node.js end-to-end applications with TypeScript.',
+    category: 'Web Architecture',
+    description: 'MongoDB, Express.js, React, and Node.js full-stack applications with TypeScript.',
     techKey: 'mern',
     accentColor: '#8B5CF6',
-    glowClass: 'group-hover:shadow-[0_0_25px_rgba(139,92,246,0.35)]',
-    borderClass: 'border-purple-500/30 group-hover:border-purple-400',
-    tagBgClass: 'bg-purple-500/10 text-purple-300',
-    placementClass: '-top-6 -left-8 lg:-left-16 xl:-left-20',
-    visibilityClass: 'hidden sm:flex',
-    motion: {
-      y: [0, -8, 0],
-      x: [0, 4, 0],
-      rotate: [0, -1.5, 0],
-      duration: 6.2,
-      delay: 0.1,
+    glowClass: 'group-hover:shadow-[0_0_25px_rgba(139,92,246,0.5)]',
+    tagBgClass: 'bg-purple-500/15 text-purple-300',
+    initialPlacement: 'top-16 left-3 sm:left-8 lg:left-14',
+    visibilityClass: 'flex', // Visible on all screens
+    desktopWander: {
+      x: [0, 55, -35, 45, -25, 0],
+      y: [0, -45, 35, -55, 25, 0],
+      rotate: [0, 5, -4, 6, -3, 0],
+      duration: 18,
+      delay: 0,
+    },
+    mobileWander: {
+      x: [0, 20, -15, 18, -10, 0],
+      y: [0, -22, 18, -25, 12, 0],
+      rotate: [0, 4, -3, 5, -2, 0],
+      duration: 14,
+      delay: 0,
     },
   },
 
-  // 2. TOP-RIGHT OF PORTRAIT: Flutter & React Native
+  // 2. React & TypeScript (Top Right quadrant, wandering diagonal)
   {
-    id: 'mobile-cross',
+    id: 'react-ts',
+    name: 'React & TS',
+    shortTag: 'Frontend',
+    category: 'UI Engineering',
+    description: 'Type-safe reactive component development with React, TypeScript, and Tailwind CSS.',
+    techKey: 'react',
+    accentColor: '#00D8FF',
+    glowClass: 'group-hover:shadow-[0_0_25px_rgba(0,216,255,0.5)]',
+    tagBgClass: 'bg-cyan-500/15 text-cyan-300',
+    initialPlacement: 'top-20 right-3 sm:right-10 lg:right-20',
+    visibilityClass: 'flex',
+    desktopWander: {
+      x: [0, -50, 40, -35, 30, 0],
+      y: [0, 50, -40, 35, -30, 0],
+      rotate: [0, -5, 4, -6, 3, 0],
+      duration: 20,
+      delay: 1.5,
+    },
+    mobileWander: {
+      x: [0, -18, 15, -12, 10, 0],
+      y: [0, 20, -18, 15, -12, 0],
+      rotate: [0, -4, 3, -4, 2, 0],
+      duration: 15,
+      delay: 1,
+    },
+  },
+
+  // 3. Flutter & Mobile (Upper Mid-Right / drifting around)
+  {
+    id: 'flutter-native',
     name: 'Flutter & Native',
-    shortTag: 'Mobile Apps',
-    category: 'Cross-Platform Mobile',
-    description: 'High-performance Android and iOS mobile applications built with Flutter, Dart & React Native.',
+    shortTag: 'Mobile',
+    category: 'Cross-Platform',
+    description: 'Cross-platform mobile apps for Android and iOS using Flutter, Dart & React Native.',
     techKey: 'flutter',
     accentColor: '#38BDF8',
-    glowClass: 'group-hover:shadow-[0_0_25px_rgba(56,189,248,0.35)]',
-    borderClass: 'border-cyan-500/30 group-hover:border-cyan-400',
-    tagBgClass: 'bg-cyan-500/10 text-cyan-300',
-    placementClass: '-top-5 -right-6 lg:-right-14 xl:-right-16',
-    visibilityClass: 'hidden sm:flex',
-    motion: {
-      y: [0, 9, 0],
-      x: [0, -3, 0],
-      rotate: [0, 1.8, 0],
-      duration: 6.8,
-      delay: 0.4,
+    glowClass: 'group-hover:shadow-[0_0_25px_rgba(56,189,248,0.5)]',
+    tagBgClass: 'bg-sky-500/15 text-sky-300',
+    initialPlacement: 'top-1/3 right-2 sm:right-8 lg:right-12',
+    visibilityClass: 'flex',
+    desktopWander: {
+      x: [0, -45, -20, 35, -25, 0],
+      y: [0, -35, 55, -40, 30, 0],
+      rotate: [0, 4, -5, 3, -4, 0],
+      duration: 19,
+      delay: 0.8,
     },
-  },
-
-  // 3. MIDDLE-RIGHT OF PORTRAIT: Node.js & Express
-  {
-    id: 'backend-node',
-    name: 'Node.js & Express',
-    shortTag: 'Backend APIs',
-    category: 'Backend & REST APIs',
-    description: 'Event-driven server runtimes, RESTful endpoints, JWT auth, and micro-services.',
-    techKey: 'nodejs',
-    accentColor: '#22C55E',
-    glowClass: 'group-hover:shadow-[0_0_25px_rgba(34,197,94,0.35)]',
-    borderClass: 'border-emerald-500/30 group-hover:border-emerald-400',
-    tagBgClass: 'bg-emerald-500/10 text-emerald-300',
-    placementClass: 'top-1/3 -right-10 lg:-right-20 xl:-right-24',
-    visibilityClass: 'hidden md:flex',
-    motion: {
-      y: [0, -7, 0],
-      x: [0, -4, 0],
-      rotate: [0, -1.2, 0],
-      duration: 7.4,
-      delay: 0.6,
-    },
-  },
-
-  // 4. BOTTOM-LEFT OF PORTRAIT: MongoDB & Supabase
-  {
-    id: 'database-stack',
-    name: 'MongoDB & Supabase',
-    shortTag: 'Databases',
-    category: 'Data Storage & Persistence',
-    description: 'NoSQL document modeling with Mongoose and relational PostgreSQL with Supabase RLS.',
-    techKey: 'mongodb',
-    accentColor: '#10B981',
-    glowClass: 'group-hover:shadow-[0_0_25px_rgba(16,185,129,0.35)]',
-    borderClass: 'border-emerald-500/30 group-hover:border-emerald-400',
-    tagBgClass: 'bg-emerald-500/10 text-emerald-300',
-    placementClass: '-bottom-6 -left-6 lg:-left-14 xl:-left-18',
-    visibilityClass: 'hidden sm:flex',
-    motion: {
-      y: [0, 7, 0],
-      x: [0, 3, 0],
-      rotate: [0, 1.4, 0],
-      duration: 6.5,
-      delay: 0.3,
-    },
-  },
-
-  // 5. BOTTOM-RIGHT OF PORTRAIT: Python & AI Integration
-  {
-    id: 'python-ai',
-    name: 'Python & AI Ops',
-    shortTag: 'Systems & AI',
-    category: 'Diagnostics & AI Systems',
-    description: 'Native desktop utilities, computer telemetry, automation scripts, and LLM integrations.',
-    techKey: 'python',
-    accentColor: '#F59E0B',
-    glowClass: 'group-hover:shadow-[0_0_25px_rgba(245,158,11,0.35)]',
-    borderClass: 'border-amber-500/30 group-hover:border-amber-400',
-    tagBgClass: 'bg-amber-500/10 text-amber-300',
-    placementClass: '-bottom-5 -right-8 lg:-right-16 xl:-right-20',
-    visibilityClass: 'hidden sm:flex',
-    motion: {
-      y: [0, -8, 0],
-      x: [0, -3, 0],
-      rotate: [0, -1.5, 0],
-      duration: 7.1,
-      delay: 0.7,
-    },
-  },
-
-  // 6. HERO CANVAS PERIMETER (Top Left Corner on Wide Screens): React & TypeScript
-  {
-    id: 'frontend-react',
-    name: 'React & TypeScript',
-    shortTag: 'UI Framework',
-    category: 'Frontend Engineering',
-    description: 'Component architecture, modern hooks, type safety, and fluid reactive state systems.',
-    techKey: 'react',
-    accentColor: '#06B6D4',
-    glowClass: 'group-hover:shadow-[0_0_25px_rgba(6,182,212,0.35)]',
-    borderClass: 'border-cyan-500/30 group-hover:border-cyan-400',
-    tagBgClass: 'bg-cyan-500/10 text-cyan-300',
-    placementClass: 'top-14 left-4 xl:left-8',
-    visibilityClass: 'hidden xl:flex',
-    motion: {
-      y: [0, 6, 0],
-      x: [0, 4, 0],
-      rotate: [0, 1.0, 0],
-      duration: 8.0,
-      delay: 0.2,
-    },
-  },
-
-  // 7. HERO CANVAS PERIMETER (Bottom Right Edge on Wide Screens): Git & Cloudflare
-  {
-    id: 'devops-tools',
-    name: 'Cloudflare & Git',
-    shortTag: 'Deploy & Edge',
-    category: 'Cloud Infrastructure',
-    description: 'Edge network hosting, serverless functions, version control, and GitHub Actions CI/CD.',
-    techKey: 'cloudflare',
-    accentColor: '#F97316',
-    glowClass: 'group-hover:shadow-[0_0_25px_rgba(249,115,22,0.35)]',
-    borderClass: 'border-orange-500/30 group-hover:border-orange-400',
-    tagBgClass: 'bg-orange-500/10 text-orange-300',
-    placementClass: 'bottom-16 right-6 xl:right-12',
-    visibilityClass: 'hidden xl:flex',
-    motion: {
-      y: [0, -7, 0],
-      x: [0, -4, 0],
-      rotate: [0, -1.0, 0],
-      duration: 7.8,
+    mobileWander: {
+      x: [0, -16, -8, 14, -10, 0],
+      y: [0, -18, 22, -15, 12, 0],
+      rotate: [0, 3, -4, 2, -3, 0],
+      duration: 16,
       delay: 0.5,
     },
   },
 
-  // 8. HERO CANVAS PERIMETER (Bottom Center / Leaflet GIS): eBantay Real-Time GIS
+  // 4. Node.js & Express (Middle Left / wandering outwards)
   {
-    id: 'gis-realtime',
-    name: 'Leaflet & GIS',
-    shortTag: 'Geospatial',
-    category: 'Mapping & Real-Time',
-    description: 'Interactive geospatial dispatch maps, heatmaps, and situational awareness triage.',
+    id: 'node-express',
+    name: 'Node & Express',
+    shortTag: 'Backend',
+    category: 'REST & APIs',
+    description: 'Scalable backend services, JWT authorization, middleware, and microservices.',
+    techKey: 'nodejs',
+    accentColor: '#22C55E',
+    glowClass: 'group-hover:shadow-[0_0_25px_rgba(34,197,94,0.5)]',
+    tagBgClass: 'bg-emerald-500/15 text-emerald-300',
+    initialPlacement: 'top-1/2 -translate-y-1/2 left-2 sm:left-6 lg:left-10',
+    visibilityClass: 'hidden sm:flex',
+    desktopWander: {
+      x: [0, 40, -30, 45, -20, 0],
+      y: [0, 45, -50, 35, -40, 0],
+      rotate: [0, -4, 5, -3, 4, 0],
+      duration: 22,
+      delay: 2.2,
+    },
+    mobileWander: {
+      x: [0, 15, -12, 16, -8, 0],
+      y: [0, 18, -20, 14, -15, 0],
+      rotate: [0, -3, 4, -2, 3, 0],
+      duration: 17,
+      delay: 1.5,
+    },
+  },
+
+  // 5. MongoDB & Supabase (Bottom Left, sweeping curves)
+  {
+    id: 'db-stack',
+    name: 'MongoDB & Supabase',
+    shortTag: 'Database',
+    category: 'Data Storage',
+    description: 'Mongoose schemas, cloud MongoDB Atlas, and relational Supabase with Row Level Security.',
+    techKey: 'mongodb',
+    accentColor: '#10B981',
+    glowClass: 'group-hover:shadow-[0_0_25px_rgba(16,185,129,0.5)]',
+    tagBgClass: 'bg-emerald-500/15 text-emerald-300',
+    initialPlacement: 'bottom-20 left-4 sm:left-10 lg:left-24',
+    visibilityClass: 'flex',
+    desktopWander: {
+      x: [0, 60, -45, 50, -30, 0],
+      y: [0, -50, 35, -45, 30, 0],
+      rotate: [0, 6, -5, 4, -4, 0],
+      duration: 21,
+      delay: 1.0,
+    },
+    mobileWander: {
+      x: [0, 22, -18, 16, -12, 0],
+      y: [0, -20, 16, -18, 12, 0],
+      rotate: [0, 4, -3, 3, -3, 0],
+      duration: 15,
+      delay: 0.8,
+    },
+  },
+
+  // 6. Python & Systems (Bottom Right, drifting upwards)
+  {
+    id: 'python-sys',
+    name: 'Python & AI',
+    shortTag: 'Systems',
+    category: 'Diagnostics & AI',
+    description: 'Hardware telemetry diagnostics, Python desktop GUIs, and intelligent system integration.',
+    techKey: 'python',
+    accentColor: '#F59E0B',
+    glowClass: 'group-hover:shadow-[0_0_25px_rgba(245,158,11,0.5)]',
+    tagBgClass: 'bg-amber-500/15 text-amber-300',
+    initialPlacement: 'bottom-24 right-4 sm:right-12 lg:right-28',
+    visibilityClass: 'flex',
+    desktopWander: {
+      x: [0, -55, 35, -45, 30, 0],
+      y: [0, -40, 50, -35, 40, 0],
+      rotate: [0, -5, 6, -4, 5, 0],
+      duration: 23,
+      delay: 2.8,
+    },
+    mobileWander: {
+      x: [0, -20, 14, -16, 12, 0],
+      y: [0, -16, 20, -14, 16, 0],
+      rotate: [0, -3, 4, -3, 3, 0],
+      duration: 17,
+      delay: 2,
+    },
+  },
+
+  // 7. Cloudflare & Edge (Top Center / Mid Upper)
+  {
+    id: 'cloudflare-edge',
+    name: 'Cloudflare & Deploy',
+    shortTag: 'Cloud Edge',
+    category: 'Edge Infrastructure',
+    description: 'Fast edge hosting, global DNS, serverless functions, and production continuous delivery.',
+    techKey: 'cloudflare',
+    accentColor: '#F97316',
+    glowClass: 'group-hover:shadow-[0_0_25px_rgba(249,115,22,0.5)]',
+    tagBgClass: 'bg-orange-500/15 text-orange-300',
+    initialPlacement: 'top-10 left-1/2 -translate-x-1/2 hidden md:flex',
+    visibilityClass: 'hidden md:flex',
+    desktopWander: {
+      x: [0, 45, -40, 30, -35, 0],
+      y: [0, 35, -40, 45, -25, 0],
+      rotate: [0, 4, -5, 4, -3, 0],
+      duration: 24,
+      delay: 3.2,
+    },
+    mobileWander: {
+      x: [0, 16, -14, 12, -12, 0],
+      y: [0, 14, -16, 18, -10, 0],
+      rotate: [0, 3, -3, 3, -2, 0],
+      duration: 18,
+      delay: 2,
+    },
+  },
+
+  // 8. Leaflet & GIS (Mid Right Center)
+  {
+    id: 'leaflet-gis',
+    name: 'Leaflet GIS',
+    shortTag: 'Mapping',
+    category: 'Geospatial Radar',
+    description: 'Real-time municipal incident mapping and GIS dispatch coordination.',
     techKey: 'leaflet',
     accentColor: '#84CC16',
-    glowClass: 'group-hover:shadow-[0_0_25px_rgba(132,204,22,0.35)]',
-    borderClass: 'border-lime-500/30 group-hover:border-lime-400',
-    tagBgClass: 'bg-lime-500/10 text-lime-300',
-    placementClass: 'top-1/2 -translate-y-1/2 left-2 xl:left-6',
-    visibilityClass: 'hidden 2xl:flex',
-    motion: {
-      y: [0, 8, 0],
-      x: [0, 2, 0],
-      rotate: [0, 1.2, 0],
-      duration: 8.4,
-      delay: 0.9,
+    glowClass: 'group-hover:shadow-[0_0_25px_rgba(132,204,22,0.5)]',
+    tagBgClass: 'bg-lime-500/15 text-lime-300',
+    initialPlacement: 'top-2/3 right-3 sm:right-6 lg:right-10',
+    visibilityClass: 'hidden sm:flex',
+    desktopWander: {
+      x: [0, -40, 30, -35, 25, 0],
+      y: [0, -45, 40, -30, 35, 0],
+      rotate: [0, -4, 4, -3, 4, 0],
+      duration: 20,
+      delay: 1.8,
+    },
+    mobileWander: {
+      x: [0, -15, 12, -14, 10, 0],
+      y: [0, -18, 16, -12, 14, 0],
+      rotate: [0, -3, 3, -2, 3, 0],
+      duration: 16,
+      delay: 1.2,
     },
   },
 ];
