@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ArrowRight, Eye, Play } from 'lucide-react';
+import { Github, ArrowRight, Eye, Play, ExternalLink } from 'lucide-react';
 import { PROJECTS } from '../../data/portfolioData';
 import { Project } from '../../types';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -178,7 +178,9 @@ export const Projects: React.FC = () => {
                       >
                         <Play className="w-3 h-3 fill-current" />
                         <span>Demo</span>
-                        {!project.liveUrl && (
+                        {project.liveUrl ? (
+                          <ExternalLink className="w-3 h-3 text-accent-violet-light" />
+                        ) : (
                           <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
                         )}
                       </button>

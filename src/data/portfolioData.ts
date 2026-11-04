@@ -156,7 +156,7 @@ export const PROJECTS: Project[] = [
     ],
     role: 'Full-Stack & Mobile Developer',
     githubUrl: 'https://github.com/JanNowel',
-    liveUrl: undefined,
+    liveUrl: 'https://e-bantay-app-kappa.vercel.app/',
     status: 'Completed',
     accentColor: '#38BDF8',
     stats: [
