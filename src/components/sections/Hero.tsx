@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, FileDown, Code2, CheckCircle2, Terminal } from 'lucide-react';
+import { Github, Linkedin, FileDown, Code2, CheckCircle2, Terminal, ArrowDown } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 import { InteractiveHeroCanvas } from '../3d/InteractiveHeroCanvas';
 import { FloatingTechElements } from '../3d/FloatingTechElements';
@@ -245,24 +245,28 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
         </div>
       </div>
 
-      {/* 5. Scroll Down Indicator */}
+      {/* 5. Scroll Down Indicator (Centered Button Above, Centered Label Below) */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 sm:gap-2 cursor-pointer group"
+        className="absolute bottom-3 sm:bottom-6 left-0 right-0 mx-auto z-20 flex flex-col items-center justify-center text-center cursor-pointer group select-none"
         onClick={scrollToAbout}
       >
-        <span className="text-[10px] sm:text-[11px] font-mono tracking-widest text-zinc-400 uppercase group-hover:text-zinc-300 transition-colors">
-          Explore Portfolio
-        </span>
-        <div className="w-4 h-7 sm:w-5 sm:h-9 rounded-full border border-white/20 flex items-start justify-center p-1 group-hover:border-cyan-400/50 transition-colors">
+        {/* The Above Button: Centered Pill with Animated Indicator */}
+        <div className="w-5 h-8 sm:w-6 sm:h-10 rounded-full border border-white/25 group-hover:border-cyan-400/60 bg-white/[0.04] backdrop-blur-md flex items-start justify-center p-1 sm:p-1.5 mb-1.5 transition-all duration-300 shadow-lg shadow-black/20 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.3)]">
           <motion.div
-            animate={{ y: [0, 12, 0] }}
+            animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-1 h-1.5 sm:h-2 rounded-full bg-cyan-400"
+            className="w-1 h-2 sm:h-2.5 rounded-full bg-cyan-400"
           />
         </div>
+
+        {/* Centered Explore Portfolio Label */}
+        <span className="text-[10px] sm:text-[11px] font-mono tracking-widest text-zinc-400 uppercase text-center group-hover:text-cyan-300 transition-colors flex items-center justify-center gap-1">
+          <span>Explore Portfolio</span>
+          <ArrowDown className="w-3 h-3 text-cyan-400/80 group-hover:translate-y-0.5 transition-transform" />
+        </span>
       </motion.div>
     </section>
   );
