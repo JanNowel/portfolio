@@ -3,12 +3,12 @@ import { Project, SkillCategory, TimelineItem } from '../types';
 export const PERSONAL_INFO = {
   name: 'Jhon Noel Baculpo',
   initials: 'JNB',
-  title: 'Full-Stack Developer | Software Developer | IT Enthusiast',
+  title: 'Full-Stack Developer | Software Developer | AI Prompt Engineer',
   roles: [
     'Full-Stack Developer',
     'Software Developer',
     'Mobile App Developer',
-    'IT Enthusiast',
+    'AI Prompt Engineer',
   ],
   profileImage: '/images/profile-transparent.png',
   logoImage: '/images/logo-jnb.jpg',
@@ -18,8 +18,8 @@ export const PERSONAL_INFO = {
   isAvailable: true,
   email: 'baculpojhonnoele@gmail.com',
   github: 'https://github.com/JanNowel',
-  linkedin: 'https://linkedin.com/in/jhonnoelbaculpo', // Editable placeholder
-  location: 'Philippines', // Editable placeholder
+  linkedin: 'https://linkedin.com/in/jhonnoelbaculpo',
+  location: 'Bien Unido, Bohol, Philippines',
   resumeFileName: 'Jhon_Noel_Baculpo_CV.pdf',
 };
 
@@ -41,7 +41,7 @@ export const ABOUT_DATA = {
     },
     {
       title: 'Intelligent Systems & AI',
-      desc: 'Exploring computer vision, incident detection, and smart automation to enhance civic and enterprise workflows.',
+      desc: 'Exploring Large Language Model (LLM), incident detection, and smart automation to enhance civic and enterprise workflows.',
       icon: 'Brain',
     },
     {
@@ -84,13 +84,13 @@ export const ABOUT_DATA = {
 
 export const PROJECTS: Project[] = [
   {
-    id: 'regesuite',
-    title: 'REGESuite / REGEBook',
-    subtitle: 'Online Booking & Client Management System',
+    id: 'regebook',
+    title: 'REGEBook',
+    subtitle: 'AN Online Booking & Client Management System for REGE Styling & Catering Services',
     description:
       'A comprehensive online booking and client management system built for REGE Styling and Catering Services to streamline reservations, package customization, and customer communication.',
     fullDescription:
-      'REGESuite (and its client portal REGEBook) was engineered to solve scheduling conflicts, manual order tracking, and client communication challenges for REGE Styling and Catering Services. The system provides real-time calendar availability, customizable package tiering, automated booking workflows, and an administrative dashboard for event managers.',
+      'REGEBook was engineered to solve scheduling conflicts, manual order tracking, and client communication challenges for REGE Styling and Catering Services. The system provides real-time calendar availability, customizable package tiering, automated booking workflows, and an administrative dashboard for event managers.',
     category: 'Full-Stack',
     technologies: [
       'MERN Stack',
