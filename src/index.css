@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  body {
+    background-color: #080808;
+    color: #ffffff;
+    overflow-x: hidden;
+  }
+
+  /* Custom subtle dark scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #080808;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #222228;
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #33333d;
+  }
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(18, 18, 23, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Print styles for CV print format */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  nav,
+  footer,
+  #home,
+  #about,
+  #projects,
+  #skills,
+  #experience,
+  #github,
+  #contact,
+  canvas {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+}
