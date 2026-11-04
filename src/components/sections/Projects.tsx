@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, ArrowRight, Eye } from 'lucide-react';
+import { Github, ArrowRight, Eye, Play } from 'lucide-react';
 import { PROJECTS } from '../../data/portfolioData';
 import { Project } from '../../types';
 import { SectionHeading } from '../ui/SectionHeading';
 import { TiltCard } from '../ui/TiltCard';
 import { ProjectModal } from './ProjectModal';
 import { ProjectVisualPreview } from './ProjectVisualPreview';
+import { UnderDevelopmentToast } from '../ui/UnderDevelopmentToast';
 import { fadeInUp, staggerContainer } from '../../utils/animations';
 
 export const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>('All');
+  const [toastProject, setToastProject] = useState<Project | null>(null);
 
   const categories = ['All', 'Full-Stack', 'Mobile', 'AI & System', 'Desktop'];
 
@@ -155,32 +157,43 @@ export const Projects: React.FC = () => {
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </button>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
+                      {/* Demo Button */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (project.liveUrl) {
+                            window.open(project.liveUrl, '_blank', 'noopener,noreferrer');
+                          } else {
+                            setToastProject(project);
+                          }
+                        }}
+                        className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-mono transition-all duration-200 border ${
+                          project.liveUrl
+                            ? 'bg-accent-violet/15 hover:bg-accent-violet/25 text-accent-violet-light border-accent-violet/30'
+                            : 'bg-white/[0.04] hover:bg-amber-500/10 text-zinc-300 hover:text-amber-300 border-white/10 hover:border-amber-500/30'
+                        }`}
+                        title={project.liveUrl ? 'Open Live Demo' : 'Live Demo (Under Development)'}
+                      >
+                        <Play className="w-3 h-3 fill-current" />
+                        <span>Demo</span>
+                        {!project.liveUrl && (
+                          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                        )}
+                      </button>
+
                       {project.githubUrl && (
                         <a
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="p-2 rounded-lg bg-white/[0.04] hover:bg-white/10 text-zinc-400 hover:text-white transition-colors border border-white/5"
+                          className="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/10 text-zinc-400 hover:text-white transition-colors border border-white/5"
                           aria-label="View on GitHub"
                           title="View on GitHub"
                         >
                           <Github className="w-4 h-4" />
-                        </a>
-                      )}
-
-                      {project.liveUrl && (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="p-2 rounded-lg bg-white/[0.04] hover:bg-white/10 text-zinc-400 hover:text-white transition-colors border border-white/5"
-                          aria-label="Live Demo"
-                          title="Live Demo"
-                        >
-                          <ExternalLink className="w-4 h-4" />
                         </a>
                       )}
                     </div>
@@ -194,6 +207,14 @@ export const Projects: React.FC = () => {
 
       {/* Interactive Detail Modal */}
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+
+      {/* Under Development Toast Notification */}
+      <UnderDevelopmentToast
+        isOpen={!!toastProject}
+        projectName={toastProject?.title || ''}
+        githubUrl={toastProject?.githubUrl}
+        onClose={() => setToastProject(null)}
+      />
     </section>
   );
 };
