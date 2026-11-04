@@ -115,7 +115,7 @@ export const PROJECTS: Project[] = [
     ],
     role: 'Lead Full-Stack Developer',
     githubUrl: 'https://github.com/JanNowel',
-    liveUrl: undefined, // Editable when public deployment is live
+    liveUrl: undefined,
     status: 'Completed',
     accentColor: '#8B5CF6',
     stats: [

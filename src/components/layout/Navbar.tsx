@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, FileDown, ArrowUpRight } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 import { triggerConfetti } from '../../utils/confetti';
+import { ThemeToggle } from '../ui/ThemeToggle';
 
 interface NavItem {
   name: string;
@@ -137,6 +138,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
 
             {/* Desktop Actions */}
             <div className="hidden md:flex items-center gap-3">
+              <ThemeToggle />
+
               <button
                 onClick={handleDownloadCV}
                 className="relative group inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium font-mono text-white bg-white/5 border border-white/10 hover:border-accent-violet/50 hover:bg-accent-violet/10 hover:shadow-glow-violet transition-all duration-300"
@@ -158,8 +161,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
               </a>
             </div>
 
-            {/* Mobile Hamburger Button */}
+            {/* Mobile Actions: Theme Toggle & Hamburger */}
             <div className="flex md:hidden items-center gap-2">
+              <ThemeToggle />
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white focus:outline-none"
@@ -203,6 +207,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
               })}
 
               <div className="pt-4 mt-2 border-t border-white/10 flex flex-col gap-2.5">
+                <div className="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10">
+                  <span className="text-xs font-mono text-zinc-300">Theme Appearance</span>
+                  <ThemeToggle />
+                </div>
+
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);

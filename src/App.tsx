@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ThemeProvider } from './context/ThemeContext';
 import { Preloader } from './components/layout/Preloader';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
@@ -18,27 +19,29 @@ export const App: React.FC = () => {
   const [cvModalOpen, setCvModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#080808] text-white selection:bg-purple-600/30 selection:text-purple-200 relative selection:overflow-hidden">
+    <ThemeProvider>
+      <div className="min-h-screen bg-[#080808] text-white selection:bg-purple-600/30 selection:text-purple-200 relative selection:overflow-hidden transition-colors duration-300">
 
-      <CustomCursor />
-      <ScrollProgressBar />
+        <CustomCursor />
+        <ScrollProgressBar />
 
-      {loading && <Preloader onComplete={() => setLoading(false)} />}
-      <Navbar onOpenCVModal={() => setCvModalOpen(true)} />
-      <main className="relative z-10">
-        <Hero onOpenCVModal={() => setCvModalOpen(true)} />
-        <About />
-        <Projects />
-        <Skills />
-        <Experience />
-        <GitHubShowcase />
-        <Contact />
-      </main>
+        {loading && <Preloader onComplete={() => setLoading(false)} />}
+        <Navbar onOpenCVModal={() => setCvModalOpen(true)} />
+        <main className="relative z-10">
+          <Hero onOpenCVModal={() => setCvModalOpen(true)} />
+          <About />
+          <Projects />
+          <Skills />
+          <Experience />
+          <GitHubShowcase />
+          <Contact />
+        </main>
 
-      <Footer />
+        <Footer />
 
-      <CVModal isOpen={cvModalOpen} onClose={() => setCvModalOpen(false)} />
-    </div>
+        <CVModal isOpen={cvModalOpen} onClose={() => setCvModalOpen(false)} />
+      </div>
+    </ThemeProvider>
   );
 };
 
