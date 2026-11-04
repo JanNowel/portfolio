@@ -1,9 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, FileDown, Code2, Sparkles, CheckCircle2, Terminal } from 'lucide-react';
+import { Github, Linkedin, FileDown, Code2, CheckCircle2, Terminal } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 import { InteractiveHeroCanvas } from '../3d/InteractiveHeroCanvas';
 import { FloatingTechElements } from '../3d/FloatingTechElements';
+import { PortraitFloatingTech } from '../3d/PortraitFloatingTech';
+import { MobileTechDock } from '../3d/MobileTechDock';
 import { MagneticButton } from '../ui/MagneticButton';
 import { TiltCard } from '../ui/TiltCard';
 import { TypewriterText } from '../ui/TypewriterText';
@@ -243,26 +245,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
                 </div>
               </TiltCard>
 
-              {/* Floating Mini Tech Badge 1 (Visible on tablet & desktop, hidden on tiny mobile) */}
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-3 -left-3 sm:-left-4 z-20 hidden md:flex items-center gap-2 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-[#121218]/90 border border-white/10 backdrop-blur-md shadow-xl"
-              >
-                <div className="w-2 h-2 rounded-full bg-cyan-400" />
-                <span className="text-[10px] sm:text-[11px] font-mono text-zinc-200">React & TypeScript</span>
-              </motion.div>
-
-              {/* Floating Mini Tech Badge 2 */}
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                className="absolute -bottom-3 -right-3 sm:-right-4 z-20 hidden md:flex items-center gap-2 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-[#121218]/90 border border-white/10 backdrop-blur-md shadow-xl"
-              >
-                <Sparkles className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-accent-violet" />
-                <span className="text-[10px] sm:text-[11px] font-mono text-zinc-200">Flutter & Python</span>
-              </motion.div>
+              {/* Intelligent Floating Technology Ecosystem surrounding the portrait */}
+              <PortraitFloatingTech />
             </div>
+
+            {/* Mobile Touch-Friendly Tech Pill Dock (Only on small screens, never overlaps face or buttons) */}
+            <MobileTechDock />
           </motion.div>
         </div>
       </div>

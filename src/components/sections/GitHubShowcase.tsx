@@ -53,7 +53,6 @@ export const GitHubShowcase: React.FC = () => {
           }
         }
       } catch (err) {
-        // Fallback already pre-set, quiet degradation
         console.warn('Using curated GitHub showcase data (API rate limit or offline).', err);
       } finally {
         setLoading(false);
@@ -72,7 +71,6 @@ export const GitHubShowcase: React.FC = () => {
     CSS: '#563D7C',
   };
 
-  // 12-week simulated contribution heatmap
   const weeks = 14;
   const daysPerWeek = 7;
   const generateContributionGrid = () => {
@@ -80,7 +78,6 @@ export const GitHubShowcase: React.FC = () => {
     for (let w = 0; w < weeks; w++) {
       const week: number[] = [];
       for (let d = 0; d < daysPerWeek; d++) {
-        // Realistic commit distribution with occasional high-commit days
         const r = Math.random();
         if (r > 0.75) week.push(3);
         else if (r > 0.5) week.push(2);
@@ -182,15 +179,14 @@ export const GitHubShowcase: React.FC = () => {
                       {week.map((level, dIdx) => (
                         <div
                           key={dIdx}
-                          className={`w-3.5 h-3.5 rounded-sm transition-colors ${
-                            level === 0
-                              ? 'bg-white/[0.04]'
-                              : level === 1
+                          className={`w-3.5 h-3.5 rounded-sm transition-colors ${level === 0
+                            ? 'bg-white/[0.04]'
+                            : level === 1
                               ? 'bg-purple-950 border border-purple-800/40'
                               : level === 2
-                              ? 'bg-purple-700'
-                              : 'bg-accent-violet shadow-sm shadow-purple-500/50'
-                          }`}
+                                ? 'bg-purple-700'
+                                : 'bg-accent-violet shadow-sm shadow-purple-500/50'
+                            }`}
                           title={`Activity level: ${level}`}
                         />
                       ))}
