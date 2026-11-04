@@ -332,13 +332,13 @@ export const TIMELINE_DATA: TimelineItem[] = [
     id: 'ojt-experience',
     period: 'Upcoming / Editable Entry',
     title: 'On-the-Job Training (OJT) / Internship',
-    organization: '[Target Company / Partner Institution]',
-    location: '[City / Remote]',
+    organization: 'FAST Distribution Corporation / Trinidad Municipal College',
+    location: 'Ubay, Bohol',
     category: 'OJT',
     description:
       'Editable placeholder for OJT internship experience. Prepared to contribute to software development teams, code reviews, feature implementation, and collaborative Agile sprints.',
     highlights: [
-      'Ready to apply full-stack and mobile development skills in professional environments',
+      'Open for Commission-based part-time full-stack and mobile development skills in professional environments',
       'Eager to learn team engineering practices, CI/CD pipelines, and production QA',
       'Open to local and remote software development internship opportunities',
     ],

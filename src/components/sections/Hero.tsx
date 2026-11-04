@@ -151,7 +151,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
                 </MagneticButton>
               </div>
 
-              {/* GitHub & LinkedIn Link Icons */}
               <div className="flex items-center justify-center gap-2.5 pt-1 sm:pt-0">
                 <a
                   href={PERSONAL_INFO.github}
