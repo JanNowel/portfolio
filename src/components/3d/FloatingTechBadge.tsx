@@ -24,7 +24,8 @@ export const FloatingTechBadge: React.FC<FloatingTechBadgeProps> = ({ item }) =>
 
   return (
     <motion.div
-      className={`absolute ${item.initialPlacement} ${item.visibilityClass} z-10 pointer-events-auto select-none`}
+      className={`absolute ${item.visibilityClass} pointer-events-auto select-none`}
+      style={{ top: item.anchor.top, left: item.anchor.left, right: item.anchor.right }}
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{
         opacity: [0.85, 1, 0.9, 1],

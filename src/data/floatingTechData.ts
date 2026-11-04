@@ -17,8 +17,8 @@ export interface FloatingTechItem {
   accentColor: string;
   glowClass: string;
   tagBgClass: string;
-  // Starting anchor placement classes
-  initialPlacement: string;
+  // Fixed anchor inside the floating layer (percentages)
+  anchor: { top: string; left?: string; right?: string };
   // Visibility on devices (visible on mobile too!)
   visibilityClass: string;
   // Dynamic wandering amplitudes
@@ -50,7 +50,7 @@ export const FLOATING_TECH_ECOSYSTEM: FloatingTechItem[] = [
     accentColor: '#8B5CF6',
     glowClass: 'group-hover:shadow-[0_0_25px_rgba(139,92,246,0.5)]',
     tagBgClass: 'bg-purple-500/15 text-purple-300',
-    initialPlacement: 'top-16 left-3 sm:left-8 lg:left-14',
+    anchor: { top: '3%', left: '3%' },
     visibilityClass: 'flex', // Visible on all screens
     desktopWander: {
       x: [0, 55, -35, 45, -25, 0],
@@ -79,7 +79,7 @@ export const FLOATING_TECH_ECOSYSTEM: FloatingTechItem[] = [
     accentColor: '#00D8FF',
     glowClass: 'group-hover:shadow-[0_0_25px_rgba(0,216,255,0.5)]',
     tagBgClass: 'bg-cyan-500/15 text-cyan-300',
-    initialPlacement: 'top-20 right-3 sm:right-10 lg:right-20',
+    anchor: { top: '12%', right: '3%' },
     visibilityClass: 'flex',
     desktopWander: {
       x: [0, -50, 40, -35, 30, 0],
@@ -108,7 +108,7 @@ export const FLOATING_TECH_ECOSYSTEM: FloatingTechItem[] = [
     accentColor: '#38BDF8',
     glowClass: 'group-hover:shadow-[0_0_25px_rgba(56,189,248,0.5)]',
     tagBgClass: 'bg-sky-500/15 text-sky-300',
-    initialPlacement: 'top-1/3 right-2 sm:right-8 lg:right-12',
+    anchor: { top: '30%', right: '2%' },
     visibilityClass: 'flex',
     desktopWander: {
       x: [0, -45, -20, 35, -25, 0],
@@ -137,7 +137,7 @@ export const FLOATING_TECH_ECOSYSTEM: FloatingTechItem[] = [
     accentColor: '#22C55E',
     glowClass: 'group-hover:shadow-[0_0_25px_rgba(34,197,94,0.5)]',
     tagBgClass: 'bg-emerald-500/15 text-emerald-300',
-    initialPlacement: 'top-1/2 -translate-y-1/2 left-2 sm:left-6 lg:left-10',
+    anchor: { top: '44%', left: '2%' },
     visibilityClass: 'hidden sm:flex',
     desktopWander: {
       x: [0, 40, -30, 45, -20, 0],
@@ -166,7 +166,7 @@ export const FLOATING_TECH_ECOSYSTEM: FloatingTechItem[] = [
     accentColor: '#10B981',
     glowClass: 'group-hover:shadow-[0_0_25px_rgba(16,185,129,0.5)]',
     tagBgClass: 'bg-emerald-500/15 text-emerald-300',
-    initialPlacement: 'bottom-20 left-4 sm:left-10 lg:left-24',
+    anchor: { top: '62%', left: '4%' },
     visibilityClass: 'flex',
     desktopWander: {
       x: [0, 60, -45, 50, -30, 0],
@@ -195,7 +195,7 @@ export const FLOATING_TECH_ECOSYSTEM: FloatingTechItem[] = [
     accentColor: '#F59E0B',
     glowClass: 'group-hover:shadow-[0_0_25px_rgba(245,158,11,0.5)]',
     tagBgClass: 'bg-amber-500/15 text-amber-300',
-    initialPlacement: 'bottom-24 right-4 sm:right-12 lg:right-28',
+    anchor: { top: '74%', right: '4%' },
     visibilityClass: 'flex',
     desktopWander: {
       x: [0, -55, 35, -45, 30, 0],
@@ -224,7 +224,7 @@ export const FLOATING_TECH_ECOSYSTEM: FloatingTechItem[] = [
     accentColor: '#F97316',
     glowClass: 'group-hover:shadow-[0_0_25px_rgba(249,115,22,0.5)]',
     tagBgClass: 'bg-orange-500/15 text-orange-300',
-    initialPlacement: 'top-10 left-1/2 -translate-x-1/2 hidden md:flex',
+    anchor: { top: '4%', left: '42%' },
     visibilityClass: 'hidden md:flex',
     desktopWander: {
       x: [0, 45, -40, 30, -35, 0],
@@ -253,7 +253,7 @@ export const FLOATING_TECH_ECOSYSTEM: FloatingTechItem[] = [
     accentColor: '#84CC16',
     glowClass: 'group-hover:shadow-[0_0_25px_rgba(132,204,22,0.5)]',
     tagBgClass: 'bg-lime-500/15 text-lime-300',
-    initialPlacement: 'top-2/3 right-3 sm:right-6 lg:right-10',
+    anchor: { top: '56%', right: '3%' },
     visibilityClass: 'hidden sm:flex',
     desktopWander: {
       x: [0, -40, 30, -35, 25, 0],
