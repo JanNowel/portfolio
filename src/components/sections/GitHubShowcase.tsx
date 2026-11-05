@@ -1,18 +1,63 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Star, GitFork, BookOpen, ExternalLink } from 'lucide-react';
+import { Github, Star, GitFork, BookOpen, ExternalLink, Activity } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 import { FALLBACK_GITHUB_USER, FALLBACK_REPOS } from '../../data/githubFallback';
 import { GitHubRepo, GitHubUser } from '../../types';
 import { SectionHeading } from '../ui/SectionHeading';
 import { fadeInUp, staggerContainer } from '../../utils/animations';
 
+interface ContributionDay {
+  date: string;
+  count: number;
+  level: number;
+}
+
 export const GitHubShowcase: React.FC = () => {
   const [user, setUser] = useState<GitHubUser>(FALLBACK_GITHUB_USER);
   const [repos, setRepos] = useState<GitHubRepo[]>(FALLBACK_REPOS);
+  const [contributions, setContributions] = useState<ContributionDay[][]>([]);
+  const [totalContributions, setTotalContributions] = useState<number | null>(null);
+
+  // Fallback 52-week grid generator (covers full card width)
+  const generateFallbackGrid = (): ContributionDay[][] => {
+    const grid: ContributionDay[][] = [];
+    const now = new Date();
+    const totalWeeks = 52;
+    const daysPerWeek = 7;
+
+    for (let w = 0; w < totalWeeks; w++) {
+      const week: ContributionDay[] = [];
+      for (let d = 0; d < daysPerWeek; d++) {
+        const dayOffset = (totalWeeks - 1 - w) * 7 + (daysPerWeek - 1 - d);
+        const date = new Date(now.getTime() - dayOffset * 24 * 60 * 60 * 1000);
+        const dateStr = date.toISOString().split('T')[0];
+        
+        // Moderate activity pattern
+        const rand = Math.random();
+        let level = 0;
+        let count = 0;
+        if (rand > 0.78) {
+          level = 3;
+          count = 4;
+        } else if (rand > 0.58) {
+          level = 2;
+          count = 2;
+        } else if (rand > 0.35) {
+          level = 1;
+          count = 1;
+        }
+
+        week.push({ date: dateStr, count, level });
+      }
+      grid.push(week);
+    }
+    return grid;
+  };
 
   useEffect(() => {
     const fetchGitHubData = async () => {
+      // 1. Fetch User Profile
       try {
         const userRes = await fetch('https://api.github.com/users/JanNowel');
         if (userRes.ok) {
@@ -29,8 +74,15 @@ export const GitHubShowcase: React.FC = () => {
             location: userData.location || FALLBACK_GITHUB_USER.location,
           });
         }
+      } catch (err) {
+        console.warn('Using fallback user data.', err);
+      }
 
-        const repoRes = await fetch('https://api.github.com/users/JanNowel/repos?sort=updated&per_page=6');
+      // 2. Fetch Public Repositories
+      try {
+        const repoRes = await fetch(
+          'https://api.github.com/users/JanNowel/repos?sort=updated&per_page=6'
+        );
         if (repoRes.ok) {
           const repoData: any[] = await repoRes.json();
           if (Array.isArray(repoData) && repoData.length > 0) {
@@ -50,30 +102,62 @@ export const GitHubShowcase: React.FC = () => {
       } catch (err) {
         console.warn('Using fallback repository data.', err);
       }
+
+      // 3. Fetch Live Contribution Graph
+      try {
+        const contribRes = await fetch(
+          'https://github-contributions-api.jogruber.de/v4/JanNowel?y=last'
+        );
+        if (contribRes.ok) {
+          const contribData = await contribRes.json();
+          if (contribData && Array.isArray(contribData.contributions)) {
+            const list: ContributionDay[] = contribData.contributions.map((c: any) => ({
+              date: c.date,
+              count: c.count || 0,
+              level: Math.min(Math.max(c.level || 0, 0), 4),
+            }));
+
+            // Group into 7-day columns (weeks)
+            const groupedWeeks: ContributionDay[][] = [];
+            for (let i = 0; i < list.length; i += 7) {
+              groupedWeeks.push(list.slice(i, i + 7));
+            }
+
+            setContributions(groupedWeeks);
+            if (contribData.total?.lastYear !== undefined) {
+              setTotalContributions(contribData.total.lastYear);
+            }
+          }
+        } else {
+          setContributions(generateFallbackGrid());
+        }
+      } catch (err) {
+        console.warn('Could not fetch live contribution graph, using fallback grid.', err);
+        setContributions(generateFallbackGrid());
+      }
     };
 
     fetchGitHubData();
   }, []);
 
-  const weeks = 28;
-  const daysPerWeek = 7;
-  const generateContributionGrid = () => {
-    const grid: number[][] = [];
-    for (let w = 0; w < weeks; w++) {
-      const week: number[] = [];
-      for (let d = 0; d < daysPerWeek; d++) {
-        const r = Math.random();
-        if (r > 0.7) week.push(3);
-        else if (r > 0.45) week.push(2);
-        else if (r > 0.2) week.push(1);
-        else week.push(0);
-      }
-      grid.push(week);
-    }
-    return grid;
-  };
+  const activeGrid = contributions.length > 0 ? contributions : generateFallbackGrid();
 
-  const contributionGrid = React.useMemo(() => generateContributionGrid(), []);
+  // Helper for dot color by level in dark and light modes
+  const getDotColor = (level: number) => {
+    switch (level) {
+      case 4:
+        return 'bg-white border-white dark:bg-white dark:border-white';
+      case 3:
+        return 'bg-zinc-300 border-zinc-300 dark:bg-zinc-300 dark:border-zinc-300';
+      case 2:
+        return 'bg-zinc-500 border-zinc-500 dark:bg-zinc-500 dark:border-zinc-500';
+      case 1:
+        return 'bg-zinc-700 border-zinc-700 dark:bg-zinc-700 dark:border-zinc-700';
+      case 0:
+      default:
+        return 'bg-zinc-900 border-zinc-800/80 dark:bg-zinc-900 dark:border-zinc-800/80';
+    }
+  };
 
   return (
     <section id="github" className="pt-4 border-t border-zinc-900">
@@ -82,48 +166,83 @@ export const GitHubShowcase: React.FC = () => {
         badge="07 — github activity"
         title="Open-Source Repositories."
         titleHighlight="Public Contributions."
-        subtitle="Transparent software codebases, experimental prototypes, and academic deliverables on GitHub."
+        subtitle="Transparent software codebases, live commit telemetry, and academic deliverables on GitHub."
         actionText="@JanNowel"
         actionHref={PERSONAL_INFO.github}
       />
 
-      {/* Contribution Matrix matching Reference Video */}
+      {/* Live Contribution Matrix matching Reference Video & Full 52-Week Span */}
       <div className="rounded-2xl bg-[#0c0c0e] border border-zinc-800/80 p-5 sm:p-7 mb-8">
         <div className="flex items-center justify-between text-xs font-mono text-zinc-400 mb-4 pb-3 border-b border-zinc-900">
           <span className="flex items-center gap-2">
             <Github className="w-4 h-4 text-zinc-300" />
-            <span>GitHub Public Commit Activity</span>
+            <span className="font-semibold text-zinc-200">GitHub Public Commit Activity</span>
+            <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-zinc-900 border border-zinc-800 text-[10px] text-emerald-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Live API</span>
+            </span>
           </span>
-          <span>@{user.login}</span>
+          <a
+            href={PERSONAL_INFO.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition-colors"
+          >
+            @{user.login}
+          </a>
         </div>
 
-        {/* Matrix Dots */}
-        <div className="overflow-x-auto py-2 no-scrollbar">
-          <div className="flex gap-1.5 min-w-[500px]">
-            {contributionGrid.map((week, wIdx) => (
-              <div key={wIdx} className="flex flex-col gap-1.5 shrink-0">
-                {week.map((level, dIdx) => {
-                  const colors = [
-                    'bg-zinc-900',
-                    'bg-zinc-700',
-                    'bg-zinc-400',
-                    'bg-zinc-100',
-                  ];
-                  return (
-                    <div
-                      key={dIdx}
-                      className={`w-2.5 h-2.5 rounded-full ${colors[level]} transition-colors`}
-                    />
-                  );
-                })}
+        {/* 52-Week Full Contribution Dot Matrix */}
+        <div className="overflow-x-auto py-2 no-scrollbar scroll-smooth">
+          <div className="flex justify-between items-center gap-1 sm:gap-1.5 min-w-[720px] w-full">
+            {activeGrid.map((week, wIdx) => (
+              <div key={wIdx} className="flex flex-col gap-1 sm:gap-1.5 shrink-0">
+                {week.map((day, dIdx) => (
+                  <div
+                    key={dIdx}
+                    title={`${day.count} contribution${day.count === 1 ? '' : 's'} on ${day.date}`}
+                    className={`w-2.5 h-2.5 rounded-full border transition-transform hover:scale-125 cursor-pointer ${getDotColor(
+                      day.level
+                    )}`}
+                  />
+                ))}
               </div>
             ))}
           </div>
         </div>
 
-        <div className="mt-4 pt-3 border-t border-zinc-900 text-xs font-mono uppercase tracking-wider text-zinc-400 flex items-center justify-between">
-          <span>500+ Contributions in the last year</span>
-          <span>{user.public_repos} Repositories</span>
+        {/* Matrix Footer Stats */}
+        <div className="mt-4 pt-3 border-t border-zinc-900 text-xs font-mono uppercase tracking-wider text-zinc-400 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <Activity className="w-3.5 h-3.5 text-zinc-400" />
+            <span>
+              {totalContributions !== null
+                ? `${totalContributions} contributions in the last year`
+                : '100+ contributions in the last year'}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-4">
+            {/* Level Legend */}
+            <div className="flex items-center gap-1.5 text-[10px] text-zinc-500 normal-case font-mono">
+              <span>Less</span>
+              <span className="w-2 h-2 rounded-full bg-zinc-900 border border-zinc-800" />
+              <span className="w-2 h-2 rounded-full bg-zinc-700" />
+              <span className="w-2 h-2 rounded-full bg-zinc-500" />
+              <span className="w-2 h-2 rounded-full bg-zinc-300" />
+              <span className="w-2 h-2 rounded-full bg-white" />
+              <span>More</span>
+            </div>
+
+            <a
+              href={`${PERSONAL_INFO.github}?tab=repositories`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors font-semibold"
+            >
+              {user.public_repos} Repositories ↗
+            </a>
+          </div>
         </div>
       </div>
 

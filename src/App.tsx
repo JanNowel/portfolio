@@ -28,7 +28,7 @@ export const App: React.FC = () => {
     setIsSkeleton(true);
     setTimeout(() => {
       setIsSkeleton(false);
-    }, 900);
+    }, 1200);
   };
 
   return (
@@ -44,31 +44,30 @@ export const App: React.FC = () => {
 
         {/* Right Main Scrollable Content Area matching iging.tech reference layout */}
         <div className="lg:pl-64 xl:pl-72 min-h-screen bg-black">
-          <main className="max-w-4xl mx-auto px-5 sm:px-8 lg:px-12 py-6 sm:py-10 space-y-20 sm:space-y-24">
+          <main className="max-w-4xl mx-auto px-4 sm:px-8 lg:px-12 pt-16 lg:pt-10 pb-28 lg:pb-16">
             <AnimatePresence mode="wait">
               {isSkeleton ? (
                 <SkeletonHero key="hero-skeleton" />
               ) : (
                 <motion.div
-                  key="hero-live"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.35, ease: 'easeOut' }}
+                  key="portfolio-content"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, ease: 'easeOut' }}
+                  className="space-y-20 sm:space-y-24"
                 >
                   <Hero onOpenCVModal={() => setCvModalOpen(true)} />
+                  <About />
+                  <Projects />
+                  <Experience />
+                  <Skills />
+                  <Certifications />
+                  <Services />
+                  <GitHubShowcase />
+                  <Contact />
                 </motion.div>
               )}
             </AnimatePresence>
-
-            {/* Sections in Exact Order */}
-            <About />
-            <Projects />
-            <Experience />
-            <Skills />
-            <Certifications />
-            <Services />
-            <GitHubShowcase />
-            <Contact />
           </main>
 
           <Footer />

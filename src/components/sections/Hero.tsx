@@ -20,7 +20,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
     }
   };
 
-  // Tech framework banner matching reference video (frame_00_t0s.jpg)
   const techLogos = [
     { name: 'React', label: 'React' },
     { name: 'TypeScript', label: 'TypeScript' },
@@ -46,13 +45,13 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
           {/* Left: Square Portrait Image */}
           <motion.div
             variants={fadeInUp}
-            className="md:col-span-5 flex justify-start"
+            className="md:col-span-5 flex justify-center md:justify-start"
           >
-            <div className="relative aspect-square w-full max-w-[280px] sm:max-w-[320px] rounded-2xl overflow-hidden bg-zinc-950 border border-zinc-800 shadow-2xl">
+            <div className="relative aspect-square w-full max-w-[260px] sm:max-w-[300px] rounded-2xl overflow-hidden bg-transparent border border-zinc-800/80 shadow-2xl">
               <img
                 src={PERSONAL_INFO.profileImage}
                 alt={PERSONAL_INFO.name}
-                className="w-full h-full object-contain object-bottom"
+                className="w-full h-full object-contain object-bottom drop-shadow-xl"
               />
               
               {/* Subtle status tag */}

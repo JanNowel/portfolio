@@ -3,7 +3,7 @@ import { GitHubRepo, GitHubUser } from '../types';
 export const FALLBACK_GITHUB_USER: GitHubUser = {
   login: 'JanNowel',
   name: 'Jhon Noel Baculpo',
-  avatar_url: '/images/profile.jpg',
+  avatar_url: '/images/profile-transparent.png',
   html_url: 'https://github.com/JanNowel',
   bio: 'Full-Stack Developer | Software Developer | IT Enthusiast. Building modern web and mobile applications.',
   public_repos: 12,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FileDown, ArrowUpRight } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
@@ -18,7 +18,7 @@ const NAV_ITEMS: NavItem[] = [
   { name: 'Stack', href: '#skills', shortName: 'Stack' },
   { name: 'Certifications', href: '#certifications', shortName: 'Certs' },
   { name: 'Services', href: '#services', shortName: 'Services' },
-  { name: 'GitHub', href: '#github', shortName: 'Git' },
+  { name: 'GitHub', href: '#github', shortName: 'GitHub' },
   { name: 'Contact', href: '#contact', shortName: 'Contact' },
 ];
 
@@ -28,11 +28,13 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
   const [activeSection, setActiveSection] = useState('about');
+  const mobileDockRef = useRef<HTMLDivElement>(null);
 
+  // Track active section on scroll
   useEffect(() => {
     const handleScroll = () => {
       const sectionIds = ['home', ...NAV_ITEMS.map((item) => item.href.substring(1))];
-      const scrollPosition = window.scrollY + 200;
+      const scrollPosition = window.scrollY + (window.innerWidth < 1024 ? 120 : 200);
 
       for (let i = sectionIds.length - 1; i >= 0; i--) {
         const sectionEl = document.getElementById(sectionIds[i]);
@@ -51,11 +53,35 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Auto-center active item in mobile bottom dock
+  useEffect(() => {
+    if (mobileDockRef.current) {
+      const activeBtn = mobileDockRef.current.querySelector<HTMLElement>(
+        `[data-section="${activeSection}"]`
+      );
+      if (activeBtn) {
+        activeBtn.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'center',
+          block: 'nearest',
+        });
+      }
+    }
+  }, [activeSection]);
+
+  // Accurate offset navigation (prevents section headings from being obscured by mobile header)
   const handleNavClick = (href: string) => {
     const id = href.substring(1);
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = window.innerWidth < 1024 ? 68 : 24;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
     }
   };
 
@@ -64,8 +90,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
     if (onOpenCVModal) {
       onOpenCVModal();
     } else {
-      const contactEl = document.getElementById('contact');
-      contactEl?.scrollIntoView({ behavior: 'smooth' });
+      handleNavClick('#contact');
     }
   };
 
@@ -75,7 +100,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
           DESKTOP FIXED LEFT SIDEBAR (Matching iging.tech / Inspired Design)
           ========================================================= */}
       <aside className="hidden lg:flex fixed inset-y-0 left-0 w-64 xl:w-72 bg-black border-r border-zinc-900 flex-col justify-between p-6 xl:p-8 z-40 select-none overflow-y-auto no-scrollbar">
-        
         {/* Top: Brand Monogram & Navigation Links */}
         <div className="space-y-8">
           {/* Brand Name */}
@@ -127,7 +151,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
 
         {/* Bottom: Live Viewer Count, Theme Switcher & Contact Prompts */}
         <div className="pt-8 space-y-6 border-t border-zinc-900 font-mono">
-          
           {/* Live Viewer Indicator matching reference */}
           <div className="flex items-center gap-2 text-xs text-zinc-400">
             <span className="relative flex h-2 w-2">
@@ -190,37 +213,42 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
       {/* =========================================================
           MOBILE & TABLET NAVIGATION (< lg)
           Clean Top Header + Bottom Floating Capsule Dock
-          (No Hamburger Menus, Fast Single-Tap Access)
+          (Ergonomic, Touch-Friendly, No Clunky Hamburger Menus)
           ========================================================= */}
       {/* 1. Mobile Top Minimal Header */}
       <header className="fixed top-0 inset-x-0 z-40 lg:hidden bg-black/90 backdrop-blur-md border-b border-zinc-900 px-4 py-3">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between max-w-4xl mx-auto">
           <a
             href="#home"
             onClick={(e) => {
               e.preventDefault();
               handleNavClick('#home');
             }}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2.5 focus:outline-none"
           >
-            <div className="w-7 h-7 rounded-full bg-zinc-900 border border-zinc-800 overflow-hidden p-0.5">
+            <div className="w-7 h-7 rounded-full bg-zinc-900 border border-zinc-800 overflow-hidden p-0.5 shrink-0">
               <img
                 src={PERSONAL_INFO.logoImage}
                 alt="JNB Logo"
                 className="w-full h-full object-cover rounded-full"
               />
             </div>
-            <span className="text-xs font-mono font-bold text-white">{PERSONAL_INFO.name}</span>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-mono font-bold text-white tracking-tight">
+                {PERSONAL_INFO.name}
+              </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+            </div>
           </a>
 
           <div className="flex items-center gap-2">
             <ThemeToggle />
             <button
               onClick={handleDownloadCV}
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-mono text-zinc-200 bg-zinc-900 border border-zinc-800"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-mono text-zinc-200 bg-zinc-900 border border-zinc-800 active:scale-95 transition-transform"
             >
               <FileDown className="w-3 h-3 text-zinc-400" />
-              <span>CV</span>
+              <span>Resume</span>
             </button>
           </div>
         </div>
@@ -229,9 +257,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
       {/* 2. Mobile Floating Bottom Capsule Dock */}
       <nav
         aria-label="Mobile Navigation"
-        className="fixed bottom-3 inset-x-2 z-40 lg:hidden max-w-sm mx-auto"
+        className="fixed bottom-3 inset-x-0 z-40 lg:hidden flex justify-center px-3 pointer-events-none"
       >
-        <div className="bg-zinc-950/95 backdrop-blur-xl border border-zinc-800/90 rounded-full px-2 py-1.5 shadow-2xl shadow-black/80 flex items-center justify-around overflow-x-auto no-scrollbar">
+        <div
+          ref={mobileDockRef}
+          className="pointer-events-auto bg-black/90 dark:bg-black/95 backdrop-blur-xl border border-zinc-800/90 rounded-full px-2 py-1.5 shadow-2xl shadow-black/80 flex items-center gap-1 overflow-x-auto no-scrollbar scroll-smooth max-w-[calc(100vw-1.5rem)] sm:max-w-md touch-pan-x"
+        >
           {NAV_ITEMS.map((item) => {
             const sectionId = item.href.substring(1);
             const isActive = activeSection === sectionId;
@@ -239,9 +270,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
             return (
               <button
                 key={item.name}
+                data-section={sectionId}
                 onClick={() => handleNavClick(item.href)}
-                className={`relative px-2 py-1 text-[11px] font-mono tracking-tight transition-colors duration-150 rounded-full focus:outline-none shrink-0 ${
-                  isActive ? 'text-white font-semibold' : 'text-zinc-400 hover:text-zinc-200'
+                className={`relative px-3 py-1.5 text-xs font-mono tracking-tight transition-colors duration-150 rounded-full focus:outline-none shrink-0 min-h-[34px] flex items-center justify-center ${
+                  isActive
+                    ? 'text-white font-semibold'
+                    : 'text-zinc-400 hover:text-zinc-200 active:text-white'
                 }`}
               >
                 {isActive && (
