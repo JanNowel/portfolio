@@ -1,15 +1,18 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-type Theme = 'dark' | 'light';
+export type ThemeMode = 'system' | 'light' | 'dark';
+export type EffectiveTheme = 'light' | 'dark';
 
 export interface ThemeContextType {
-  theme: Theme;
+  mode: ThemeMode;
+  theme: EffectiveTheme;
+  setMode: (mode: ThemeMode, origin?: { x: number; y: number }) => void;
   toggleTheme: (origin?: { x: number; y: number }) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-const playThemeChirp = (toTheme: Theme) => {
+const playThemeChirp = (toTheme: EffectiveTheme) => {
   try {
     const AudioContextClass =
       window.AudioContext ||
@@ -39,22 +42,36 @@ const playThemeChirp = (toTheme: Theme) => {
   }
 };
 
+const getSystemPreference = (): EffectiveTheme => {
+  if (typeof window !== 'undefined' && window.matchMedia) {
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+  return 'dark';
+};
+
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>(() => {
+  const [mode, setModeState] = useState<ThemeMode>(() => {
     if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('jnb-portfolio-theme') as Theme | null;
-      if (savedTheme === 'light' || savedTheme === 'dark') {
-        return savedTheme;
+      const savedMode = localStorage.getItem('jnb-portfolio-theme-mode') as ThemeMode | null;
+      if (savedMode === 'system' || savedMode === 'light' || savedMode === 'dark') {
+        return savedMode;
       }
-      // Respect user's system theme preference on initial load
-      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-        return 'light';
+      const legacyTheme = localStorage.getItem('jnb-portfolio-theme');
+      if (legacyTheme === 'light' || legacyTheme === 'dark') {
+        return legacyTheme;
       }
     }
-    return 'dark';
+    return 'system';
   });
 
-  const applyThemeToDOM = (t: Theme) => {
+  const [effectiveTheme, setEffectiveTheme] = useState<EffectiveTheme>(() => {
+    if (mode === 'system') {
+      return getSystemPreference();
+    }
+    return mode;
+  });
+
+  const applyThemeToDOM = (t: EffectiveTheme) => {
     const root = document.documentElement;
     if (t === 'light') {
       root.classList.remove('dark');
@@ -67,29 +84,61 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   };
 
+  // Listen for system OS color scheme changes when in 'system' mode
   useEffect(() => {
-    applyThemeToDOM(theme);
-    localStorage.setItem('jnb-portfolio-theme', theme);
-  }, [theme]);
+    if (typeof window === 'undefined' || !window.matchMedia) return;
 
-  const toggleTheme = (origin?: { x: number; y: number }) => {
-    const nextTheme: Theme = theme === 'dark' ? 'light' : 'dark';
-    playThemeChirp(nextTheme);
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+    const handleSystemChange = (e: MediaQueryListEvent) => {
+      if (mode === 'system') {
+        const newEffective: EffectiveTheme = e.matches ? 'light' : 'dark';
+        setEffectiveTheme(newEffective);
+        applyThemeToDOM(newEffective);
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleSystemChange);
+    return () => mediaQuery.removeEventListener('change', handleSystemChange);
+  }, [mode]);
+
+  // Synchronize initial theme application
+  useEffect(() => {
+    const targetTheme = mode === 'system' ? getSystemPreference() : mode;
+    setEffectiveTheme(targetTheme);
+    applyThemeToDOM(targetTheme);
+    localStorage.setItem('jnb-portfolio-theme-mode', mode);
+  }, [mode]);
+
+  const setMode = (newMode: ThemeMode, origin?: { x: number; y: number }) => {
+    if (newMode === mode) return;
+
+    const newEffective: EffectiveTheme =
+      newMode === 'system' ? getSystemPreference() : newMode;
+
+    const willChangeEffective = newEffective !== effectiveTheme;
+
+    if (!willChangeEffective) {
+      setModeState(newMode);
+      localStorage.setItem('jnb-portfolio-theme-mode', newMode);
+      return;
+    }
+
+    playThemeChirp(newEffective);
 
     const isReducedMotion =
       typeof window !== 'undefined' &&
       window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Graceful fallback for browsers without View Transition API or reduced motion
     const doc = document as any;
     if (!doc.startViewTransition || isReducedMotion) {
-      setTheme(nextTheme);
-      applyThemeToDOM(nextTheme);
+      setModeState(newMode);
+      setEffectiveTheme(newEffective);
+      applyThemeToDOM(newEffective);
+      localStorage.setItem('jnb-portfolio-theme-mode', newMode);
       return;
     }
 
-    // Origin coordinate of the theme toggle button
     const x = origin?.x ?? window.innerWidth / 2;
     const y = origin?.y ?? window.innerHeight / 2;
 
@@ -99,14 +148,16 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     );
 
     const transition = doc.startViewTransition(() => {
-      setTheme(nextTheme);
-      applyThemeToDOM(nextTheme);
+      setModeState(newMode);
+      setEffectiveTheme(newEffective);
+      applyThemeToDOM(newEffective);
+      localStorage.setItem('jnb-portfolio-theme-mode', newMode);
     });
 
     transition.ready
       .then(() => {
-        if (nextTheme === 'dark') {
-          // When switching to dark mode: dark circular layer smoothly expands until covering entire viewport
+        if (newEffective === 'dark') {
+          // Expanding dark circle from the button
           document.documentElement.animate(
             {
               clipPath: [
@@ -115,14 +166,13 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
               ],
             },
             {
-              duration: 500,
+              duration: 480,
               easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
               pseudoElement: '::view-transition-new(root)',
             }
           );
         } else {
-          // When switching back to light mode: reverse the circular reveal animation
-          // The dark layer smoothly contracts back to the button position, revealing light mode
+          // Reverse: contracting dark circle back into button, revealing light
           document.documentElement.animate(
             {
               clipPath: [
@@ -131,7 +181,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
               ],
             },
             {
-              duration: 500,
+              duration: 480,
               easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
               pseudoElement: '::view-transition-old(root)',
             }
@@ -139,14 +189,32 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         }
       })
       .catch(() => {
-        // Fallback if animation fails
-        setTheme(nextTheme);
-        applyThemeToDOM(nextTheme);
+        setModeState(newMode);
+        setEffectiveTheme(newEffective);
+        applyThemeToDOM(newEffective);
+        localStorage.setItem('jnb-portfolio-theme-mode', newMode);
       });
   };
 
+  const toggleTheme = (origin?: { x: number; y: number }) => {
+    // Cycle: system -> light -> dark -> system
+    const cycleMap: Record<ThemeMode, ThemeMode> = {
+      system: 'light',
+      light: 'dark',
+      dark: 'system',
+    };
+    setMode(cycleMap[mode], origin);
+  };
+
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider
+      value={{
+        mode,
+        theme: effectiveTheme,
+        setMode,
+        toggleTheme,
+      }}
+    >
       {children}
     </ThemeContext.Provider>
   );

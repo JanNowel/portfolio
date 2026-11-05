@@ -145,6 +145,27 @@ html.light::view-transition-new(root) {
   z-index: 1;
 }
 
+/* Smooth UI transition across theme switches */
+body,
+aside,
+header,
+nav,
+main,
+section,
+button,
+a,
+input,
+textarea,
+.rounded-2xl,
+.rounded-xl {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.animate-marquee,
+.animate-marquee * {
+  transition: none !important;
+}
+
 /* ===================================================
    ATS RESUME PRINT STYLESHEET
    Flawless single-page PDF generation via window.print()
@@ -342,4 +363,52 @@ html.light .bg-white.text-zinc-950 {
 html.light button.bg-white:hover,
 html.light a.bg-white:hover {
   background-color: #1e293b !important;
+}
+
+/* 9. Theme Selector Segmented Control in Light Mode */
+html.light [role="radiogroup"][aria-label="Theme selector"] {
+  background-color: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+}
+
+html.light [role="radiogroup"][aria-label="Theme selector"] button {
+  color: #64748b !important;
+}
+
+html.light [role="radiogroup"][aria-label="Theme selector"] button:hover {
+  color: #0f172a !important;
+}
+
+html.light [role="radiogroup"][aria-label="Theme selector"] button[aria-checked="true"] {
+  color: #0f172a !important;
+}
+
+html.light [role="radiogroup"][aria-label="Theme selector"] .bg-zinc-800 {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* 9. Theme Selector Segmented Control in Light Mode */
+html.light [role="radiogroup"][aria-label="Theme selector"] {
+  background-color: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+}
+
+html.light [role="radiogroup"][aria-label="Theme selector"] button {
+  color: #64748b !important;
+}
+
+html.light [role="radiogroup"][aria-label="Theme selector"] button:hover {
+  color: #0f172a !important;
+}
+
+html.light [role="radiogroup"][aria-label="Theme selector"] button[aria-checked="true"] {
+  color: #0f172a !important;
+}
+
+html.light [role="radiogroup"][aria-label="Theme selector"] .bg-zinc-800 {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
 }

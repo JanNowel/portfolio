@@ -1,71 +1,99 @@
-import React, { useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon } from 'lucide-react';
-import { useTheme } from '../../context/ThemeContext';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Sun, Moon, Monitor } from 'lucide-react';
+import { useTheme, ThemeMode } from '../../context/ThemeContext';
 
 interface ThemeToggleProps {
   className?: string;
 }
 
-export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
-  const { theme, toggleTheme } = useTheme();
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const isDark = theme === 'dark';
+interface ModeOption {
+  value: ThemeMode;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+  getRotation: (isSelected: boolean) => number;
+}
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    let origin: { x: number; y: number } | undefined;
-    if (buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
-      origin = {
-        x: rect.left + rect.width / 2,
-        y: rect.top + rect.height / 2,
-      };
-    } else if (e.clientX && e.clientY) {
-      origin = { x: e.clientX, y: e.clientY };
-    }
-    toggleTheme(origin);
+const MODES: ModeOption[] = [
+  {
+    value: 'light',
+    label: 'Light',
+    icon: Sun,
+    getRotation: (isSelected) => (isSelected ? 0 : 45),
+  },
+  {
+    value: 'system',
+    label: 'System',
+    icon: Monitor,
+    getRotation: () => 0,
+  },
+  {
+    value: 'dark',
+    label: 'Dark',
+    icon: Moon,
+    getRotation: (isSelected) => (isSelected ? 0 : -25),
+  },
+];
+
+export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
+  const { mode, setMode } = useTheme();
+
+  const handleSelect = (targetMode: ThemeMode, e: React.MouseEvent<HTMLButtonElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const origin = {
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2,
+    };
+    setMode(targetMode, origin);
   };
 
   return (
-    <motion.button
-      ref={buttonRef}
-      type="button"
-      whileTap={{ scale: 0.9 }}
-      whileHover={{ scale: 1.05 }}
-      onClick={handleClick}
-      className={`relative p-2.5 rounded-xl border transition-colors duration-200 flex items-center justify-center overflow-hidden focus:outline-none select-none ${
-        isDark
-          ? 'bg-zinc-900/90 border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-700 shadow-sm'
-          : 'bg-white border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:border-zinc-300 shadow-sm'
-      } ${className}`}
-      aria-label={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-      title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+    <div
+      role="radiogroup"
+      aria-label="Theme selector"
+      className={`inline-flex items-center p-0.5 rounded-full bg-zinc-200/80 dark:bg-[#121215] border border-zinc-300/80 dark:border-zinc-800/80 shadow-inner select-none transition-colors duration-200 ${className}`}
     >
-      <AnimatePresence mode="wait" initial={false}>
-        {isDark ? (
-          <motion.div
-            key="dark-icon"
-            initial={{ rotate: -90, scale: 0.5, opacity: 0 }}
-            animate={{ rotate: 0, scale: 1, opacity: 1 }}
-            exit={{ rotate: 90, scale: 0.5, opacity: 0 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="flex items-center justify-center"
+      {MODES.map((item) => {
+        const isSelected = mode === item.value;
+        const IconComponent = item.icon;
+
+        return (
+          <motion.button
+            key={item.value}
+            type="button"
+            role="radio"
+            aria-checked={isSelected}
+            whileTap={{ scale: 0.88 }}
+            whileHover={{ scale: 1.05 }}
+            onClick={(e) => handleSelect(item.value, e)}
+            className={`relative p-1.5 sm:px-2 sm:py-1 rounded-full text-xs font-mono transition-colors duration-150 flex items-center justify-center focus:outline-none ${
+              isSelected
+                ? 'text-zinc-950 dark:text-white font-medium'
+                : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
+            }`}
+            aria-label={`${item.label} mode`}
+            title={`${item.label} Mode`}
           >
-            <Moon className="w-4 h-4 text-zinc-300" />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="light-icon"
-            initial={{ rotate: 90, scale: 0.5, opacity: 0 }}
-            animate={{ rotate: 0, scale: 1, opacity: 1 }}
-            exit={{ rotate: -90, scale: 0.5, opacity: 0 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="flex items-center justify-center"
-          >
-            <Sun className="w-4 h-4 text-zinc-800" />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.button>
+            {isSelected && (
+              <motion.div
+                layoutId="active-theme-pill"
+                className="absolute inset-0 rounded-full bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700/60 shadow-sm"
+                transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+              />
+            )}
+            <motion.span
+              className="relative z-10 flex items-center justify-center"
+              animate={{
+                rotate: item.getRotation(isSelected),
+                scale: isSelected ? 1.05 : 0.85,
+              }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+            >
+              <IconComponent className="w-3.5 h-3.5 shrink-0" />
+            </motion.span>
+          </motion.button>
+        );
+      })}
+    </div>
   );
 };

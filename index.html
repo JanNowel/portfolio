@@ -17,11 +17,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Early theme init script to prevent flash and ensure light/dark sync -->
+    <script>
+      (function() {
+        try {
+          var mode = localStorage.getItem('jnb-portfolio-theme-mode') || localStorage.getItem('jnb-portfolio-theme');
+          var isLight = mode === 'light' || (mode !== 'dark' && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
+          var root = document.documentElement;
+          if (isLight) {
+            root.classList.remove('dark');
+            root.classList.add('light');
+            root.setAttribute('data-theme', 'light');
+          } else {
+            root.classList.remove('light');
+            root.classList.add('dark');
+            root.setAttribute('data-theme', 'dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+
     <title>Jhon Noel Baculpo | Full-Stack Developer</title>
   </head>
-  <body class="bg-[#000000] text-zinc-100 selection:bg-zinc-800 selection:text-zinc-100 antialiased overflow-x-hidden">
+  <body class="selection:bg-zinc-800 selection:text-zinc-100 antialiased overflow-x-hidden">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

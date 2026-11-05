@@ -223,3 +223,4 @@ main().catch((err) => {
   console.error('[SYNC] Fatal error:', err);
   process.exit(0); // Exit 0 so GitHub Actions workflow does not fail if GitHub API is temporarily down
 });
+

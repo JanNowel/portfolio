@@ -98,7 +98,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
       {/* =========================================================
           DESKTOP FIXED LEFT SIDEBAR (Matching iging.tech / Inspired Design)
           ========================================================= */}
-      <aside className="hidden lg:flex fixed inset-y-0 left-0 w-64 xl:w-72 bg-black border-r border-zinc-900 flex-col justify-between p-6 xl:p-8 z-40 select-none overflow-y-auto no-scrollbar">
+      <aside className="hidden lg:flex fixed inset-y-0 left-0 w-64 xl:w-72 bg-white dark:bg-black border-r border-zinc-200 dark:border-zinc-900 flex-col justify-between p-6 xl:p-8 z-40 select-none overflow-y-auto no-scrollbar">
         {/* Top: Brand Monogram & Navigation Links */}
         <div className="space-y-8">
           {/* Brand Name */}
@@ -215,7 +215,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
           (Ergonomic, Touch-Friendly, No Clunky Hamburger Menus)
           ========================================================= */}
       {/* 1. Mobile Top Minimal Header */}
-      <header className="fixed top-0 inset-x-0 z-40 lg:hidden bg-black/90 backdrop-blur-md border-b border-zinc-900 px-4 py-3">
+      <header className="fixed top-0 inset-x-0 z-40 lg:hidden bg-white/90 dark:bg-black/90 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-900 px-4 py-3">
         <div className="flex items-center justify-between max-w-4xl mx-auto">
           <a
             href="#home"
@@ -225,7 +225,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
             }}
             className="flex items-center gap-2.5 focus:outline-none"
           >
-            <div className="w-7 h-7 rounded-full bg-zinc-900 border border-zinc-800 overflow-hidden p-0.5 shrink-0">
+            <div className="w-7 h-7 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 overflow-hidden p-0.5 shrink-0">
               <img
                 src={PERSONAL_INFO.logoImage}
                 alt="JNB Logo"
@@ -233,7 +233,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
               />
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-mono font-bold text-white tracking-tight">
+              <span className="text-xs font-mono font-bold text-zinc-900 dark:text-white tracking-tight">
                 {PERSONAL_INFO.name}
               </span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
@@ -244,9 +244,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
             <ThemeToggle />
             <button
               onClick={handleDownloadCV}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-mono text-zinc-200 bg-zinc-900 border border-zinc-800 active:scale-95 transition-transform"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-mono text-zinc-700 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 active:scale-95 transition-transform"
             >
-              <FileDown className="w-3 h-3 text-zinc-400" />
+              <FileDown className="w-3 h-3 text-zinc-500 dark:text-zinc-400" />
               <span>Resume</span>
             </button>
           </div>
@@ -260,7 +260,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
       >
         <div
           ref={mobileDockRef}
-          className="pointer-events-auto bg-black/90 dark:bg-black/95 backdrop-blur-xl border border-zinc-800/90 rounded-full px-2 py-1.5 shadow-2xl shadow-black/80 flex items-center gap-1 overflow-x-auto no-scrollbar scroll-smooth max-w-[calc(100vw-1.5rem)] sm:max-w-md touch-pan-x"
+          className="pointer-events-auto bg-white/95 dark:bg-black/95 backdrop-blur-xl border border-zinc-200 dark:border-zinc-800/90 rounded-full px-2 py-1.5 shadow-2xl flex items-center gap-1 overflow-x-auto no-scrollbar scroll-smooth max-w-[calc(100vw-1.5rem)] sm:max-w-md touch-pan-x"
         >
           {NAV_ITEMS.map((item) => {
             const sectionId = item.href.substring(1);
