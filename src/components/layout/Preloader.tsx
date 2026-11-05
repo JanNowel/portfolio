@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Volume2, VolumeX, FastForward, Sparkles, Terminal } from 'lucide-react';
+import { Volume2, VolumeX, FastForward } from 'lucide-react';
+import { PERSONAL_INFO } from '../../data/portfolioData';
 
 interface PreloaderProps {
   onComplete: () => void;
@@ -11,19 +12,18 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
   const [, setHasStartedPlaying] = useState(false);
-  const [statusMessage, setStatusMessage] = useState('INITIALIZING QUANTUM CORE...');
+  const [statusMessage, setStatusMessage] = useState('INITIALIZING ENVIRONMENT...');
   const [isFinishing, setIsFinishing] = useState(false);
+
   useEffect(() => {
-    if (progress < 25) {
-      setStatusMessage('INITIALIZING QUANTUM CORE...');
-    } else if (progress < 50) {
-      setStatusMessage('LOADING 3D TECH ECOSYSTEM...');
-    } else if (progress < 75) {
-      setStatusMessage('CALIBRATING MOTION ENGINES...');
+    if (progress < 30) {
+      setStatusMessage('INITIALIZING RUNTIME & ASSETS...');
+    } else if (progress < 65) {
+      setStatusMessage('PREPARING COMPONENT HIERARCHY...');
     } else if (progress < 95) {
       setStatusMessage('SYNCHRONIZING REPOSITORIES...');
     } else {
-      setStatusMessage('PORTFOLIO IS READY // WELCOME TO MY LIFE');
+      setStatusMessage('WELCOME // PORTFOLIO READY');
     }
   }, [progress]);
 
@@ -42,7 +42,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     setProgress(100);
     setTimeout(() => {
       onComplete();
-    }, 600);
+    }, 500);
   };
 
   const handleVideoEnded = () => {
@@ -60,10 +60,10 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           setHasStartedPlaying(true);
         })
         .catch(() => {
-          // Autoplay blocked: fallback incremental timer
           setHasStartedPlaying(true);
         });
     }
+
     const fallbackTimer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
@@ -71,9 +71,9 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           finishLoading();
           return 100;
         }
-        return Math.min(prev + 4, 100);
+        return Math.min(prev + 5, 100);
       });
-    }, 150);
+    }, 140);
 
     return () => clearInterval(fallbackTimer);
   }, []);
@@ -83,33 +83,27 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       <motion.div
         initial={{ opacity: 1 }}
         exit={{
-          y: '-100%',
           opacity: 0,
-          transition: { duration: 0.8, ease: [0.77, 0, 0.175, 1] },
+          transition: { duration: 0.6, ease: 'easeInOut' },
         }}
-        className="fixed inset-0 z-[1000] flex flex-col items-center justify-between bg-[#080808] text-white p-4 sm:p-8 select-none overflow-hidden"
+        className="fixed inset-0 z-[1000] flex flex-col items-center justify-between bg-[#09090b] text-white p-4 sm:p-8 select-none overflow-hidden"
       >
-        {/* Ambient background glows */}
-        <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] rounded-full bg-accent-violet/10 blur-[140px] pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-cyan-500/10 blur-[140px] pointer-events-none" />
-
         {/* Top Header Bar */}
-        <div className="w-full max-w-4xl flex items-center justify-between z-10 pt-2">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#141418] border border-cyan-400/30 overflow-hidden p-0.5">
+        <div className="w-full max-w-3xl flex items-center justify-between z-10 pt-2">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 overflow-hidden p-0.5">
               <img
-                src="/images/logo-jnb.jpg"
+                src={PERSONAL_INFO.logoImage}
                 alt="JNB Logo"
-                className="w-full h-full object-cover rounded-md"
+                className="w-full h-full object-cover rounded-full"
               />
             </div>
             <div>
-              <div className="text-xs font-mono font-bold tracking-wider text-white">
-                JHON NOEL BACULPO
+              <div className="text-xs font-mono font-semibold tracking-wider text-zinc-100">
+                {PERSONAL_INFO.name}
               </div>
-              <div className="text-[10px] font-mono text-cyan-400 tracking-widest uppercase flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
-                <span>BOOT_SEQUENCE // v2.4</span>
+              <div className="text-[10px] font-mono text-zinc-400 tracking-wider uppercase">
+                PORTFOLIO SEQUENCE
               </div>
             </div>
           </div>
@@ -124,7 +118,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
                   setIsMuted(!isMuted);
                 }
               }}
-              className="p-2 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-400/40 text-zinc-300 hover:text-white transition-colors text-xs font-mono flex items-center gap-1.5"
+              className="px-2.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-300 hover:text-white transition-colors text-xs font-mono flex items-center gap-1.5"
               title={isMuted ? 'Unmute Audio' : 'Mute Audio'}
             >
               {isMuted ? (
@@ -134,96 +128,59 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
                 </>
               ) : (
                 <>
-                  <Volume2 className="w-3.5 h-3.5 text-cyan-400" />
-                  <span className="hidden sm:inline text-[11px] text-cyan-300">Sound ON</span>
+                  <Volume2 className="w-3.5 h-3.5 text-zinc-200" />
+                  <span className="hidden sm:inline text-[11px] text-zinc-200">Audio On</span>
                 </>
               )}
             </button>
 
-            {/* Skip Intro Button */}
+            {/* Skip Button */}
             <button
               type="button"
               onClick={finishLoading}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono text-zinc-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-accent-violet/40 transition-all duration-200"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-zinc-300 hover:text-white bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition-colors"
             >
-              <span>Skip Intro</span>
-              <FastForward className="w-3 h-3 text-accent-violet" />
+              <span>Skip</span>
+              <FastForward className="w-3 h-3 text-zinc-400" />
             </button>
           </div>
         </div>
 
-        {/* Center: Futuristic Video Container */}
-        <div className="relative my-auto w-full max-w-xl sm:max-w-2xl flex flex-col items-center z-10 px-2">
+        {/* Center: Minimalist Video Frame */}
+        <div className="relative my-auto w-full max-w-xl flex flex-col items-center z-10 px-2">
           <motion.div
-            initial={{ scale: 0.92, opacity: 0 }}
+            initial={{ scale: 0.96, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black/90 border border-cyan-400/40 shadow-[0_0_50px_rgba(6,182,212,0.2)] group"
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="w-full relative rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800 shadow-2xl"
           >
-            {/* Cyberpunk HUD Corner Brackets */}
-            <div className="absolute top-2 left-2 z-20 pointer-events-none">
-              <span className="text-[9px] font-mono font-bold tracking-widest text-cyan-400/90 bg-black/60 px-1.5 py-0.5 rounded border border-cyan-400/30">
-                [SYSTEM_STREAM]
-              </span>
-            </div>
-            <div className="absolute top-2 right-2 z-20 pointer-events-none">
-              <span className="text-[9px] font-mono tracking-widest text-accent-violet/90 bg-black/60 px-1.5 py-0.5 rounded border border-accent-violet/30 flex items-center gap-1">
-                <Sparkles className="w-2.5 h-2.5 text-accent-violet" />
-                <span>AI_GENERATIVE</span>
-              </span>
-            </div>
-            <div className="absolute bottom-2 left-2 z-20 pointer-events-none">
-              <span className="text-[9px] font-mono text-zinc-400 bg-black/60 px-1.5 py-0.5 rounded border border-white/10">
-                PORTFOLIO_INTRO // 1080P
-              </span>
-            </div>
-            <div className="absolute bottom-2 right-2 z-20 pointer-events-none">
-              <span className="text-[9px] font-mono text-cyan-400 font-semibold bg-black/60 px-1.5 py-0.5 rounded border border-cyan-400/30 tabular-nums">
-                {progress}%
-              </span>
-            </div>
-
-            {/* Video Element */}
             <video
               ref={videoRef}
               src="/videos/gemini_generated_video_83869ac7.mp4"
-              autoPlay
-              muted={isMuted}
               playsInline
+              muted={isMuted}
               onTimeUpdate={handleTimeUpdate}
               onEnded={handleVideoEnded}
-              className="w-full h-full object-cover"
+              className="w-full aspect-video object-contain bg-zinc-950"
             />
-
-            {/* Subtle scanline overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/[0.02] to-transparent pointer-events-none" />
           </motion.div>
         </div>
 
-        {/* Bottom HUD Progress Section */}
-        <div className="w-full max-w-2xl flex flex-col items-center z-10 pb-4">
-          <div className="w-full flex items-center justify-between text-xs font-mono text-zinc-400 mb-2">
-            <div className="flex items-center gap-2">
-              <Terminal className="w-3.5 h-3.5 text-cyan-400" />
-              <span className="text-zinc-300 font-semibold tracking-wider">
-                {statusMessage}
-              </span>
-            </div>
-            <span className="text-cyan-400 font-bold tabular-nums">{progress}%</span>
+        {/* Bottom Loading Progress Strip */}
+        <div className="w-full max-w-3xl z-10 pb-3">
+          <div className="flex items-center justify-between text-[11px] font-mono text-zinc-400 mb-2">
+            <span>{statusMessage}</span>
+            <span className="text-zinc-200">{progress}%</span>
           </div>
 
-          {/* Glowing Dual-Tone Progress Track */}
-          <div className="w-full h-1.5 bg-zinc-900 rounded-full overflow-hidden border border-white/5 relative">
+          {/* Minimal Monochrome Progress Bar */}
+          <div className="w-full h-1 bg-zinc-900 rounded-full overflow-hidden border border-zinc-800">
             <motion.div
-              className="h-full bg-gradient-to-r from-cyan-400 via-accent-violet to-accent-blue shadow-[0_0_15px_rgba(6,182,212,0.8)]"
+              className="h-full bg-zinc-200 rounded-full"
               style={{ width: `${progress}%` }}
-              transition={{ ease: 'easeOut', duration: 0.1 }}
+              transition={{ ease: 'linear' }}
             />
           </div>
-
-          <p className="text-[11px] font-mono text-zinc-400 mt-3 text-center">
-            Tap or click <span className="text-zinc-300 font-semibold">Skip Intro</span> anytime to jump directly to the portfolio.
-          </p>
         </div>
       </motion.div>
     </AnimatePresence>

@@ -1,148 +1,146 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Layout, Server, Database, Wrench, Sparkles, Code } from 'lucide-react';
+import { Layout, Server, Database, Wrench, Sparkles, Code2 } from 'lucide-react';
 import { SKILL_CATEGORIES } from '../../data/portfolioData';
 import { SectionHeading } from '../ui/SectionHeading';
-import { TiltCard } from '../ui/TiltCard';
 
 export const Skills: React.FC = () => {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   const iconMap: Record<string, React.ReactNode> = {
-    Layout: <Layout className="w-5 h-5 text-accent-violet" />,
-    Server: <Server className="w-5 h-5 text-accent-blue" />,
-    Database: <Database className="w-5 h-5 text-purple-400" />,
-    Wrench: <Wrench className="w-5 h-5 text-cyan-400" />,
-    Sparkles: <Sparkles className="w-5 h-5 text-emerald-400" />,
+    Layout: <Layout className="w-3.5 h-3.5 text-zinc-300" />,
+    Server: <Server className="w-3.5 h-3.5 text-zinc-300" />,
+    Database: <Database className="w-3.5 h-3.5 text-zinc-300" />,
+    Wrench: <Wrench className="w-3.5 h-3.5 text-zinc-300" />,
+    Sparkles: <Sparkles className="w-3.5 h-3.5 text-zinc-300" />,
   };
 
-  return (
-    <section id="skills" className="relative py-28 bg-[#0a0a0d] border-t border-white/[0.05] overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/2 right-1/4 w-[450px] h-[450px] bg-accent-blue/[0.03] rounded-full blur-[140px] pointer-events-none" />
+  // Primary stack pills matching reference video "STACK I RELY ON"
+  const primaryStack = [
+    { name: 'TypeScript', tag: 'TS' },
+    { name: 'React', tag: 'UI' },
+    { name: 'React Native', tag: 'Mobile' },
+    { name: 'Flutter', tag: 'Dart' },
+    { name: 'Node.js', tag: 'JS' },
+    { name: 'Express.js', tag: 'API' },
+    { name: 'Python', tag: 'PY' },
+    { name: 'MongoDB', tag: 'NoSQL' },
+    { name: 'Supabase', tag: 'SQL' },
+    { name: 'PostgreSQL', tag: 'DB' },
+    { name: 'Git & GitHub', tag: 'VCS' },
+    { name: 'Docker', tag: 'DevOps' },
+    { name: 'Cloudflare', tag: 'Edge' },
+    { name: 'AI Workflows', tag: 'LLM' },
+  ];
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+  return (
+    <section id="skills" className="py-20 sm:py-24 bg-[#000000] border-t border-zinc-900">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
         <SectionHeading
-          badge="// 03. TECHNICAL CAPABILITIES"
-          title="Tools & Technologies."
-          titleHighlight="Modern Stack."
-          subtitle="Proficiency across frontend frameworks, backend environments, database modeling, and developer tooling."
+          badge="04 — stack & capabilities"
+          title="Stack I Rely On."
+          titleHighlight="Modern Engineering."
+          subtitle="Core languages, libraries, databases, and runtime environments powering production builds."
+          actionText="View All"
+          actionHref="#skills"
         />
 
-        {/* Category Switcher Tabs */}
-        <div className="flex flex-wrap items-center justify-start gap-2 mb-10 pb-2 border-b border-white/[0.08]">
-          {SKILL_CATEGORIES.map((cat, idx) => (
-            <button
-              key={cat.title}
-              onClick={() => setActiveTab(idx)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 ${
-                activeTab === idx
-                  ? 'bg-accent-violet/20 text-white border border-accent-violet/40 shadow-sm'
-                  : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
-              }`}
-            >
-              {iconMap[cat.icon]}
-              <span>{cat.title}</span>
-            </button>
-          ))}
+        {/* Primary Stack Chip Strip matching reference video */}
+        <div className="mb-12">
+          <div className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-4">
+            Core Technology Stack
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {primaryStack.map((tech) => (
+              <div
+                key={tech.name}
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-[#0c0c0e] border border-zinc-800/80 hover:border-zinc-700 transition-colors"
+              >
+                <span className="w-6 h-6 rounded-md bg-zinc-900 border border-zinc-800 text-[10px] font-mono font-bold text-zinc-300 flex items-center justify-center">
+                  {tech.tag}
+                </span>
+                <span className="text-xs font-medium text-zinc-200">{tech.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Selected Category Skill Cards Display */}
-        <motion.div
-          key={activeTab}
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35 }}
-          className="mb-14"
-        >
-          <div className="p-4 sm:p-6 sm:p-8 rounded-2xl bg-[#121217]/90 border border-white/[0.08] backdrop-blur-md">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6 pb-4 border-b border-white/[0.06]">
+        {/* Categorized Breakdown */}
+        <div>
+          <div className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-4">
+            Competencies by Discipline
+          </div>
+
+          {/* Minimal Category Tabs */}
+          <div className="flex flex-wrap items-center gap-1.5 mb-6">
+            {SKILL_CATEGORIES.map((cat, idx) => (
+              <button
+                key={cat.title}
+                onClick={() => setActiveTab(idx)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono transition-colors ${
+                  activeTab === idx
+                    ? 'bg-white text-zinc-950 font-medium'
+                    : 'text-zinc-400 hover:text-white bg-zinc-900/60 border border-zinc-800/80'
+                }`}
+              >
+                {iconMap[cat.icon]}
+                <span>{cat.title}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* Active Category Display */}
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25 }}
+            className="rounded-2xl bg-[#0c0c0e] border border-zinc-800/80 p-5 sm:p-7"
+          >
+            <div className="flex items-center justify-between pb-3.5 mb-5 border-b border-zinc-800/80">
               <div>
-                <h3 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2.5">
-                  {iconMap[SKILL_CATEGORIES[activeTab].icon]}
-                  <span>{SKILL_CATEGORIES[activeTab].title}</span>
+                <h3 className="text-sm sm:text-base font-semibold text-white">
+                  {SKILL_CATEGORIES[activeTab].title}
                 </h3>
-                <p className="text-xs sm:text-sm text-zinc-400 mt-1">
+                <p className="text-xs text-zinc-400 mt-0.5">
                   {SKILL_CATEGORIES[activeTab].subtitle}
                 </p>
               </div>
 
-              <span className="text-[11px] sm:text-xs font-mono text-accent-violet-light self-start sm:self-auto px-2.5 py-1 rounded bg-accent-violet/10 border border-accent-violet/20">
-                {SKILL_CATEGORIES[activeTab].skills.length} Core Competencies
+              <span className="text-[10px] font-mono text-zinc-400 px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">
+                {SKILL_CATEGORIES[activeTab].skills.length} Skills
               </span>
             </div>
 
-            {/* Grid of individual skills */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
               {SKILL_CATEGORIES[activeTab].skills.map((skill, index) => (
                 <div
                   key={index}
-                  className="group p-3 sm:p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:border-accent-violet/40 hover:bg-accent-violet/[0.04] transition-all duration-200 flex items-center justify-between"
+                  className="p-3 rounded-xl bg-zinc-900/40 border border-zinc-800/70 hover:border-zinc-700 transition-colors flex items-center justify-between"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center group-hover:scale-105 group-hover:border-accent-violet/30 transition-transform">
-                      <Code className="w-4 h-4 text-zinc-300 group-hover:text-accent-violet-light" />
-                    </div>
+                  <div className="flex items-center gap-2">
+                    <Code2 className="w-3.5 h-3.5 text-zinc-500" />
                     <div>
-                      <div className="text-sm font-semibold text-white group-hover:text-accent-violet-light transition-colors">
+                      <div className="text-xs font-medium text-zinc-200">
                         {skill.name}
                       </div>
                       {skill.tag && (
-                        <div className="text-[10px] font-mono text-zinc-400">{skill.tag}</div>
+                        <div className="text-[9px] font-mono text-zinc-400">
+                          {skill.tag}
+                        </div>
                       )}
                     </div>
                   </div>
 
-                  <span className="text-[11px] font-mono text-zinc-400 group-hover:text-zinc-200 transition-colors px-2 py-0.5 rounded bg-white/[0.03]">
+                  <span className="text-[10px] font-mono text-zinc-400 px-1.5 py-0.5 rounded bg-zinc-900 border border-zinc-800/80">
                     {skill.level}
                   </span>
                 </div>
               ))}
             </div>
-          </div>
-        </motion.div>
-
-        {/* Overview Bento Summary: All Categories at a glance */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {SKILL_CATEGORIES.map((category, idx) => (
-            <TiltCard
-              key={idx}
-              maxTilt={5}
-              glareOpacity={0.08}
-              onClick={() => setActiveTab(idx)}
-              className="bg-[#111115]/80 border border-white/[0.06] p-6 hover:border-accent-violet/40 transition-colors cursor-pointer group"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-9 h-9 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center">
-                  {iconMap[category.icon]}
-                </div>
-                <span className="text-[10px] font-mono text-zinc-400 group-hover:text-accent-violet-light transition-colors">
-                  View Skills →
-                </span>
-              </div>
-
-              <h4 className="text-base font-bold text-white mb-1 group-hover:text-accent-violet-light transition-colors">
-                {category.title}
-              </h4>
-              <p className="text-xs text-zinc-400 mb-4 line-clamp-1">{category.subtitle}</p>
-
-              <div className="flex flex-wrap gap-1.5">
-                {category.skills.slice(0, 4).map((s, i) => (
-                  <span
-                    key={i}
-                    className="px-2 py-0.5 rounded text-[10px] font-mono bg-white/[0.03] text-zinc-300 border border-white/[0.05]"
-                  >
-                    {s.name}
-                  </span>
-                ))}
-                {category.skills.length > 4 && (
-                  <span className="px-1.5 py-0.5 rounded text-[10px] font-mono text-zinc-400">
-                    +{category.skills.length - 4}
-                  </span>
-                )}
-              </div>
-            </TiltCard>
-          ))}
+          </motion.div>
         </div>
       </div>
     </section>

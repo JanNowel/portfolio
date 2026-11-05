@@ -13,36 +13,38 @@
   }
 
   body {
-    background-color: #080808;
-    color: #ffffff;
+    background-color: #09090b;
+    color: #f4f4f5;
     overflow-x: hidden;
   }
 
   /* Custom subtle dark scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #080808;
+    background: #09090b;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #222228;
+    background: #27272a;
     border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #33333d;
+    background: #3f3f46;
   }
 }
 
-/* Glassmorphism utility */
-.glass-panel {
-  background: rgba(18, 18, 23, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Hide scrollbars for floating bars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Shimmer keyframe for skeleton */
@@ -53,15 +55,16 @@
 }
 
 /* ===================================================
-   LIGHT THEME: FULL COMPREHENSIVE COVERAGE (ALL SECTIONS + MODALS)
+   LIGHT THEME: FULL COMPREHENSIVE COVERAGE
+   Minimalist, High Contrast, Zero Gradients
    =================================================== */
 html.light {
   color-scheme: light;
 }
 
 html.light body {
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
 }
 
 /* Light mode scrollbar */
@@ -75,83 +78,61 @@ html.light ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
 
-/* 1. ALL SECTION BACKGROUNDS (Hero, About, Projects, Skills, Experience, GitHub, Contact, Footer) */
+/* 1. All Section and Page Backgrounds */
 html.light section,
 html.light section[id],
+html.light #home,
 html.light #about,
-html.light #skills,
-html.light #github,
 html.light #projects,
 html.light #experience,
+html.light #skills,
+html.light #certifications,
+html.light #services,
+html.light #github,
 html.light #contact,
-html.light #home,
-html.light .bg-\[\#0a0a0d\],
-html.light .bg-\[\#080808\],
-html.light .bg-\[\#0d0d12\],
 html.light main,
-html.light footer {
+html.light footer,
+html.light .bg-\[\#09090b\],
+html.light .bg-\[\#080808\],
+html.light .bg-\[\#060608\] {
   background-color: #f8fafc !important;
 }
 
-/* 2. CARDS, SURFACES, BENTO TILES, TILT CARDS & CONTAINERS */
-html.light .bg-\[\#111116\],
-html.light .bg-\[\#121216\],
-html.light .bg-\[\#131317\],
-html.light .bg-\[\#141416\],
-html.light .bg-\[\#141418\],
-html.light .bg-\[\#14141a\],
-html.light .bg-\[\#111115\],
-html.light .bg-\[\#121217\],
-html.light .bg-\[\#16161f\],
-html.light .bg-\[\#14141c\],
-html.light .bg-\[\#18181f\],
-html.light .bg-\[\#121218\],
-html.light [class*="bg-\[\#11111"],
-html.light [class*="bg-\[\#12121"],
-html.light [class*="bg-\[\#13131"],
-html.light [class*="bg-\[\#14141"] {
+/* 2. Surfaces, Cards, Bento Containers & Floating Panels */
+html.light .bg-zinc-950,
+html.light .bg-zinc-900,
+html.light [class*="bg-zinc-900"],
+html.light [class*="bg-zinc-950"] {
   background-color: #ffffff !important;
   color: #0f172a !important;
-  border-color: rgba(15, 23, 42, 0.08) !important;
-  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03) !important;
+  border-color: #e2e8f0 !important;
 }
 
-/* 3. INNER SHEETS IN MODALS (CVModal, ProjectModal) */
-html.light .bg-\[\#0b0b0e\],
-html.light .bg-\[\#0c0c10\] {
-  background-color: #f8fafc !important;
-  color: #1e293b !important;
-  border-color: rgba(15, 23, 42, 0.08) !important;
+/* 3. Navigation Bars & Floating Docks in Light Mode */
+html.light header > div,
+html.light nav[aria-label="Mobile Navigation"] > div,
+html.light header {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.08) !important;
 }
 
-/* 4. MODALS FULL STYLING (CVModal, ProjectModal) */
-html.light .fixed.inset-0.bg-black\/85,
+html.light .bg-zinc-800,
+html.light [class*="bg-zinc-800"] {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* 4. Modals (ProjectModal, CVModal) */
 html.light .fixed.inset-0.bg-black\/80,
-html.light .fixed.inset-0.bg-black\/75 {
-  background-color: rgba(15, 23, 42, 0.5) !important;
+html.light .fixed.inset-0.bg-black\/85 {
+  background-color: rgba(15, 23, 42, 0.6) !important;
   backdrop-filter: blur(8px) !important;
 }
 
-html.light div[role="dialog"],
-html.light .relative.w-full.max-w-3xl {
-  background-color: #ffffff !important;
-  border-color: #e2e8f0 !important;
-  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.15) !important;
-}
-
-html.light input,
-html.light textarea {
-  background-color: #ffffff !important;
-  border-color: #cbd5e1 !important;
-  color: #0f172a !important;
-}
-
-html.light input::placeholder,
-html.light textarea::placeholder {
-  color: #94a3b8 !important;
-}
-
-/* 5. TYPOGRAPHY IN LIGHT MODE */
+/* 5. Typography */
+html.light .text-zinc-100,
 html.light .text-white {
   color: #0f172a !important;
 }
@@ -172,142 +153,35 @@ html.light .text-zinc-500 {
   color: #94a3b8 !important;
 }
 
-/* 6. BORDERS & DIVIDERS */
-html.light .border-white\/5,
-html.light .border-white\/10,
-html.light .border-white\/15,
-html.light .border-white\/20,
-html.light [class*="border-white\/"] {
-  border-color: rgba(15, 23, 42, 0.08) !important;
-}
-
-/* 7. PILLS, CHIPS & INTERNAL CONTAINERS */
-html.light .bg-white\/5,
-html.light .bg-white\/10,
-html.light [class*="bg-white\/\[0\.0"] {
-  background-color: rgba(15, 23, 42, 0.04) !important;
-}
-
-/* Heatmap in GitHub Showcase */
-html.light .bg-white\/\[0\.04\] {
-  background-color: #e2e8f0 !important;
-}
-html.light .bg-purple-950 {
-  background-color: #ddd6fe !important;
-  border-color: #c4b5fd !important;
-}
-html.light .bg-purple-700 {
-  background-color: #a855f7 !important;
-}
-
-/* 8. FLOATING TECH BADGES & TOOLTIPS */
-html.light .floating-tech-badge,
-html.light div[style*="background-color: rgb(18, 18, 24)"] {
-  background-color: rgba(255, 255, 255, 0.95) !important;
-  border-color: rgba(15, 23, 42, 0.12) !important;
+/* 6. Form Inputs & Textareas */
+html.light input,
+html.light textarea {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
   color: #0f172a !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08) !important;
 }
 
-/* 9. SHADOWS & GLASS */
-html.light .shadow-black\/40,
-html.light .shadow-black\/80,
-html.light .shadow-black\/90,
-html.light .shadow-2xl {
-  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04) !important;
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #94a3b8 !important;
 }
 
-html.light .glass-panel {
-  background: rgba(255, 255, 255, 0.9) !important;
-  border: 1px solid rgba(15, 23, 42, 0.08) !important;
-  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.06) !important;
+/* 7. Borders */
+html.light .border-zinc-900,
+html.light .border-zinc-800,
+html.light [class*="border-zinc-800"],
+html.light [class*="border-zinc-700"] {
+  border-color: #e2e8f0 !important;
 }
 
-html.light header.bg-\[\#080808\]\/80,
-html.light header {
-  background-color: rgba(248, 250, 252, 0.9) !important;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08) !important;
-}
-
-/* 10. BUTTON & ACCENT PRESERVATION */
-html.light .bg-accent-violet,
-html.light .bg-accent-violet *,
-html.light .bg-accent-violet-dark,
-html.light .bg-accent-violet-dark *,
-html.light button.bg-accent-violet,
-html.light a.bg-accent-violet,
-html.light button[class*="bg-accent-violet"],
-html.light a[class*="bg-accent-violet"] {
+/* 8. Solid Primary Buttons in Light Mode */
+html.light button.bg-white,
+html.light a.bg-white,
+html.light .bg-white.text-zinc-950 {
+  background-color: #0f172a !important;
   color: #ffffff !important;
 }
-
-/* Gradient headlines in light mode */
-html.light .from-white.to-zinc-400,
-html.light .from-white.to-zinc-300,
-html.light .from-white.via-zinc-200.to-zinc-400 {
-  --tw-gradient-from: #0f172a !important;
-  --tw-gradient-to: #334155 !important;
-}
-
-/* Hero background glow reduction in light mode */
-html.light .from-\[\#080808\] {
-  --tw-gradient-from: #f8fafc !important;
-}
-html.light .to-\[\#080808\] {
-  --tw-gradient-to: #f8fafc !important;
-}
-
-/* Skills progress track in light mode */
-html.light .bg-zinc-800 {
-  background-color: #e2e8f0 !important;
-}
-
-/* PRELOADER ALWAYS REMAINS DARK/CINEMATIC */
-div[class*="z-\[1000\]"] {
-  background-color: #080808 !important;
-  color: #ffffff !important;
-}
-
-div[class*="z-\[1000\]"] * {
-  color: revert;
-}
-
-/* SMOOTH TRANSITIONS */
-body,
-nav,
-section,
-header,
-main,
-footer,
-.glass-panel,
-div[class*="bg-"],
-div[class*="border-"] {
-  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Print styles for CV print format */
-@media print {
-  body {
-    background: white !important;
-  }
-
-  nav,
-  footer,
-  #home,
-  #about,
-  #projects,
-  #skills,
-  #experience,
-  #github,
-  #contact,
-  canvas {
-    display: none !important;
-  }
-
-  .print-only {
-    display: block !important;
-  }
+html.light button.bg-white:hover,
+html.light a.bg-white:hover {
+  background-color: #1e293b !important;
 }

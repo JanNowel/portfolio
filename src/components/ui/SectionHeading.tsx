@@ -7,6 +7,9 @@ interface SectionHeadingProps {
   title: string;
   titleHighlight?: string;
   subtitle?: string;
+  actionText?: string;
+  actionHref?: string;
+  onActionClick?: () => void;
   centered?: boolean;
 }
 
@@ -15,6 +18,9 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   title,
   titleHighlight,
   subtitle,
+  actionText,
+  actionHref,
+  onActionClick,
   centered = false,
 }) => {
   return (
@@ -22,31 +28,54 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       variants={fadeInUp}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-60px' }}
-      className={`mb-12 md:mb-16 ${centered ? 'text-center mx-auto max-w-2xl' : 'max-w-3xl'}`}
+      viewport={{ once: true, margin: '-50px' }}
+      className={`mb-10 sm:mb-12 ${centered ? 'text-center mx-auto max-w-2xl' : 'max-w-4xl'}`}
     >
-      <div className={`flex items-center gap-2 mb-3.5 ${centered ? 'justify-center' : ''}`}>
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium tracking-wider uppercase bg-accent-violet/10 text-accent-violet-light border border-accent-violet/20">
-          <span className="w-1.5 h-1.5 rounded-full bg-accent-violet animate-pulse" />
+      {/* Top Section Index Bar matching reference: "01 — about", "ALL POSTS →" */}
+      <div
+        className={`flex items-center justify-between pb-2.5 border-b border-zinc-800/80 mb-5 ${
+          centered ? 'justify-center' : ''
+        }`}
+      >
+        <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest">
           {badge}
         </span>
+
+        {actionText && (
+          actionHref ? (
+            <a
+              href={actionHref}
+              className="text-xs font-mono text-zinc-400 hover:text-zinc-200 transition-colors uppercase tracking-wider"
+            >
+              {actionText} →
+            </a>
+          ) : (
+            <button
+              onClick={onActionClick}
+              className="text-xs font-mono text-zinc-400 hover:text-zinc-200 transition-colors uppercase tracking-wider"
+            >
+              {actionText} →
+            </button>
+          )
+        )}
       </div>
 
-      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight break-words">
+      {/* Main Title (Clean High Contrast Monospace/Sans, No Gradients) */}
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-white leading-tight">
         {title}{' '}
         {titleHighlight && (
-          <span className="bg-gradient-to-r from-accent-violet via-purple-300 to-accent-blue bg-clip-text text-transparent">
+          <span className="text-zinc-400 font-normal">
             {titleHighlight}
           </span>
         )}
       </h2>
 
+      {/* Subtitle */}
       {subtitle && (
-        <p className="mt-3 sm:mt-4 text-xs sm:text-base md:text-lg text-zinc-400 font-normal leading-relaxed">
+        <p className="mt-3 text-xs sm:text-sm text-zinc-400 font-normal leading-relaxed max-w-2xl">
           {subtitle}
         </p>
       )}
     </motion.div>
   );
 };
-

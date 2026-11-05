@@ -54,39 +54,37 @@ export const CustomCursor: React.FC = () => {
 
   return (
     <>
-      {/* Outer subtle halo ring */}
+      {/* Outer subtle ring */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full border border-purple-500/40 mix-blend-screen"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full border border-zinc-500/40"
         animate={{
-          x: mousePosition.x - (isHovering ? 24 : 16),
-          y: mousePosition.y - (isHovering ? 24 : 16),
-          width: isHovering ? 48 : 32,
-          height: isHovering ? 48 : 32,
-          backgroundColor: isHovering ? 'rgba(139, 92, 246, 0.15)' : 'rgba(139, 92, 246, 0.03)',
-          borderColor: isHovering ? 'rgba(168, 85, 247, 0.7)' : 'rgba(139, 92, 246, 0.4)',
+          x: mousePosition.x - (isHovering ? 20 : 12),
+          y: mousePosition.y - (isHovering ? 20 : 12),
+          width: isHovering ? 40 : 24,
+          height: isHovering ? 40 : 24,
         }}
         transition={{
           type: 'spring',
-          damping: 28,
-          stiffness: 350,
-          mass: 0.4,
+          damping: 25,
+          stiffness: 400,
+          mass: 0.1,
         }}
       />
-      {/* Center sharp glowing dot */}
+
+      {/* Center sharp dot */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full bg-white shadow-glow-violet"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full bg-white/80"
         animate={{
           x: mousePosition.x - (isHovering ? 3 : 2),
           y: mousePosition.y - (isHovering ? 3 : 2),
           width: isHovering ? 6 : 4,
           height: isHovering ? 6 : 4,
-          scale: isHovering ? 1.5 : 1,
         }}
         transition={{
           type: 'spring',
           damping: 35,
           stiffness: 700,
-          mass: 0.1,
+          mass: 0.05,
         }}
       />
     </>

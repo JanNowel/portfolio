@@ -1,4 +1,4 @@
-import { Project, SkillCategory, TimelineItem } from '../types';
+import { Project, SkillCategory, TimelineItem, Certification, Service } from '../types';
 
 export const PERSONAL_INFO = {
   name: 'Jhon Noel Baculpo',
@@ -377,5 +377,134 @@ export const TIMELINE_DATA: TimelineItem[] = [
     ],
     technologies: ['MERN', 'Expo', 'Dart', 'Python', 'Leaflet'],
     isPlaceholder: false,
+  },
+];
+
+export const CERTIFICATIONS: Certification[] = [
+  {
+    id: 'cert-fullstack-dev',
+    title: 'Full-Stack Web Development & Architecture',
+    issuer: 'Technical Capstone & Independent Software Projects',
+    date: '2024',
+    category: 'Full-Stack',
+    skills: ['React', 'TypeScript', 'Node.js', 'MongoDB', 'REST APIs'],
+    credentialId: 'JNB-FS-2024-CAPSTONE',
+  },
+  {
+    id: 'cert-mobile-eng',
+    title: 'Cross-Platform Mobile Application Engineering',
+    issuer: 'Mobile Development Track & Hands-on Production Builds',
+    date: '2024',
+    category: 'Mobile',
+    skills: ['React Native', 'Flutter', 'Dart', 'Expo', 'Supabase'],
+    credentialId: 'JNB-MOB-2024-ENG',
+  },
+  {
+    id: 'cert-python-dev',
+    title: 'Python Software & Systems Engineering',
+    issuer: 'Independent Systems & Desktop Development',
+    date: '2023',
+    category: 'Software & Systems',
+    skills: ['Python', 'OS APIs', 'Algorithms', 'Hardware Telemetry'],
+    credentialId: 'JNB-PY-2023-SYS',
+  },
+  {
+    id: 'cert-ai-prompt',
+    title: 'Applied AI & Advanced Prompt Engineering',
+    issuer: 'Generative AI & LLM Systems Specialization',
+    date: '2024',
+    category: 'AI Specialization',
+    skills: ['Prompt Engineering', 'LLM Workflow Design', 'API Integration', 'Incident Triage'],
+    credentialId: 'JNB-AI-2024-PROMPT',
+  },
+  {
+    id: 'cert-git-collab',
+    title: 'Git Version Control & Agile Team Practices',
+    issuer: 'Collaborative Software Engineering Practices',
+    date: '2023',
+    category: 'DevOps & Tools',
+    skills: ['Git', 'GitHub', 'Code Review', 'Branching Strategies'],
+    credentialId: 'JNB-GIT-2023-COLLAB',
+  },
+];
+
+export const SERVICES: Service[] = [
+  {
+    id: 'web-engineering',
+    title: 'Full-Stack Web Applications',
+    shortDesc: 'End-to-end web applications crafted with React, TypeScript, Node.js, and MongoDB/PostgreSQL. Engineered for responsiveness, speed, and maintainability.',
+    deliverables: [
+      'Responsive, modern, and accessible web interfaces',
+      'REST API design & secure JWT authentication',
+      'Database modeling & query optimization',
+      'Production deployment and performance tuning',
+    ],
+    technologies: ['React', 'TypeScript', 'Node.js', 'Express', 'Tailwind CSS', 'MongoDB'],
+    badge: 'Core Service',
+  },
+  {
+    id: 'mobile-development',
+    title: 'Cross-Platform Mobile Apps',
+    shortDesc: 'Smooth, reliable iOS and Android mobile applications built using React Native and Flutter with real-time features and offline capabilities.',
+    deliverables: [
+      'Cross-platform UI/UX implementation',
+      'Supabase & Firebase real-time sync',
+      'Geolocation, mapping, and native device APIs',
+      'Clean state management and offline persistence',
+    ],
+    technologies: ['React Native', 'Flutter', 'Expo', 'Dart', 'Supabase'],
+    badge: 'Mobile First',
+  },
+  {
+    id: 'backend-architecture',
+    title: 'Backend APIs & Systems Integration',
+    shortDesc: 'Secure, modular server architectures, RESTful endpoints, database schemas, and external service integrations built for scale.',
+    deliverables: [
+      'Modular REST endpoints & API documentation',
+      'Role-based access control (RBAC) & security',
+      'Third-party webhooks, payments, and notifications',
+      'Automated testing & structured error handling',
+    ],
+    technologies: ['Node.js', 'Express.js', 'PostgreSQL', 'MongoDB', 'Postman'],
+    badge: 'Backend & Cloud',
+  },
+  {
+    id: 'python-automation',
+    title: 'Desktop Software & Automation Scripts',
+    shortDesc: 'Custom desktop utilities, telemetry inspectors, data extraction pipelines, and automated scripts to streamline manual workflows.',
+    deliverables: [
+      'Native desktop GUI utilities',
+      'Automated batch processes & script routines',
+      'System telemetry, diagnostic tools, and OS queries',
+      'Stand-alone executables with minimal dependencies',
+    ],
+    technologies: ['Python', 'Desktop GUI', 'Psutil', 'Automation', 'OS APIs'],
+    badge: 'Automation',
+  },
+  {
+    id: 'ai-prompt-engineering',
+    title: 'AI Integration & Prompt Engineering',
+    shortDesc: 'Connecting Large Language Models, structured JSON outputs, and automated classification systems into real-world business workflows.',
+    deliverables: [
+      'Structured prompt engineering & testing',
+      'Automated incident triage and categorization',
+      'Intelligent conversational workflows and search',
+      'Safe model outputs with strict schema validation',
+    ],
+    technologies: ['LLM APIs', 'Prompt Design', 'JSON Schema', 'Smart Triage'],
+    badge: 'AI Specialization',
+  },
+  {
+    id: 'commission-refactoring',
+    title: 'Commission Projects & Code Refactoring',
+    shortDesc: 'Available for freelance commissions, sprint help, refactoring existing codebases to clean TypeScript, and UI modernization.',
+    deliverables: [
+      'Codebase migration to typed TypeScript',
+      'UI modernization & component cleanup',
+      'Performance audit & bundle optimization',
+      'Clear documentation and pull request reviews',
+    ],
+    technologies: ['TypeScript', 'Git', 'Agile', 'Code Review', 'Clean Architecture'],
+    badge: 'Open for Commissions',
   },
 ];

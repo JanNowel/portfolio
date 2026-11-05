@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Printer, Mail, Sparkles } from 'lucide-react';
+import { X, Printer, Mail, FileText } from 'lucide-react';
 import { PERSONAL_INFO, PROJECTS } from '../../data/portfolioData';
 import { modalVariants } from '../../utils/animations';
 
@@ -41,7 +41,7 @@ export const CVModal: React.FC<CVModalProps> = ({ isOpen, onClose }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-black/85 backdrop-blur-md"
+          className="fixed inset-0 bg-black/85 backdrop-blur-sm"
         />
 
         {/* Modal Window */}
@@ -50,24 +50,24 @@ export const CVModal: React.FC<CVModalProps> = ({ isOpen, onClose }) => {
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="relative w-full max-w-3xl rounded-2xl bg-[#121217] border border-white/15 p-6 sm:p-8 shadow-2xl shadow-black/90 z-10 max-h-[90vh] overflow-y-auto"
+          className="relative w-full max-w-3xl rounded-2xl bg-zinc-950 border border-zinc-800 p-6 sm:p-8 shadow-2xl z-10 max-h-[90vh] overflow-y-auto"
         >
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 p-2 rounded-xl bg-white/5 border border-white/10 text-zinc-400 hover:text-white transition-colors"
+            className="absolute top-5 right-5 p-2 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white transition-colors"
             aria-label="Close CV Modal"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
 
           {/* Header */}
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-accent-violet/10 border border-accent-violet/20 flex items-center justify-center font-mono font-bold text-accent-violet">
+            <div className="w-9 h-9 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center font-mono font-semibold text-zinc-200 text-xs">
               CV
             </div>
             <div>
-              <h3 className="text-xl font-bold text-white tracking-tight">
+              <h3 className="text-lg sm:text-xl font-semibold text-zinc-100">
                 Curriculum Vitae Preview
               </h3>
               <p className="text-xs text-zinc-400 font-mono">
@@ -76,20 +76,20 @@ export const CVModal: React.FC<CVModalProps> = ({ isOpen, onClose }) => {
             </div>
           </div>
 
-          {/* Quick Notice */}
-          <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.08] text-xs text-zinc-300 mb-6 flex items-start gap-2.5">
-            <Sparkles className="w-4 h-4 text-accent-violet shrink-0 mt-0.5" />
+          {/* Notice */}
+          <div className="p-3.5 rounded-xl bg-zinc-900/40 border border-zinc-800 text-xs text-zinc-400 mb-6 flex items-start gap-2.5">
+            <FileText className="w-4 h-4 text-zinc-300 shrink-0 mt-0.5" />
             <span>
-              This is a digital preview of Jhon Noel's developer CV. You can print to PDF or download directly. To link an existing PDF file, place <code className="text-accent-violet-light font-mono">cv.pdf</code> into the <code className="text-accent-violet-light font-mono">public/</code> directory.
+              Digital preview of Jhon Noel's developer CV. Use the print action to generate a clean PDF or email directly to request reference transcripts.
             </span>
           </div>
 
           {/* Resume Content Sheet */}
-          <div className="bg-[#0b0b0e] border border-white/[0.08] rounded-xl p-6 sm:p-8 space-y-6 text-zinc-300 text-xs sm:text-sm">
+          <div className="bg-zinc-900/30 border border-zinc-800/80 rounded-xl p-5 sm:p-7 space-y-6 text-zinc-300 text-xs sm:text-sm">
             {/* Top Resume Header */}
-            <div className="border-b border-white/[0.08] pb-4">
-              <h4 className="text-2xl font-black text-white">{PERSONAL_INFO.name}</h4>
-              <p className="text-xs font-mono text-accent-violet-light mt-0.5">
+            <div className="border-b border-zinc-800 pb-4">
+              <h4 className="text-xl sm:text-2xl font-bold text-zinc-100">{PERSONAL_INFO.name}</h4>
+              <p className="text-xs font-mono text-zinc-400 mt-0.5">
                 {PERSONAL_INFO.title}
               </p>
               <div className="flex flex-wrap gap-4 mt-2 text-xs text-zinc-400 font-mono">
@@ -101,29 +101,29 @@ export const CVModal: React.FC<CVModalProps> = ({ isOpen, onClose }) => {
 
             {/* Professional Summary */}
             <div>
-              <h5 className="text-xs font-mono font-bold uppercase tracking-wider text-white mb-2">
+              <h5 className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-200 mb-1.5">
                 Professional Summary
               </h5>
-              <p className="text-zinc-300 leading-relaxed text-xs sm:text-sm">
-                Aspiring software developer with demonstrated experience in full-stack web and cross-platform mobile application development. Passionate about engineering clean, maintainable software and practical digital experiences utilizing modern stacks (MERN, TypeScript, Flutter, Python, and Supabase).
+              <p className="text-zinc-400 leading-relaxed text-xs sm:text-sm">
+                Software developer with demonstrated experience in full-stack web and cross-platform mobile application development. Focused on engineering clean, maintainable software and practical digital experiences utilizing modern stacks (MERN, TypeScript, Flutter, Python, and Supabase).
               </p>
             </div>
 
             {/* Featured Projects */}
             <div>
-              <h5 className="text-xs font-mono font-bold uppercase tracking-wider text-white mb-3">
-                Key Software Projects
+              <h5 className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-200 mb-2.5">
+                Featured Projects
               </h5>
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {PROJECTS.map((proj) => (
-                  <div key={proj.id} className="p-3 rounded-lg bg-white/[0.02] border border-white/[0.04]">
-                    <div className="flex items-center justify-between font-bold text-white text-xs sm:text-sm">
+                  <div key={proj.id} className="p-3 rounded-lg bg-zinc-900/60 border border-zinc-800">
+                    <div className="flex items-center justify-between font-semibold text-zinc-200 text-xs sm:text-sm">
                       <span>{proj.title}</span>
                       <span className="text-[10px] font-mono text-zinc-400 font-normal">
                         {proj.technologies.slice(0, 3).join(', ')}
                       </span>
                     </div>
-                    <p className="text-[11px] sm:text-xs text-zinc-400 mt-1">{proj.description}</p>
+                    <p className="text-xs text-zinc-400 mt-1">{proj.description}</p>
                   </div>
                 ))}
               </div>
@@ -131,44 +131,41 @@ export const CVModal: React.FC<CVModalProps> = ({ isOpen, onClose }) => {
 
             {/* Core Competencies */}
             <div>
-              <h5 className="text-xs font-mono font-bold uppercase tracking-wider text-white mb-2">
+              <h5 className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-200 mb-2">
                 Core Competencies
               </h5>
-              <div className="grid grid-cols-2 gap-2 text-xs">
-                <div>• Frontend: React, TypeScript, React Native, Flutter, HTML/CSS</div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-zinc-400 font-mono">
+                <div>• Frontend: React, TypeScript, React Native, Flutter</div>
                 <div>• Backend: Node.js, Express, REST APIs, Python</div>
-                <div>• Databases: MongoDB, Mongoose, Supabase, SQLite</div>
+                <div>• Databases: MongoDB, Supabase, PostgreSQL, SQLite</div>
                 <div>• Tools: Git, GitHub, VS Code, Postman, Docker</div>
               </div>
             </div>
           </div>
 
           {/* Action Footer */}
-          <div className="pt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-3 mt-6">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between gap-3 pt-5 mt-6 border-t border-zinc-800">
+            <span className="text-xs font-mono text-zinc-400">
+              Format: Standard Developer Resume
+            </span>
+
+            <div className="flex items-center gap-2.5">
               <button
                 onClick={handlePrint}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-black bg-white hover:bg-zinc-200 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-mono font-medium text-zinc-200 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition-colors"
               >
-                <Printer className="w-3.5 h-3.5" />
-                <span>Print / Save as PDF</span>
+                <Printer className="w-3.5 h-3.5 text-zinc-400" />
+                <span>Print / Save PDF</span>
               </button>
 
               <a
-                href={`mailto:${PERSONAL_INFO.email}?subject=Resume%20Inquiry%20-%20Jhon%20Noel%20Baculpo`}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono text-white bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+                href={`mailto:${PERSONAL_INFO.email}?subject=CV%20Inquiry%20-%20Jhon%20Noel%20Baculpo`}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium text-zinc-950 bg-white hover:bg-zinc-200 transition-colors"
               >
                 <Mail className="w-3.5 h-3.5" />
-                <span>Request Updated CV File</span>
+                <span>Contact Jhon</span>
               </a>
             </div>
-
-            <button
-              onClick={onClose}
-              className="text-xs text-zinc-400 hover:text-white transition-colors"
-            >
-              Close Preview
-            </button>
           </div>
         </motion.div>
       </div>

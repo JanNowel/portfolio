@@ -63,3 +63,24 @@ export interface GitHubUser {
   location: string | null;
 }
 
+export interface Certification {
+  id: string;
+  title: string;
+  issuer: string;
+  date: string;
+  credentialId?: string;
+  skills: string[];
+  link?: string;
+  category: string;
+}
+
+export interface Service {
+  id: string;
+  title: string;
+  shortDesc: string;
+  deliverables: string[];
+  technologies: string[];
+  badge: string;
+}
+
+

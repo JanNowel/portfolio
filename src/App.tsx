@@ -8,8 +8,10 @@ import { Footer } from './components/layout/Footer';
 import { Hero } from './components/sections/Hero';
 import { About } from './components/sections/About';
 import { Projects } from './components/sections/Projects';
-import { Skills } from './components/sections/Skills';
 import { Experience } from './components/sections/Experience';
+import { Skills } from './components/sections/Skills';
+import { Certifications } from './components/sections/Certifications';
+import { Services } from './components/sections/Services';
 import { GitHubShowcase } from './components/sections/GitHubShowcase';
 import { Contact } from './components/sections/Contact';
 import { CustomCursor } from './components/ui/CustomCursor';
@@ -26,18 +28,18 @@ export const App: React.FC = () => {
     setIsSkeleton(true);
     setTimeout(() => {
       setIsSkeleton(false);
-    }, 1300);
+    }, 1100);
   };
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-[#080808] text-white selection:bg-purple-600/30 selection:text-purple-200 relative selection:overflow-hidden transition-colors duration-300">
-
+      <div className="min-h-screen bg-[#09090b] text-zinc-100 selection:bg-zinc-800 selection:text-zinc-100 relative selection:overflow-hidden transition-colors duration-300">
         <CustomCursor />
         <ScrollProgressBar />
 
         {loading && <Preloader onComplete={handlePreloaderComplete} />}
         <Navbar onOpenCVModal={() => setCvModalOpen(true)} />
+
         <main className="relative z-10">
           <AnimatePresence mode="wait">
             {isSkeleton ? (
@@ -47,16 +49,20 @@ export const App: React.FC = () => {
                 key="hero-live"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
+                transition={{ duration: 0.4, ease: 'easeOut' }}
               >
                 <Hero onOpenCVModal={() => setCvModalOpen(true)} />
               </motion.div>
             )}
           </AnimatePresence>
+
+          {/* Structured Sections in Requested Hierarchy */}
           <About />
           <Projects />
-          <Skills />
           <Experience />
+          <Skills />
+          <Certifications />
+          <Services />
           <GitHubShowcase />
           <Contact />
         </main>

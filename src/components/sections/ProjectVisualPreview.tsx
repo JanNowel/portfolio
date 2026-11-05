@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, MapPin, MessageSquare, Activity, ShieldAlert, CheckCircle, Database, Cpu } from 'lucide-react';
+import { Calendar, MapPin, MessageSquare, Activity, ShieldCheck, Database, Cpu, Terminal } from 'lucide-react';
 
 interface ProjectVisualPreviewProps {
   projectId: string;
@@ -7,32 +7,30 @@ interface ProjectVisualPreviewProps {
 
 export const ProjectVisualPreview: React.FC<ProjectVisualPreviewProps> = ({ projectId }) => {
   switch (projectId) {
+    case 'regebook':
     case 'regesuite':
       return (
-        <div className="w-full h-48 sm:h-56 bg-gradient-to-br from-[#12101e] via-[#17142b] to-[#0d0c15] relative overflow-hidden flex flex-col justify-between p-4 sm:p-5 select-none">
-          {/* Subtle grid lines */}
-          <div className="absolute inset-0 bg-[radial-gradient(#8B5CF6_1px,transparent_1px)] [background-size:16px_16px] opacity-15" />
-
+        <div className="w-full h-44 sm:h-52 bg-zinc-950 relative overflow-hidden flex flex-col justify-between p-4 sm:p-5 select-none">
           {/* Top simulated browser bar */}
-          <div className="relative z-10 flex items-center justify-between border-b border-purple-500/20 pb-2">
+          <div className="relative z-10 flex items-center justify-between border-b border-zinc-800/80 pb-2">
             <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-              <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-              <span className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
-              <span className="text-[10px] font-mono text-purple-300/70 ml-2">rege-suite.client.portal/booking</span>
+              <span className="w-2 h-2 rounded-full bg-zinc-700" />
+              <span className="w-2 h-2 rounded-full bg-zinc-700" />
+              <span className="w-2 h-2 rounded-full bg-zinc-700" />
+              <span className="text-[10px] font-mono text-zinc-400 ml-2">regebook.app/portal</span>
             </div>
-            <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
-              REGE Catering
+            <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-zinc-300 border border-zinc-800">
+              Catering ERP
             </span>
           </div>
 
           {/* Center mock interface: Booking calendar & package selector */}
-          <div className="relative z-10 grid grid-cols-12 gap-3 my-auto">
-            <div className="col-span-7 bg-[#1c1836]/90 border border-purple-500/20 rounded-xl p-3 shadow-lg">
+          <div className="relative z-10 grid grid-cols-12 gap-2.5 my-auto">
+            <div className="col-span-7 bg-zinc-900/80 border border-zinc-800 rounded-lg p-2.5">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-mono font-bold text-white flex items-center gap-1.5">
-                  <Calendar className="w-3 h-3 text-accent-violet" />
-                  November Schedule
+                <span className="text-[10px] font-mono font-medium text-zinc-200 flex items-center gap-1.5">
+                  <Calendar className="w-3 h-3 text-zinc-400" />
+                  Reservation Schedule
                 </span>
                 <span className="text-[9px] font-mono text-emerald-400">Available</span>
               </div>
@@ -41,12 +39,12 @@ export const ProjectVisualPreview: React.FC<ProjectVisualPreviewProps> = ({ proj
                 {[1, 2, 3, 4, 5, 6, 7].map((d) => (
                   <span
                     key={d}
-                    className={`p-1 rounded ${
+                    className={`py-0.5 rounded ${
                       d === 4
-                        ? 'bg-accent-violet text-white font-bold shadow-sm'
+                        ? 'bg-zinc-200 text-zinc-950 font-bold'
                         : d === 6
-                        ? 'bg-purple-900/40 text-purple-300'
-                        : 'bg-white/[0.02]'
+                        ? 'bg-zinc-800 text-zinc-300'
+                        : 'bg-zinc-900/60'
                     }`}
                   >
                     {d + 10}
@@ -56,65 +54,62 @@ export const ProjectVisualPreview: React.FC<ProjectVisualPreviewProps> = ({ proj
             </div>
 
             <div className="col-span-5 flex flex-col justify-between gap-2">
-              <div className="bg-[#1c1836]/90 border border-purple-500/20 rounded-xl p-2.5">
+              <div className="bg-zinc-900/80 border border-zinc-800 rounded-lg p-2">
                 <div className="text-[9px] font-mono text-zinc-400">Selected Tier</div>
-                <div className="text-xs font-bold text-white">Grand Gala Luxe</div>
-                <div className="text-[9px] text-accent-violet-light font-mono mt-0.5">MERN Client Sync</div>
+                <div className="text-xs font-semibold text-zinc-100">Grand Gala Luxe</div>
+                <div className="text-[9px] text-zinc-400 font-mono mt-0.5">MERN Client Sync</div>
               </div>
-              <div className="bg-[#1c1836]/90 border border-purple-500/20 rounded-xl p-2 flex items-center justify-between text-[9px] font-mono text-emerald-400">
+              <div className="bg-zinc-900/80 border border-zinc-800 rounded-lg p-1.5 flex items-center justify-between text-[9px] font-mono text-zinc-300">
                 <span>Slots Confirmed</span>
-                <CheckCircle className="w-3 h-3 text-emerald-400" />
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               </div>
             </div>
           </div>
 
           {/* Bottom badge */}
           <div className="relative z-10 flex items-center justify-between text-[9px] font-mono text-zinc-400">
-            <span>React Native Mobile Staff App Synced</span>
-            <span className="text-accent-violet">MongoDB Cluster Active</span>
+            <span>React Native Mobile Staff Sync</span>
+            <span className="text-zinc-300">MongoDB Cluster Active</span>
           </div>
         </div>
       );
 
     case 'ebantay':
       return (
-        <div className="w-full h-48 sm:h-56 bg-gradient-to-br from-[#0c1824] via-[#0f2133] to-[#071018] relative overflow-hidden flex flex-col justify-between p-4 sm:p-5 select-none">
-          {/* Subtle GIS map grid pattern */}
-          <div className="absolute inset-0 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:20px_20px] opacity-15" />
-
+        <div className="w-full h-44 sm:h-52 bg-zinc-950 relative overflow-hidden flex flex-col justify-between p-4 sm:p-5 select-none">
           {/* Top telemetry bar */}
-          <div className="relative z-10 flex items-center justify-between border-b border-cyan-500/20 pb-2">
+          <div className="relative z-10 flex items-center justify-between border-b border-zinc-800/80 pb-2">
             <div className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-              <span className="text-[10px] font-mono text-cyan-300 font-bold">eBantay GIS Live Radar</span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              <span className="text-[10px] font-mono text-zinc-200 font-semibold">eBantay GIS Radar</span>
             </div>
-            <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-              AI Incident Triage
+            <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-zinc-300 border border-zinc-800">
+              AI Triage Online
             </span>
           </div>
 
           {/* Center mock interface: Leaflet Map & Incident Cards */}
-          <div className="relative z-10 grid grid-cols-12 gap-3 my-auto">
-            <div className="col-span-8 bg-[#10273c]/90 border border-cyan-500/25 rounded-xl p-3 relative overflow-hidden shadow-lg">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-mono text-white flex items-center gap-1">
-                  <MapPin className="w-3 h-3 text-red-400 animate-bounce" />
+          <div className="relative z-10 grid grid-cols-12 gap-2.5 my-auto">
+            <div className="col-span-8 bg-zinc-900/80 border border-zinc-800 rounded-lg p-2.5">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-[10px] font-mono text-zinc-200 flex items-center gap-1">
+                  <MapPin className="w-3 h-3 text-zinc-400" />
                   Barangay Sector 4
                 </span>
-                <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/30">
-                  Priority High
+                <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-200 border border-zinc-700">
+                  Priority 1
                 </span>
               </div>
-              <div className="text-[9px] text-zinc-300">Hazard: Street Tree Obstruction</div>
-              <div className="mt-2 text-[8px] font-mono text-cyan-400/80 flex items-center gap-2">
-                <span>Lat: 14.5995° N</span>
-                <span>Long: 120.9842° E</span>
+              <div className="text-[9px] text-zinc-300">Municipal Hazard: Road Tree Obstruction</div>
+              <div className="mt-1.5 text-[8px] font-mono text-zinc-400 flex items-center gap-2">
+                <span>14.5995° N</span>
+                <span>120.9842° E</span>
               </div>
             </div>
 
-            <div className="col-span-4 bg-[#10273c]/90 border border-cyan-500/25 rounded-xl p-2.5 flex flex-col justify-center text-center">
-              <ShieldAlert className="w-5 h-5 text-amber-400 mx-auto mb-1" />
-              <span className="text-[10px] font-bold text-white">AI Verified</span>
+            <div className="col-span-4 bg-zinc-900/80 border border-zinc-800 rounded-lg p-2 flex flex-col justify-center text-center">
+              <ShieldCheck className="w-4 h-4 text-zinc-300 mx-auto mb-1" />
+              <span className="text-[10px] font-semibold text-zinc-100">AI Verified</span>
               <span className="text-[8px] font-mono text-zinc-400 mt-0.5">Expo Mobile GPS</span>
             </div>
           </div>
@@ -122,123 +117,117 @@ export const ProjectVisualPreview: React.FC<ProjectVisualPreviewProps> = ({ proj
           {/* Bottom badge */}
           <div className="relative z-10 flex items-center justify-between text-[9px] font-mono text-zinc-400">
             <span>Leaflet Mapping Engine</span>
-            <span className="text-accent-blue">Real-Time Dispatch Active</span>
+            <span className="text-zinc-300">Live Dispatch Ready</span>
           </div>
         </div>
       );
 
     case 'student-hub':
       return (
-        <div className="w-full h-48 sm:h-56 bg-gradient-to-br from-[#191024] via-[#211233] to-[#0e0716] relative overflow-hidden flex flex-col justify-between p-4 sm:p-5 select-none">
-          {/* Subtle dots */}
-          <div className="absolute inset-0 bg-[radial-gradient(#A855F7_1px,transparent_1px)] [background-size:18px_18px] opacity-15" />
-
+        <div className="w-full h-44 sm:h-52 bg-zinc-950 relative overflow-hidden flex flex-col justify-between p-4 sm:p-5 select-none">
           {/* Top header */}
-          <div className="relative z-10 flex items-center justify-between border-b border-purple-500/20 pb-2">
+          <div className="relative z-10 flex items-center justify-between border-b border-zinc-800/80 pb-2">
             <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-purple-400" />
-              <span className="text-[10px] font-mono text-purple-200 font-bold">Student Hub • Flutter Mobile</span>
+              <span className="w-2 h-2 rounded-full bg-zinc-400" />
+              <span className="text-[10px] font-mono text-zinc-200 font-semibold">Student Hub • Flutter</span>
             </div>
-            <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
+            <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-zinc-300 border border-zinc-800">
               Supabase RLS
             </span>
           </div>
 
           {/* Center mock interface: Mobile task & peer collaboration feed */}
-          <div className="relative z-10 grid grid-cols-12 gap-3 my-auto">
-            <div className="col-span-7 bg-[#26173b]/90 border border-purple-500/25 rounded-xl p-3 shadow-lg">
-              <div className="flex items-center justify-between mb-1.5">
-                <span className="text-[10px] font-bold text-white flex items-center gap-1.5">
-                  <Activity className="w-3 h-3 text-purple-400" />
-                  Algorithms Study Room
+          <div className="relative z-10 grid grid-cols-12 gap-2.5 my-auto">
+            <div className="col-span-7 bg-zinc-900/80 border border-zinc-800 rounded-lg p-2.5">
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-[10px] font-semibold text-zinc-200 flex items-center gap-1">
+                  <Activity className="w-3 h-3 text-zinc-400" />
+                  Study Session
                 </span>
               </div>
-              <div className="text-[9px] text-zinc-300">Exam Prep: Graph Traversals</div>
-              <div className="mt-2 flex items-center gap-1">
+              <div className="text-[9px] text-zinc-300">Exam Prep: Algorithms & Data Structures</div>
+              <div className="mt-1.5 flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <span className="text-[8px] font-mono text-zinc-400">14 peers collaborating</span>
+                <span className="text-[8px] font-mono text-zinc-400">14 peers connected</span>
               </div>
             </div>
 
-            <div className="col-span-5 bg-[#26173b]/90 border border-purple-500/25 rounded-xl p-2.5 flex flex-col justify-between">
+            <div className="col-span-5 bg-zinc-900/80 border border-zinc-800 rounded-lg p-2 flex flex-col justify-between">
               <div className="flex items-center gap-1 text-[9px] font-mono text-zinc-300">
-                <MessageSquare className="w-3 h-3 text-purple-300" />
+                <MessageSquare className="w-3 h-3 text-zinc-400" />
                 <span>Notes Sync</span>
               </div>
-              <div className="text-[9px] font-mono text-purple-300 mt-1">PostgreSQL Realtime</div>
+              <div className="text-[9px] font-mono text-zinc-400 mt-1">PostgreSQL Realtime</div>
             </div>
           </div>
 
           {/* Bottom badge */}
           <div className="relative z-10 flex items-center justify-between text-[9px] font-mono text-zinc-400">
-            <span>Material 3 Responsive Flutter</span>
-            <span className="text-purple-400">Cross-Platform Sync</span>
+            <span>Material 3 Responsive UI</span>
+            <span className="text-zinc-300">Supabase DB</span>
           </div>
         </div>
       );
 
     case 'python-system-info':
       return (
-        <div className="w-full h-48 sm:h-56 bg-gradient-to-br from-[#0c1c14] via-[#0f241a] to-[#07100b] relative overflow-hidden flex flex-col justify-between p-4 sm:p-5 select-none">
-          {/* Subtle grid */}
-          <div className="absolute inset-0 bg-[radial-gradient(#10B981_1px,transparent_1px)] [background-size:16px_16px] opacity-15" />
-
+        <div className="w-full h-44 sm:h-52 bg-zinc-950 relative overflow-hidden flex flex-col justify-between p-4 sm:p-5 select-none">
           {/* Top window title */}
-          <div className="relative z-10 flex items-center justify-between border-b border-emerald-500/20 pb-2">
+          <div className="relative z-10 flex items-center justify-between border-b border-zinc-800/80 pb-2">
             <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-sm bg-emerald-400/80" />
-              <span className="text-[10px] font-mono text-emerald-300 font-bold">SysInfo_Diagnostic_v2.exe</span>
+              <span className="w-2 h-2 rounded-sm bg-zinc-400" />
+              <span className="text-[10px] font-mono text-zinc-200 font-semibold">SysInfo_Diagnostic.exe</span>
             </div>
-            <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+            <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-zinc-300 border border-zinc-800">
               Windows OS API
             </span>
           </div>
 
           {/* Center mock interface: CPU & RAM metrics */}
-          <div className="relative z-10 grid grid-cols-12 gap-3 my-auto">
-            <div className="col-span-6 bg-[#122e20]/90 border border-emerald-500/25 rounded-xl p-2.5 shadow-lg">
+          <div className="relative z-10 grid grid-cols-12 gap-2.5 my-auto">
+            <div className="col-span-6 bg-zinc-900/80 border border-zinc-800 rounded-lg p-2">
               <div className="flex items-center justify-between text-[9px] font-mono text-zinc-300 mb-1">
-                <span className="flex items-center gap-1 text-white">
-                  <Cpu className="w-3 h-3 text-emerald-400" />
+                <span className="flex items-center gap-1 text-zinc-200">
+                  <Cpu className="w-3 h-3 text-zinc-400" />
                   CPU Load
                 </span>
-                <span className="text-emerald-400 font-bold">24%</span>
+                <span className="text-zinc-100 font-bold">24%</span>
               </div>
-              <div className="w-full h-1.5 bg-black/40 rounded-full overflow-hidden">
-                <div className="w-1/4 h-full bg-emerald-400 rounded-full" />
+              <div className="w-full h-1 bg-zinc-800 rounded-full overflow-hidden">
+                <div className="w-1/4 h-full bg-zinc-300 rounded-full" />
               </div>
-              <div className="text-[8px] font-mono text-zinc-400 mt-1.5">8 Cores • 3.8 GHz Base</div>
+              <div className="text-[8px] font-mono text-zinc-400 mt-1.5">8 Cores • 3.8 GHz</div>
             </div>
 
-            <div className="col-span-6 bg-[#122e20]/90 border border-emerald-500/25 rounded-xl p-2.5 shadow-lg">
+            <div className="col-span-6 bg-zinc-900/80 border border-zinc-800 rounded-lg p-2">
               <div className="flex items-center justify-between text-[9px] font-mono text-zinc-300 mb-1">
-                <span className="flex items-center gap-1 text-white">
-                  <Database className="w-3 h-3 text-emerald-400" />
-                  RAM Usage
+                <span className="flex items-center gap-1 text-zinc-200">
+                  <Database className="w-3 h-3 text-zinc-400" />
+                  Memory
                 </span>
-                <span className="text-emerald-400 font-bold">5.8 / 16 GB</span>
+                <span className="text-zinc-100 font-bold">5.8 GB</span>
               </div>
-              <div className="w-full h-1.5 bg-black/40 rounded-full overflow-hidden">
-                <div className="w-1/3 h-full bg-emerald-400 rounded-full" />
+              <div className="w-full h-1 bg-zinc-800 rounded-full overflow-hidden">
+                <div className="w-1/3 h-full bg-zinc-300 rounded-full" />
               </div>
-              <div className="text-[8px] font-mono text-zinc-400 mt-1.5">DDR4 3200MHz Active</div>
+              <div className="text-[8px] font-mono text-zinc-400 mt-1.5">DDR4 Active</div>
             </div>
           </div>
 
           {/* Bottom badge */}
           <div className="relative z-10 flex items-center justify-between text-[9px] font-mono text-zinc-400">
             <span>Psutil Multi-Thread Telemetry</span>
-            <span className="text-emerald-400">Native Windows GUI</span>
+            <span className="text-zinc-300">Native Windows GUI</span>
           </div>
         </div>
       );
 
     default:
       return (
-        <div className="w-full h-48 bg-zinc-900 flex items-center justify-center text-zinc-500 font-mono text-xs">
+        <div className="w-full h-44 sm:h-52 bg-zinc-950 flex items-center justify-center text-zinc-400 font-mono text-xs">
+          <Terminal className="w-4 h-4 mr-2" />
           Interactive Architecture Preview
         </div>
       );
   }
 };
-

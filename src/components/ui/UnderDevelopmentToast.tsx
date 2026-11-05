@@ -1,25 +1,29 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AlertTriangle, X, Github, ArrowUpRight } from 'lucide-react';
+import { AlertCircle, X, Github, ArrowUpRight } from 'lucide-react';
 
 interface UnderDevelopmentToastProps {
-  isOpen: boolean;
-  projectName: string;
+  isOpen?: boolean;
+  projectName?: string;
+  projectTitle?: string;
   githubUrl?: string;
   onClose: () => void;
 }
 
 export const UnderDevelopmentToast: React.FC<UnderDevelopmentToastProps> = ({
-  isOpen,
+  isOpen = true,
   projectName,
+  projectTitle,
   githubUrl,
   onClose,
 }) => {
+  const name = projectTitle || projectName || 'Selected Project';
+
   useEffect(() => {
     if (!isOpen) return;
     const timer = setTimeout(() => {
       onClose();
-    }, 4500);
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, [isOpen, onClose]);
@@ -28,33 +32,30 @@ export const UnderDevelopmentToast: React.FC<UnderDevelopmentToastProps> = ({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, y: 50, scale: 0.95 }}
+          initial={{ opacity: 0, y: 30, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 30, scale: 0.95 }}
-          transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="fixed bottom-6 right-6 z-[9999] max-w-sm w-[calc(100vw-3rem)] pointer-events-auto"
+          exit={{ opacity: 0, y: 20, scale: 0.96 }}
+          transition={{ duration: 0.25 }}
+          className="fixed bottom-16 md:bottom-6 right-4 sm:right-6 z-[9999] max-w-sm w-[calc(100vw-2rem)] pointer-events-auto"
         >
-          <div className="relative overflow-hidden rounded-2xl bg-[#14141c]/95 border border-amber-500/30 p-4 shadow-2xl shadow-black/80 backdrop-blur-xl">
-            {/* Top glowing accent line */}
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600/30" />
-
+          <div className="relative rounded-xl bg-zinc-950 border border-zinc-700 p-4 shadow-2xl">
             <div className="flex items-start gap-3">
-              <div className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 shrink-0 mt-0.5">
-                <AlertTriangle className="w-5 h-5 animate-pulse" />
+              <div className="p-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 shrink-0 mt-0.5">
+                <AlertCircle className="w-4 h-4" />
               </div>
 
               <div className="flex-1 min-w-0 pr-2">
                 <div className="flex items-center gap-2">
-                  <h4 className="text-xs font-mono font-bold tracking-wider uppercase text-amber-400">
+                  <h4 className="text-xs font-mono font-medium uppercase tracking-wider text-zinc-200">
                     Under Development
                   </h4>
-                  <span className="inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-mono bg-amber-500/10 text-amber-300 border border-amber-500/20">
-                    Demo Notice
+                  <span className="px-1.5 py-0.2 rounded text-[10px] font-mono bg-zinc-900 text-zinc-400 border border-zinc-800">
+                    Notice
                   </span>
                 </div>
 
-                <p className="text-xs text-zinc-300 mt-1 leading-relaxed">
-                  Live demo for <span className="font-semibold text-white">"{projectName}"</span> is currently under development.
+                <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
+                  Interactive demo for <strong className="text-zinc-200 font-medium">"{name}"</strong> is currently in development.
                 </p>
 
                 {githubUrl && (
@@ -62,36 +63,26 @@ export const UnderDevelopmentToast: React.FC<UnderDevelopmentToastProps> = ({
                     href={githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 mt-2.5 text-[11px] font-mono font-medium text-amber-300 hover:text-white transition-colors group"
+                    className="inline-flex items-center gap-1.5 mt-2.5 text-xs font-mono text-zinc-300 hover:text-white transition-colors"
                   >
                     <Github className="w-3.5 h-3.5" />
-                    <span>Inspect source on GitHub</span>
-                    <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    <span>View Repository on GitHub</span>
+                    <ArrowUpRight className="w-3 h-3" />
                   </a>
                 )}
               </div>
 
               <button
-                type="button"
                 onClick={onClose}
-                className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/10 transition-colors shrink-0"
-                aria-label="Close notification"
+                className="p-1 rounded-lg text-zinc-500 hover:text-zinc-300 transition-colors"
+                aria-label="Close Toast"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
-
-            {/* Timed progress bar */}
-            <motion.div
-              initial={{ width: '100%' }}
-              animate={{ width: '0%' }}
-              transition={{ duration: 4.5, ease: 'linear' }}
-              className="absolute bottom-0 left-0 h-[2px] bg-amber-500/40"
-            />
           </div>
         </motion.div>
       )}
     </AnimatePresence>
   );
 };
-

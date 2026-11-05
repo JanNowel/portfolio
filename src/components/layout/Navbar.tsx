@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, FileDown, ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { FileDown, ArrowUpRight } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 import { triggerConfetti } from '../../utils/confetti';
 import { ThemeToggle } from '../ui/ThemeToggle';
@@ -8,15 +8,17 @@ import { ThemeToggle } from '../ui/ThemeToggle';
 interface NavItem {
   name: string;
   href: string;
+  shortName?: string;
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'About', href: '#about', shortName: 'About' },
+  { name: 'Projects', href: '#projects', shortName: 'Projects' },
+  { name: 'Experience', href: '#experience', shortName: 'Exp' },
+  { name: 'Skills', href: '#skills', shortName: 'Skills' },
+  { name: 'Certifications', href: '#certifications', shortName: 'Certs' },
+  { name: 'Services', href: '#services', shortName: 'Services' },
+  { name: 'Contact', href: '#contact', shortName: 'Contact' },
 ];
 
 interface NavbarProps {
@@ -24,27 +26,22 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
+  const [activeSection, setActiveSection] = useState('about');
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 30) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 20);
 
-      const sections = NAV_ITEMS.map((item) => item.href.substring(1));
-      const scrollPosition = window.scrollY + 200;
+      const sectionIds = ['home', ...NAV_ITEMS.map((item) => item.href.substring(1))];
+      const scrollPosition = window.scrollY + 220;
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const sectionEl = document.getElementById(sections[i]);
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const sectionEl = document.getElementById(sectionIds[i]);
         if (sectionEl) {
           const sectionTop = sectionEl.offsetTop;
           if (scrollPosition >= sectionTop) {
-            setActiveSection(sections[i]);
+            setActiveSection(sectionIds[i]);
             break;
           }
         }
@@ -57,7 +54,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
   }, []);
 
   const handleNavClick = (href: string) => {
-    setMobileMenuOpen(false);
     const id = href.substring(1);
     const element = document.getElementById(id);
     if (element) {
@@ -70,171 +66,176 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
     if (onOpenCVModal) {
       onOpenCVModal();
     } else {
-      window.open('#contact', '_self');
+      const contactEl = document.getElementById('contact');
+      contactEl?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-            ? 'py-3.5 bg-[#080808]/80 backdrop-blur-xl border-b border-white/[0.07] shadow-lg shadow-black/40'
-            : 'py-6 bg-transparent'
+      {/* =========================================================
+          DESKTOP & TABLET NAVIGATION: Floating Minimalist Island
+          ========================================================= */}
+      <header className="fixed top-4 inset-x-0 mx-auto max-w-5xl z-50 px-4 hidden md:block">
+        <div
+          className={`flex items-center justify-between rounded-full px-4 py-2 border transition-all duration-300 ${
+            isScrolled
+              ? 'bg-zinc-950/85 backdrop-blur-md border-zinc-800 shadow-xl shadow-black/40'
+              : 'bg-zinc-950/60 backdrop-blur-sm border-zinc-800/80'
           }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            {/* Brand Monogram / Logo */}
+        >
+          {/* Brand Monogram */}
+          <a
+            href="#home"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('#home');
+            }}
+            className="flex items-center gap-2.5 group focus:outline-none"
+          >
+            <div className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-700/80 overflow-hidden p-0.5 flex items-center justify-center">
+              <img
+                src={PERSONAL_INFO.logoImage}
+                alt="JNB Logo"
+                className="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform"
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xs font-semibold tracking-tight text-zinc-100 group-hover:text-white transition-colors">
+                {PERSONAL_INFO.name}
+              </span>
+              <span className="text-[10px] font-mono text-zinc-400">
+                Software Developer
+              </span>
+            </div>
+          </a>
+
+          {/* Minimal Text Links */}
+          <nav className="flex items-center gap-0.5">
+            {NAV_ITEMS.map((item) => {
+              const sectionId = item.href.substring(1);
+              const isActive = activeSection === sectionId;
+
+              return (
+                <button
+                  key={item.name}
+                  onClick={() => handleNavClick(item.href)}
+                  className={`relative px-3 py-1.5 text-xs font-medium tracking-wide transition-colors duration-150 rounded-full focus:outline-none ${
+                    isActive ? 'text-zinc-100' : 'text-zinc-400 hover:text-zinc-200'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNavIndicator"
+                      className="absolute inset-0 bg-zinc-800 rounded-full border border-zinc-700/60"
+                      transition={{ type: 'spring', damping: 28, stiffness: 380 }}
+                    />
+                  )}
+                  <span className="relative z-10">{item.name}</span>
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* Actions: Theme Toggle & CV */}
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+
+            <button
+              onClick={handleDownloadCV}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-medium text-zinc-200 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 hover:text-white transition-all duration-200"
+            >
+              <FileDown className="w-3.5 h-3.5 text-zinc-400" />
+              <span>CV</span>
+            </button>
+
             <a
-              href="#home"
+              href="#contact"
               onClick={(e) => {
                 e.preventDefault();
-                handleNavClick('#home');
+                handleNavClick('#contact');
               }}
-              className="group flex items-center gap-3 relative focus:outline-none"
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium text-zinc-950 bg-white hover:bg-zinc-200 transition-colors"
             >
-              <div className="w-10 h-10 rounded-xl bg-[#141418] border border-white/10 overflow-hidden flex items-center justify-center p-0.5 group-hover:border-cyan-400/60 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.35)] transition-all duration-300">
-                <img
-                  src={PERSONAL_INFO.logoImage}
-                  alt="JNB Logo"
-                  className="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="hidden sm:block">
-                <div className="text-sm font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">
-                  {PERSONAL_INFO.name}
-                </div>
-                <div className="text-[10px] font-mono text-zinc-400 tracking-wider uppercase">
-                  Developer
-                </div>
-              </div>
+              <span>Contact</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
-
-            {/* Desktop Navigation Links */}
-            <nav className="hidden md:flex items-center gap-1 px-4 py-1.5 rounded-full bg-[#121216]/70 border border-white/[0.08] backdrop-blur-md">
-              {NAV_ITEMS.map((item) => {
-                const sectionId = item.href.substring(1);
-                const isActive = activeSection === sectionId;
-
-                return (
-                  <button
-                    key={item.name}
-                    onClick={() => handleNavClick(item.href)}
-                    className={`relative px-4 py-1.5 text-xs font-medium tracking-wide transition-colors duration-200 rounded-full focus:outline-none ${isActive ? 'text-white' : 'text-zinc-400 hover:text-white'
-                      }`}
-                  >
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeNavBackground"
-                        className="absolute inset-0 bg-white/10 rounded-full border border-white/10 shadow-sm"
-                        transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-                      />
-                    )}
-                    <span className="relative z-10">{item.name}</span>
-                  </button>
-                );
-              })}
-            </nav>
-
-            {/* Desktop Actions */}
-            <div className="hidden md:flex items-center gap-3">
-              <ThemeToggle />
-
-              <button
-                onClick={handleDownloadCV}
-                className="relative group inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium font-mono text-white bg-white/5 border border-white/10 hover:border-accent-violet/50 hover:bg-accent-violet/10 hover:shadow-glow-violet transition-all duration-300"
-              >
-                <FileDown className="w-3.5 h-3.5 text-accent-violet group-hover:translate-y-[1px] transition-transform" />
-                <span>Download CV</span>
-              </button>
-
-              <a
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick('#contact');
-                }}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold text-black bg-white hover:bg-zinc-200 transition-colors shadow-sm"
-              >
-                <span>Let's Talk</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-
-            {/* Mobile Actions: Theme Toggle & Hamburger */}
-            <div className="flex md:hidden items-center gap-2">
-              <ThemeToggle />
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white focus:outline-none"
-                aria-label="Toggle Navigation Menu"
-              >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
-            </div>
           </div>
         </div>
       </header>
 
-      {/* Mobile Drawer Menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-x-4 top-20 z-50 md:hidden rounded-2xl bg-[#111115]/95 backdrop-blur-2xl border border-white/15 p-6 shadow-2xl shadow-black/80"
+      {/* =========================================================
+          MOBILE NAVIGATION: Clean Top Header + Floating Bottom Dock
+          (Zero Hamburger Drawer, Fast Single-Tap Access)
+          ========================================================= */}
+      {/* 1. Mobile Top Minimal Header */}
+      <header className="fixed top-0 inset-x-0 z-40 md:hidden bg-zinc-950/85 backdrop-blur-md border-b border-zinc-800/80 px-4 py-2.5">
+        <div className="flex items-center justify-between">
+          <a
+            href="#home"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('#home');
+            }}
+            className="flex items-center gap-2"
           >
-            <div className="flex flex-col gap-2">
-              {NAV_ITEMS.map((item) => {
-                const sectionId = item.href.substring(1);
-                const isActive = activeSection === sectionId;
-
-                return (
-                  <button
-                    key={item.name}
-                    onClick={() => handleNavClick(item.href)}
-                    className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-colors text-left ${isActive
-                        ? 'bg-accent-violet/20 text-white border border-accent-violet/30'
-                        : 'text-zinc-300 hover:text-white hover:bg-white/5'
-                      }`}
-                  >
-                    <span>{item.name}</span>
-                    {isActive && <div className="w-1.5 h-1.5 rounded-full bg-accent-violet" />}
-                  </button>
-                );
-              })}
-
-              <div className="pt-4 mt-2 border-t border-white/10 flex flex-col gap-2.5">
-                <div className="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10">
-                  <span className="text-xs font-mono text-zinc-300">Theme Appearance</span>
-                  <ThemeToggle />
-                </div>
-
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    handleDownloadCV();
-                  }}
-                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-medium text-white bg-white/5 border border-white/10 hover:bg-white/10"
-                >
-                  <FileDown className="w-4 h-4 text-accent-violet" />
-                  <span>Download Curriculum Vitae</span>
-                </button>
-
-                <button
-                  onClick={() => handleNavClick('#contact')}
-                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold text-black bg-white hover:bg-zinc-200"
-                >
-                  <span>Get in Touch</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </button>
-              </div>
+            <div className="w-7 h-7 rounded-full bg-zinc-900 border border-zinc-800 overflow-hidden p-0.5">
+              <img
+                src={PERSONAL_INFO.logoImage}
+                alt="JNB Logo"
+                className="w-full h-full object-cover rounded-full"
+              />
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs font-bold text-zinc-100">{PERSONAL_INFO.initials}</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            </div>
+          </a>
+
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <button
+              onClick={handleDownloadCV}
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-mono font-medium text-zinc-200 bg-zinc-900 border border-zinc-800"
+            >
+              <FileDown className="w-3 h-3 text-zinc-400" />
+              <span>CV</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* 2. Mobile Floating Bottom Capsule Dock */}
+      <nav
+        aria-label="Mobile Navigation"
+        className="fixed bottom-3 inset-x-2 z-40 md:hidden max-w-sm mx-auto"
+      >
+        <div className="bg-zinc-950/90 backdrop-blur-xl border border-zinc-800/90 rounded-full px-2 py-1.5 shadow-2xl shadow-black/80 flex items-center justify-around overflow-x-auto no-scrollbar">
+          {NAV_ITEMS.map((item) => {
+            const sectionId = item.href.substring(1);
+            const isActive = activeSection === sectionId;
+
+            return (
+              <button
+                key={item.name}
+                onClick={() => handleNavClick(item.href)}
+                className={`relative px-2 py-1 text-[11px] font-mono tracking-tight transition-colors duration-150 rounded-full focus:outline-none shrink-0 ${
+                  isActive ? 'text-zinc-100 font-semibold' : 'text-zinc-400 hover:text-zinc-200'
+                }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="mobileActiveDock"
+                    className="absolute inset-0 bg-zinc-800 rounded-full border border-zinc-700/80"
+                    transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+                  />
+                )}
+                <span className="relative z-10">{item.shortName || item.name}</span>
+              </button>
+            );
+          })}
+        </div>
+      </nav>
     </>
   );
 };

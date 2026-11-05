@@ -1,6 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowUp, Github, Linkedin, Mail, Sparkles } from 'lucide-react';
+import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 
 export const Footer: React.FC = () => {
@@ -14,52 +13,47 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative bg-[#060608] border-t border-white/[0.08] pt-16 pb-12 overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-accent-violet/5 blur-[80px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/[0.06]">
+    <footer className="bg-zinc-950 border-t border-zinc-900 pt-16 pb-20 md:pb-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-zinc-900">
+          
           {/* Brand Col */}
-          <div className="md:col-span-5 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-xl bg-[#141418] border border-cyan-400/30 overflow-hidden flex items-center justify-center p-0.5 shadow-md shadow-cyan-500/10">
+          <div className="md:col-span-5 space-y-3">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 overflow-hidden p-0.5">
                 <img
                   src={PERSONAL_INFO.logoImage}
                   alt="JNB Logo"
-                  className="w-full h-full object-cover rounded-lg"
+                  className="w-full h-full object-cover rounded-full"
                 />
               </div>
-              <div>
-                <span className="text-base font-bold text-white tracking-tight">
-                  {PERSONAL_INFO.name}
-                </span>
-                <p className="text-xs text-zinc-400 font-mono">Full-Stack & Systems Developer</p>
-              </div>
+              <span className="text-sm font-semibold text-zinc-100">
+                {PERSONAL_INFO.name}
+              </span>
             </div>
 
-            <p className="text-sm text-zinc-400 max-w-sm leading-relaxed">
-              Designing and building modern web, mobile, and intelligent software experiences with clean architecture and thoughtful interaction.
+            <p className="text-xs text-zinc-400 max-w-sm leading-relaxed">
+              Designing and engineering modern full-stack web platforms, cross-platform mobile apps, and practical AI tooling.
             </p>
 
-            <div className="flex items-center gap-2 pt-1 text-xs text-zinc-400 font-mono">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Available for internships, developer roles & collaboration</span>
+            <div className="flex items-center gap-2 text-[11px] font-mono text-zinc-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <span>Available for commissions & technical internships</span>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="md:col-span-4 grid grid-cols-2 gap-6">
+          {/* Quick Nav Links */}
+          <div className="md:col-span-4 grid grid-cols-2 gap-4">
             <div>
-              <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-300 mb-4">
-                Navigation
-              </h4>
-              <ul className="space-y-2.5 text-sm">
-                {['Home', 'About', 'Projects', 'Skills', 'Experience', 'Contact'].map((item) => (
+              <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-3">
+                Sections
+              </div>
+              <ul className="space-y-2 text-xs">
+                {['About', 'Projects', 'Experience', 'Skills'].map((item) => (
                   <li key={item}>
                     <a
                       href={`#${item.toLowerCase()}`}
-                      className="text-zinc-400 hover:text-white transition-colors duration-200"
+                      className="text-zinc-400 hover:text-zinc-200 transition-colors"
                     >
                       {item}
                     </a>
@@ -69,97 +63,78 @@ export const Footer: React.FC = () => {
             </div>
 
             <div>
-              <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-300 mb-4">
-                Featured Projects
-              </h4>
-              <ul className="space-y-2.5 text-sm">
-                <li>
-                  <a href="#projects" className="text-zinc-400 hover:text-white transition-colors">
-                    REGESuite
-                  </a>
-                </li>
-                <li>
-                  <a href="#projects" className="text-zinc-400 hover:text-white transition-colors">
-                    eBantay AI
-                  </a>
-                </li>
-                <li>
-                  <a href="#projects" className="text-zinc-400 hover:text-white transition-colors">
-                    Student Hub
-                  </a>
-                </li>
-                <li>
-                  <a href="#projects" className="text-zinc-400 hover:text-white transition-colors">
-                    Python SysInfo
-                  </a>
-                </li>
+              <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-3">
+                Offerings
+              </div>
+              <ul className="space-y-2 text-xs">
+                {['Certifications', 'Services', 'GitHub', 'Contact'].map((item) => (
+                  <li key={item}>
+                    <a
+                      href={`#${item.toLowerCase()}`}
+                      className="text-zinc-400 hover:text-zinc-200 transition-colors"
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
 
-          {/* Socials & Connect */}
-          <div className="md:col-span-3 space-y-4">
-            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-300">
-              Connect & Source
-            </h4>
-            <div className="flex items-center gap-2.5">
-              <a
-                href={PERSONAL_INFO.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-400 hover:text-white hover:border-accent-violet/40 hover:bg-accent-violet/10 transition-all duration-200"
-                aria-label="GitHub Profile"
-              >
-                <Github className="w-4 h-4" />
-              </a>
-              <a
-                href={PERSONAL_INFO.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-400 hover:text-white hover:border-accent-blue/40 hover:bg-accent-blue/10 transition-all duration-200"
-                aria-label="LinkedIn Profile"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a
-                href={`mailto:${PERSONAL_INFO.email}`}
-                className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-400 hover:text-white hover:border-purple-400/40 hover:bg-purple-400/10 transition-all duration-200"
-                aria-label="Send Email"
-              >
-                <Mail className="w-4 h-4" />
-              </a>
+          {/* Social Links & Back to Top */}
+          <div className="md:col-span-3 flex flex-col justify-between">
+            <div>
+              <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-3">
+                Connect
+              </div>
+              <div className="flex items-center gap-2">
+                <a
+                  href={PERSONAL_INFO.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white transition-colors"
+                  aria-label="GitHub"
+                >
+                  <Github className="w-3.5 h-3.5" />
+                </a>
+
+                <a
+                  href={PERSONAL_INFO.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin className="w-3.5 h-3.5" />
+                </a>
+
+                <a
+                  href={`mailto:${PERSONAL_INFO.email}`}
+                  className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white transition-colors"
+                  aria-label="Email"
+                >
+                  <Mail className="w-3.5 h-3.5" />
+                </a>
+              </div>
             </div>
 
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              Designed with precision for fast deployment on Cloudflare Pages and GitHub Pages.
-            </p>
+            <button
+              onClick={scrollToTop}
+              className="mt-6 md:mt-0 inline-flex items-center gap-1.5 text-xs font-mono text-zinc-400 hover:text-zinc-200 transition-colors self-start"
+            >
+              <ArrowUp className="w-3.5 h-3.5" />
+              <span>Back to Top</span>
+            </button>
           </div>
         </div>
 
-        {/* Bottom Bar with Back to Top */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-400">
-          <div className="flex items-center gap-1.5 text-center sm:text-left">
-            <span>© {currentYear} {PERSONAL_INFO.name}. Built with</span>
-            <span className="text-accent-violet font-mono">React</span>
-            <span>&</span>
-            <span className="text-accent-blue font-mono">Framer Motion</span>
+        {/* Bottom copyright line */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500 font-mono">
+          <div>
+            © {currentYear} {PERSONAL_INFO.name}. All rights reserved.
           </div>
-
-          <div className="flex items-center gap-4">
-            <span className="hidden sm:inline-flex items-center gap-1 text-[11px] text-zinc-400">
-              <Sparkles className="w-3 h-3 text-accent-violet" /> Ready for Production
-            </span>
-
-            <motion.button
-              onClick={scrollToTop}
-              whileHover={{ y: -3 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:border-white/25 transition-colors focus:outline-none"
-              aria-label="Back to Top"
-            >
-              <span>Back to Top</span>
-              <ArrowUp className="w-3.5 h-3.5" />
-            </motion.button>
+          <div>
+            Designed with Minimalist Precision • Built with React & TypeScript
           </div>
         </div>
       </div>
