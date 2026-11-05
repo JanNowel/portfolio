@@ -1,0 +1,47 @@
+name: Auto-Sync GitHub Contributions
+
+on:
+  schedule:
+    # Runs at 16:00 UTC (12:00 AM Midnight Philippine Time UTC+8) every day
+    - cron: '0 16 * * *'
+    # Also runs at 04:00 UTC (12:00 PM Noon Philippine Time UTC+8) for daytime updates
+    - cron: '0 4 * * *'
+  # Allows manual 1-click trigger from GitHub Actions tab anytime you commit
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch and Sync Latest Contribution Graph
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/sync-contributions.mjs
+
+      - name: Commit and Push if Updated
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet src/data/githubCalendarData.ts; then
+            echo "Changes detected in GitHub contribution calendar. Committing..."
+            git add src/data/githubCalendarData.ts
+            git commit -m "chore(github): auto-sync contribution activity [skip ci]"
+            git push origin main
+          else
+            echo "No contribution changes detected. Up to date!"
+          fi
