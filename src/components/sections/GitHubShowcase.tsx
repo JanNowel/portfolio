@@ -3,57 +3,21 @@ import { motion } from 'framer-motion';
 import { Github, Star, GitFork, BookOpen, ExternalLink, Activity } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 import { FALLBACK_GITHUB_USER, FALLBACK_REPOS } from '../../data/githubFallback';
+import {
+  GITHUB_MONTHS,
+  GITHUB_CONTRIBUTION_WEEKS,
+  GITHUB_TOTAL_CONTRIBUTIONS,
+  CalendarDay,
+} from '../../data/githubCalendarData';
 import { GitHubRepo, GitHubUser } from '../../types';
 import { SectionHeading } from '../ui/SectionHeading';
 import { fadeInUp, staggerContainer } from '../../utils/animations';
 
-interface ContributionDay {
-  date: string;
-  count: number;
-  level: number;
-}
-
 export const GitHubShowcase: React.FC = () => {
   const [user, setUser] = useState<GitHubUser>(FALLBACK_GITHUB_USER);
   const [repos, setRepos] = useState<GitHubRepo[]>(FALLBACK_REPOS);
-  const [contributions, setContributions] = useState<ContributionDay[][]>([]);
-  const [totalContributions, setTotalContributions] = useState<number | null>(null);
-
-  // Fallback 52-week grid generator (covers full card width)
-  const generateFallbackGrid = (): ContributionDay[][] => {
-    const grid: ContributionDay[][] = [];
-    const now = new Date();
-    const totalWeeks = 52;
-    const daysPerWeek = 7;
-
-    for (let w = 0; w < totalWeeks; w++) {
-      const week: ContributionDay[] = [];
-      for (let d = 0; d < daysPerWeek; d++) {
-        const dayOffset = (totalWeeks - 1 - w) * 7 + (daysPerWeek - 1 - d);
-        const date = new Date(now.getTime() - dayOffset * 24 * 60 * 60 * 1000);
-        const dateStr = date.toISOString().split('T')[0];
-        
-        // Moderate activity pattern
-        const rand = Math.random();
-        let level = 0;
-        let count = 0;
-        if (rand > 0.78) {
-          level = 3;
-          count = 4;
-        } else if (rand > 0.58) {
-          level = 2;
-          count = 2;
-        } else if (rand > 0.35) {
-          level = 1;
-          count = 1;
-        }
-
-        week.push({ date: dateStr, count, level });
-      }
-      grid.push(week);
-    }
-    return grid;
-  };
+  const [contributions] = useState<CalendarDay[][]>(GITHUB_CONTRIBUTION_WEEKS);
+  const [totalContributions, setTotalContributions] = useState<number>(GITHUB_TOTAL_CONTRIBUTIONS);
 
   useEffect(() => {
     const fetchGitHubData = async () => {
@@ -103,59 +67,42 @@ export const GitHubShowcase: React.FC = () => {
         console.warn('Using fallback repository data.', err);
       }
 
-      // 3. Fetch Live Contribution Graph
+      // 3. Optional real-time refresh from contributions API
       try {
         const contribRes = await fetch(
           'https://github-contributions-api.jogruber.de/v4/JanNowel?y=last'
         );
         if (contribRes.ok) {
           const contribData = await contribRes.json();
-          if (contribData && Array.isArray(contribData.contributions)) {
-            const list: ContributionDay[] = contribData.contributions.map((c: any) => ({
-              date: c.date,
-              count: c.count || 0,
-              level: Math.min(Math.max(c.level || 0, 0), 4),
-            }));
-
-            // Group into 7-day columns (weeks)
-            const groupedWeeks: ContributionDay[][] = [];
-            for (let i = 0; i < list.length; i += 7) {
-              groupedWeeks.push(list.slice(i, i + 7));
-            }
-
-            setContributions(groupedWeeks);
-            if (contribData.total?.lastYear !== undefined) {
-              setTotalContributions(contribData.total.lastYear);
-            }
+          if (
+            contribData?.total?.lastYear &&
+            contribData.total.lastYear > GITHUB_TOTAL_CONTRIBUTIONS
+          ) {
+            setTotalContributions(contribData.total.lastYear);
           }
-        } else {
-          setContributions(generateFallbackGrid());
         }
-      } catch (err) {
-        console.warn('Could not fetch live contribution graph, using fallback grid.', err);
-        setContributions(generateFallbackGrid());
+      } catch {
+        // Keeps verified GitHub dataset
       }
     };
 
     fetchGitHubData();
   }, []);
 
-  const activeGrid = contributions.length > 0 ? contributions : generateFallbackGrid();
-
-  // Helper for dot color by level in dark and light modes
-  const getDotColor = (level: number) => {
+  // Authentic GitHub contribution colors (dark mode & light mode)
+  const getCellColor = (level: number) => {
     switch (level) {
       case 4:
-        return 'bg-white border-white dark:bg-white dark:border-white';
+        return 'bg-[#39d353] border-[#39d353]/60';
       case 3:
-        return 'bg-zinc-300 border-zinc-300 dark:bg-zinc-300 dark:border-zinc-300';
+        return 'bg-[#26a641] border-[#26a641]/60';
       case 2:
-        return 'bg-zinc-500 border-zinc-500 dark:bg-zinc-500 dark:border-zinc-500';
+        return 'bg-[#006d32] border-[#006d32]/60';
       case 1:
-        return 'bg-zinc-700 border-zinc-700 dark:bg-zinc-700 dark:border-zinc-700';
+        return 'bg-[#0e4429] border-[#0e4429]/60';
       case 0:
       default:
-        return 'bg-zinc-900 border-zinc-800/80 dark:bg-zinc-900 dark:border-zinc-800/80';
+        return 'bg-[#161b22] border-[#21262d]/50';
     }
   };
 
@@ -171,43 +118,76 @@ export const GitHubShowcase: React.FC = () => {
         actionHref={PERSONAL_INFO.github}
       />
 
-      {/* Live Contribution Matrix matching Reference Video & Full 52-Week Span */}
+      {/* Contribution Calendar Card matching GitHub Profile */}
       <div className="rounded-2xl bg-[#0c0c0e] border border-zinc-800/80 p-5 sm:p-7 mb-8">
+        {/* Header without Live API label */}
         <div className="flex items-center justify-between text-xs font-mono text-zinc-400 mb-4 pb-3 border-b border-zinc-900">
           <span className="flex items-center gap-2">
             <Github className="w-4 h-4 text-zinc-300" />
             <span className="font-semibold text-zinc-200">GitHub Public Commit Activity</span>
-            <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-zinc-900 border border-zinc-800 text-[10px] text-emerald-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Live API</span>
-            </span>
           </span>
           <a
             href={PERSONAL_INFO.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-white transition-colors"
+            className="hover:text-white transition-colors text-zinc-400"
           >
             @{user.login}
           </a>
         </div>
 
-        {/* 52-Week Full Contribution Dot Matrix */}
+        {/* Contribution Calendar Graph with Month & Day Labels */}
         <div className="overflow-x-auto py-2 no-scrollbar scroll-smooth">
-          <div className="flex justify-between items-center gap-1 sm:gap-1.5 min-w-[720px] w-full">
-            {activeGrid.map((week, wIdx) => (
-              <div key={wIdx} className="flex flex-col gap-1 sm:gap-1.5 shrink-0">
-                {week.map((day, dIdx) => (
-                  <div
-                    key={dIdx}
-                    title={`${day.count} contribution${day.count === 1 ? '' : 's'} on ${day.date}`}
-                    className={`w-2.5 h-2.5 rounded-full border transition-transform hover:scale-125 cursor-pointer ${getDotColor(
-                      day.level
-                    )}`}
-                  />
+          <div className="min-w-[690px] w-full">
+            {/* Months Header Row */}
+            <div className="flex pl-7 mb-1 text-[10px] font-mono text-zinc-500 select-none">
+              {GITHUB_MONTHS.map((m, idx) => (
+                <div key={idx} style={{ flex: m.span }} className="truncate">
+                  {m.name}
+                </div>
+              ))}
+            </div>
+
+            {/* Grid Container with Day Labels on Left */}
+            <div className="flex items-start gap-2">
+              {/* Day Labels Column */}
+              <div className="flex flex-col justify-between h-[92px] sm:h-[101px] text-[9px] font-mono text-zinc-500 py-0.5 select-none shrink-0 w-5">
+                <span className="opacity-0">Sun</span>
+                <span>Mon</span>
+                <span className="opacity-0">Tue</span>
+                <span>Wed</span>
+                <span className="opacity-0">Thu</span>
+                <span>Fri</span>
+                <span className="opacity-0">Sat</span>
+              </div>
+
+              {/* 53 Weeks Matrix */}
+              <div className="flex justify-between items-center gap-[3px] sm:gap-1 flex-1">
+                {contributions.map((week, wIdx) => (
+                  <div key={wIdx} className="flex flex-col gap-[3px] sm:gap-1 shrink-0">
+                    {week.map((day, dIdx) => {
+                      if (!day.date) {
+                        return (
+                          <div
+                            key={dIdx}
+                            className="w-[10px] h-[10px] sm:w-[11px] sm:h-[11px] opacity-0"
+                          />
+                        );
+                      }
+                      return (
+                        <div
+                          key={dIdx}
+                          title={`${day.count} contribution${day.count === 1 ? '' : 's'} on ${day.date}`}
+                          className={`w-[10px] h-[10px] sm:w-[11px] sm:h-[11px] rounded-[2px] border transition-transform hover:scale-125 cursor-pointer ${getCellColor(
+                            day.level
+                          )}`}
+                        />
+                      );
+                    })}
+                  </div>
                 ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
 
@@ -215,22 +195,20 @@ export const GitHubShowcase: React.FC = () => {
         <div className="mt-4 pt-3 border-t border-zinc-900 text-xs font-mono uppercase tracking-wider text-zinc-400 flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <Activity className="w-3.5 h-3.5 text-zinc-400" />
-            <span>
-              {totalContributions !== null
-                ? `${totalContributions} contributions in the last year`
-                : '100+ contributions in the last year'}
+            <span className="text-zinc-200 font-medium">
+              {totalContributions} contributions in the last year
             </span>
           </div>
 
           <div className="flex items-center gap-4">
-            {/* Level Legend */}
+            {/* Level Legend Matching GitHub */}
             <div className="flex items-center gap-1.5 text-[10px] text-zinc-500 normal-case font-mono">
               <span>Less</span>
-              <span className="w-2 h-2 rounded-full bg-zinc-900 border border-zinc-800" />
-              <span className="w-2 h-2 rounded-full bg-zinc-700" />
-              <span className="w-2 h-2 rounded-full bg-zinc-500" />
-              <span className="w-2 h-2 rounded-full bg-zinc-300" />
-              <span className="w-2 h-2 rounded-full bg-white" />
+              <span className="w-2.5 h-2.5 rounded-[2px] bg-[#161b22] border border-[#21262d]/50" />
+              <span className="w-2.5 h-2.5 rounded-[2px] bg-[#0e4429]" />
+              <span className="w-2.5 h-2.5 rounded-[2px] bg-[#006d32]" />
+              <span className="w-2.5 h-2.5 rounded-[2px] bg-[#26a641]" />
+              <span className="w-2.5 h-2.5 rounded-[2px] bg-[#39d353]" />
               <span>More</span>
             </div>
 
@@ -238,7 +216,7 @@ export const GitHubShowcase: React.FC = () => {
               href={`${PERSONAL_INFO.github}?tab=repositories`}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white transition-colors font-semibold"
+              className="hover:text-white transition-colors font-semibold text-zinc-300"
             >
               {user.public_repos} Repositories ↗
             </a>
