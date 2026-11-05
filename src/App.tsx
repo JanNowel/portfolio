@@ -28,46 +28,51 @@ export const App: React.FC = () => {
     setIsSkeleton(true);
     setTimeout(() => {
       setIsSkeleton(false);
-    }, 1100);
+    }, 900);
   };
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-[#09090b] text-zinc-100 selection:bg-zinc-800 selection:text-zinc-100 relative selection:overflow-hidden transition-colors duration-300">
+      <div className="min-h-screen bg-black text-zinc-100 selection:bg-zinc-800 selection:text-zinc-100 relative selection:overflow-hidden transition-colors duration-300">
         <CustomCursor />
         <ScrollProgressBar />
 
         {loading && <Preloader onComplete={handlePreloaderComplete} />}
+        
+        {/* Navigation: Fixed Left Sidebar on Desktop + Top Bar & Bottom Dock on Mobile */}
         <Navbar onOpenCVModal={() => setCvModalOpen(true)} />
 
-        <main className="relative z-10">
-          <AnimatePresence mode="wait">
-            {isSkeleton ? (
-              <SkeletonHero key="hero-skeleton" />
-            ) : (
-              <motion.div
-                key="hero-live"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4, ease: 'easeOut' }}
-              >
-                <Hero onOpenCVModal={() => setCvModalOpen(true)} />
-              </motion.div>
-            )}
-          </AnimatePresence>
+        {/* Right Main Scrollable Content Area matching iging.tech reference layout */}
+        <div className="lg:pl-64 xl:pl-72 min-h-screen bg-black">
+          <main className="max-w-4xl mx-auto px-5 sm:px-8 lg:px-12 py-6 sm:py-10 space-y-20 sm:space-y-24">
+            <AnimatePresence mode="wait">
+              {isSkeleton ? (
+                <SkeletonHero key="hero-skeleton" />
+              ) : (
+                <motion.div
+                  key="hero-live"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.35, ease: 'easeOut' }}
+                >
+                  <Hero onOpenCVModal={() => setCvModalOpen(true)} />
+                </motion.div>
+              )}
+            </AnimatePresence>
 
-          {/* Structured Sections in Requested Hierarchy */}
-          <About />
-          <Projects />
-          <Experience />
-          <Skills />
-          <Certifications />
-          <Services />
-          <GitHubShowcase />
-          <Contact />
-        </main>
+            {/* Sections in Exact Order */}
+            <About />
+            <Projects />
+            <Experience />
+            <Skills />
+            <Certifications />
+            <Services />
+            <GitHubShowcase />
+            <Contact />
+          </main>
 
-        <Footer />
+          <Footer />
+        </div>
 
         <CVModal isOpen={cvModalOpen} onClose={() => setCvModalOpen(false)} />
       </div>

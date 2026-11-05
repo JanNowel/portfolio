@@ -15,9 +15,10 @@ const NAV_ITEMS: NavItem[] = [
   { name: 'About', href: '#about', shortName: 'About' },
   { name: 'Projects', href: '#projects', shortName: 'Projects' },
   { name: 'Experience', href: '#experience', shortName: 'Exp' },
-  { name: 'Skills', href: '#skills', shortName: 'Skills' },
+  { name: 'Stack', href: '#skills', shortName: 'Stack' },
   { name: 'Certifications', href: '#certifications', shortName: 'Certs' },
   { name: 'Services', href: '#services', shortName: 'Services' },
+  { name: 'GitHub', href: '#github', shortName: 'Git' },
   { name: 'Contact', href: '#contact', shortName: 'Contact' },
 ];
 
@@ -27,14 +28,11 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
   const [activeSection, setActiveSection] = useState('about');
-  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-
       const sectionIds = ['home', ...NAV_ITEMS.map((item) => item.href.substring(1))];
-      const scrollPosition = window.scrollY + 220;
+      const scrollPosition = window.scrollY + 200;
 
       for (let i = sectionIds.length - 1; i >= 0; i--) {
         const sectionEl = document.getElementById(sectionIds[i]);
@@ -74,44 +72,31 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
   return (
     <>
       {/* =========================================================
-          DESKTOP & TABLET NAVIGATION: Floating Minimalist Island
+          DESKTOP FIXED LEFT SIDEBAR (Matching iging.tech / Inspired Design)
           ========================================================= */}
-      <header className="fixed top-4 inset-x-0 mx-auto max-w-5xl z-50 px-4 hidden md:block">
-        <div
-          className={`flex items-center justify-between rounded-full px-4 py-2 border transition-all duration-300 ${
-            isScrolled
-              ? 'bg-zinc-950/85 backdrop-blur-md border-zinc-800 shadow-xl shadow-black/40'
-              : 'bg-zinc-950/60 backdrop-blur-sm border-zinc-800/80'
-          }`}
-        >
-          {/* Brand Monogram */}
+      <aside className="hidden lg:flex fixed inset-y-0 left-0 w-64 xl:w-72 bg-black border-r border-zinc-900 flex-col justify-between p-6 xl:p-8 z-40 select-none overflow-y-auto no-scrollbar">
+        
+        {/* Top: Brand Monogram & Navigation Links */}
+        <div className="space-y-8">
+          {/* Brand Name */}
           <a
             href="#home"
             onClick={(e) => {
               e.preventDefault();
               handleNavClick('#home');
             }}
-            className="flex items-center gap-2.5 group focus:outline-none"
+            className="block group focus:outline-none"
           >
-            <div className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-700/80 overflow-hidden p-0.5 flex items-center justify-center">
-              <img
-                src={PERSONAL_INFO.logoImage}
-                alt="JNB Logo"
-                className="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform"
-              />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xs font-semibold tracking-tight text-zinc-100 group-hover:text-white transition-colors">
-                {PERSONAL_INFO.name}
-              </span>
-              <span className="text-[10px] font-mono text-zinc-400">
-                Software Developer
-              </span>
-            </div>
+            <h1 className="text-base xl:text-lg font-mono font-bold text-white tracking-tight group-hover:text-zinc-200 transition-colors">
+              {PERSONAL_INFO.name}
+            </h1>
+            <p className="text-[11px] font-mono text-zinc-400 uppercase tracking-widest mt-0.5">
+              Software Developer
+            </p>
           </a>
 
-          {/* Minimal Text Links */}
-          <nav className="flex items-center gap-0.5">
+          {/* Navigation Links with Active Arrow Indicator */}
+          <nav className="space-y-2.5 pt-2 font-mono text-sm">
             {NAV_ITEMS.map((item) => {
               const sectionId = item.href.substring(1);
               const isActive = activeSection === sectionId;
@@ -120,56 +105,95 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
                 <button
                   key={item.name}
                   onClick={() => handleNavClick(item.href)}
-                  className={`relative px-3 py-1.5 text-xs font-medium tracking-wide transition-colors duration-150 rounded-full focus:outline-none ${
-                    isActive ? 'text-zinc-100' : 'text-zinc-400 hover:text-zinc-200'
+                  className={`block w-full text-left transition-colors duration-150 focus:outline-none ${
+                    isActive
+                      ? 'text-white font-medium pl-1'
+                      : 'text-zinc-400 hover:text-white pl-1'
                   }`}
                 >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeNavIndicator"
-                      className="absolute inset-0 bg-zinc-800 rounded-full border border-zinc-700/60"
-                      transition={{ type: 'spring', damping: 28, stiffness: 380 }}
-                    />
-                  )}
-                  <span className="relative z-10">{item.name}</span>
+                  <span className="inline-flex items-center gap-2">
+                    {isActive ? (
+                      <span className="text-white">→</span>
+                    ) : (
+                      <span className="opacity-0">→</span>
+                    )}
+                    <span>{item.name}</span>
+                  </span>
                 </button>
               );
             })}
           </nav>
+        </div>
 
-          {/* Actions: Theme Toggle & CV */}
-          <div className="flex items-center gap-2">
+        {/* Bottom: Live Viewer Count, Theme Switcher & Contact Prompts */}
+        <div className="pt-8 space-y-6 border-t border-zinc-900 font-mono">
+          
+          {/* Live Viewer Indicator matching reference */}
+          <div className="flex items-center gap-2 text-xs text-zinc-400">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+            </span>
+            <span>1 person viewing now</span>
+          </div>
+
+          {/* Theme Switcher & CV Button */}
+          <div className="flex items-center justify-between">
             <ThemeToggle />
-
             <button
               onClick={handleDownloadCV}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-medium text-zinc-200 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 hover:text-white transition-all duration-200"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-zinc-300 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 hover:text-white transition-colors"
             >
               <FileDown className="w-3.5 h-3.5 text-zinc-400" />
-              <span>CV</span>
+              <span>Resume</span>
             </button>
+          </div>
 
+          {/* Contact Prompt matching reference video */}
+          <div className="space-y-2 text-xs">
+            <p className="text-[11px] text-zinc-400 uppercase tracking-wider">
+              For work, collabs & everything else, reach me at
+            </p>
             <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick('#contact');
-              }}
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium text-zinc-950 bg-white hover:bg-zinc-200 transition-colors"
+              href={`mailto:${PERSONAL_INFO.email}`}
+              className="block text-zinc-300 hover:text-white text-xs break-all transition-colors"
             >
-              <span>Contact</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              {PERSONAL_INFO.email}
             </a>
+
+            {/* Social Handles with ↗ */}
+            <div className="pt-2 flex flex-col gap-1.5 text-xs text-zinc-400">
+              <a
+                href={PERSONAL_INFO.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 hover:text-white transition-colors"
+              >
+                <span>@JanNowel</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </a>
+
+              <a
+                href={PERSONAL_INFO.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 hover:text-white transition-colors"
+              >
+                <span>in/jhonnoelbaculpo</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </a>
+            </div>
           </div>
         </div>
-      </header>
+      </aside>
 
       {/* =========================================================
-          MOBILE NAVIGATION: Clean Top Header + Floating Bottom Dock
-          (Zero Hamburger Drawer, Fast Single-Tap Access)
+          MOBILE & TABLET NAVIGATION (< lg)
+          Clean Top Header + Bottom Floating Capsule Dock
+          (No Hamburger Menus, Fast Single-Tap Access)
           ========================================================= */}
       {/* 1. Mobile Top Minimal Header */}
-      <header className="fixed top-0 inset-x-0 z-40 md:hidden bg-zinc-950/85 backdrop-blur-md border-b border-zinc-800/80 px-4 py-2.5">
+      <header className="fixed top-0 inset-x-0 z-40 lg:hidden bg-black/90 backdrop-blur-md border-b border-zinc-900 px-4 py-3">
         <div className="flex items-center justify-between">
           <a
             href="#home"
@@ -186,17 +210,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
                 className="w-full h-full object-cover rounded-full"
               />
             </div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs font-bold text-zinc-100">{PERSONAL_INFO.initials}</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            </div>
+            <span className="text-xs font-mono font-bold text-white">{PERSONAL_INFO.name}</span>
           </a>
 
           <div className="flex items-center gap-2">
             <ThemeToggle />
             <button
               onClick={handleDownloadCV}
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-mono font-medium text-zinc-200 bg-zinc-900 border border-zinc-800"
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-mono text-zinc-200 bg-zinc-900 border border-zinc-800"
             >
               <FileDown className="w-3 h-3 text-zinc-400" />
               <span>CV</span>
@@ -208,9 +229,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
       {/* 2. Mobile Floating Bottom Capsule Dock */}
       <nav
         aria-label="Mobile Navigation"
-        className="fixed bottom-3 inset-x-2 z-40 md:hidden max-w-sm mx-auto"
+        className="fixed bottom-3 inset-x-2 z-40 lg:hidden max-w-sm mx-auto"
       >
-        <div className="bg-zinc-950/90 backdrop-blur-xl border border-zinc-800/90 rounded-full px-2 py-1.5 shadow-2xl shadow-black/80 flex items-center justify-around overflow-x-auto no-scrollbar">
+        <div className="bg-zinc-950/95 backdrop-blur-xl border border-zinc-800/90 rounded-full px-2 py-1.5 shadow-2xl shadow-black/80 flex items-center justify-around overflow-x-auto no-scrollbar">
           {NAV_ITEMS.map((item) => {
             const sectionId = item.href.substring(1);
             const isActive = activeSection === sectionId;
@@ -220,7 +241,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCVModal }) => {
                 key={item.name}
                 onClick={() => handleNavClick(item.href)}
                 className={`relative px-2 py-1 text-[11px] font-mono tracking-tight transition-colors duration-150 rounded-full focus:outline-none shrink-0 ${
-                  isActive ? 'text-zinc-100 font-semibold' : 'text-zinc-400 hover:text-zinc-200'
+                  isActive ? 'text-white font-semibold' : 'text-zinc-400 hover:text-zinc-200'
                 }`}
               >
                 {isActive && (

@@ -92,10 +92,19 @@ html.light #github,
 html.light #contact,
 html.light main,
 html.light footer,
+html.light aside,
+html.light .bg-black,
+html.light .bg-\[\#000000\],
+html.light .bg-\[\#0c0c0e\],
 html.light .bg-\[\#09090b\],
 html.light .bg-\[\#080808\],
 html.light .bg-\[\#060608\] {
   background-color: #f8fafc !important;
+}
+
+html.light aside {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
 }
 
 /* 2. Surfaces, Cards, Bento Containers & Floating Panels */

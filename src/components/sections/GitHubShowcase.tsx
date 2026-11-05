@@ -55,7 +55,6 @@ export const GitHubShowcase: React.FC = () => {
     fetchGitHubData();
   }, []);
 
-  // Generate 26 columns of 7 dots matching reference video
   const weeks = 28;
   const daysPerWeek = 7;
   const generateContributionGrid = () => {
@@ -77,114 +76,111 @@ export const GitHubShowcase: React.FC = () => {
   const contributionGrid = React.useMemo(() => generateContributionGrid(), []);
 
   return (
-    <section id="github" className="py-20 sm:py-24 bg-[#000000] border-t border-zinc-900">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <SectionHeading
-          badge="07 — github activity"
-          title="Open-Source Repositories."
-          titleHighlight="Public Contributions."
-          subtitle="Transparent software codebases, experimental prototypes, and academic deliverables on GitHub."
-          actionText="@JanNowel"
-          actionHref={PERSONAL_INFO.github}
-        />
+    <section id="github" className="pt-4 border-t border-zinc-900">
+      {/* Section Header */}
+      <SectionHeading
+        badge="07 — github activity"
+        title="Open-Source Repositories."
+        titleHighlight="Public Contributions."
+        subtitle="Transparent software codebases, experimental prototypes, and academic deliverables on GitHub."
+        actionText="@JanNowel"
+        actionHref={PERSONAL_INFO.github}
+      />
 
-        {/* Contribution Matrix matching Reference Video */}
-        <div className="rounded-2xl bg-[#0c0c0e] border border-zinc-800/80 p-5 sm:p-7 mb-8">
-          <div className="flex items-center justify-between text-xs font-mono text-zinc-400 mb-4 pb-3 border-b border-zinc-900">
-            <span className="flex items-center gap-2">
-              <Github className="w-4 h-4 text-zinc-300" />
-              <span>GitHub Public Commit Activity</span>
-            </span>
-            <span>@{user.login}</span>
-          </div>
+      {/* Contribution Matrix matching Reference Video */}
+      <div className="rounded-2xl bg-[#0c0c0e] border border-zinc-800/80 p-5 sm:p-7 mb-8">
+        <div className="flex items-center justify-between text-xs font-mono text-zinc-400 mb-4 pb-3 border-b border-zinc-900">
+          <span className="flex items-center gap-2">
+            <Github className="w-4 h-4 text-zinc-300" />
+            <span>GitHub Public Commit Activity</span>
+          </span>
+          <span>@{user.login}</span>
+        </div>
 
-          {/* Matrix Dots */}
-          <div className="overflow-x-auto py-2 no-scrollbar">
-            <div className="flex gap-1.5 min-w-[500px]">
-              {contributionGrid.map((week, wIdx) => (
-                <div key={wIdx} className="flex flex-col gap-1.5 shrink-0">
-                  {week.map((level, dIdx) => {
-                    const colors = [
-                      'bg-zinc-900',
-                      'bg-zinc-700',
-                      'bg-zinc-400',
-                      'bg-zinc-100',
-                    ];
-                    return (
-                      <div
-                        key={dIdx}
-                        className={`w-2.5 h-2.5 rounded-full ${colors[level]} transition-colors`}
-                      />
-                    );
-                  })}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-4 pt-3 border-t border-zinc-900 text-xs font-mono uppercase tracking-wider text-zinc-400 flex items-center justify-between">
-            <span>500+ Contributions in the last year</span>
-            <span>{user.public_repos} Repositories</span>
+        {/* Matrix Dots */}
+        <div className="overflow-x-auto py-2 no-scrollbar">
+          <div className="flex gap-1.5 min-w-[500px]">
+            {contributionGrid.map((week, wIdx) => (
+              <div key={wIdx} className="flex flex-col gap-1.5 shrink-0">
+                {week.map((level, dIdx) => {
+                  const colors = [
+                    'bg-zinc-900',
+                    'bg-zinc-700',
+                    'bg-zinc-400',
+                    'bg-zinc-100',
+                  ];
+                  return (
+                    <div
+                      key={dIdx}
+                      className={`w-2.5 h-2.5 rounded-full ${colors[level]} transition-colors`}
+                    />
+                  );
+                })}
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Repositories Cards Grid */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-        >
-          {repos.map((repo, idx) => (
-            <motion.a
-              key={repo.name}
-              href={repo.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              variants={fadeInUp}
-              transition={{ delay: idx * 0.05 }}
-              className="rounded-2xl bg-[#0c0c0e] border border-zinc-800/80 p-5 hover:border-zinc-700 transition-colors flex flex-col justify-between group"
-            >
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <div className="flex items-center gap-2 min-w-0">
-                    <BookOpen className="w-3.5 h-3.5 text-zinc-400 group-hover:text-white transition-colors shrink-0" />
-                    <span className="text-xs sm:text-sm font-semibold text-white group-hover:text-zinc-200 transition-colors truncate">
-                      {repo.name}
-                    </span>
-                  </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-zinc-500 group-hover:text-zinc-300 transition-colors shrink-0" />
-                </div>
-
-                <p className="text-xs text-zinc-400 line-clamp-2 mb-4 leading-relaxed">
-                  {repo.description || 'Public software repository on GitHub.'}
-                </p>
-              </div>
-
-              <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500 pt-3 border-t border-zinc-900">
-                <span className="flex items-center gap-1.5 text-zinc-400">
-                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-400" />
-                  <span>{repo.language || 'Code'}</span>
-                </span>
-
-                <div className="flex items-center gap-3">
-                  <span className="flex items-center gap-1">
-                    <Star className="w-3 h-3 text-zinc-500" />
-                    <span>{repo.stargazers_count}</span>
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <GitFork className="w-3 h-3 text-zinc-500" />
-                    <span>{repo.forks_count}</span>
-                  </span>
-                </div>
-              </div>
-            </motion.a>
-          ))}
-        </motion.div>
+        <div className="mt-4 pt-3 border-t border-zinc-900 text-xs font-mono uppercase tracking-wider text-zinc-400 flex items-center justify-between">
+          <span>500+ Contributions in the last year</span>
+          <span>{user.public_repos} Repositories</span>
+        </div>
       </div>
+
+      {/* Repositories Cards Grid */}
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+      >
+        {repos.map((repo, idx) => (
+          <motion.a
+            key={repo.name}
+            href={repo.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            variants={fadeInUp}
+            transition={{ delay: idx * 0.05 }}
+            className="rounded-2xl bg-[#0c0c0e] border border-zinc-800/80 p-5 hover:border-zinc-700 transition-colors flex flex-col justify-between group"
+          >
+            <div>
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <BookOpen className="w-3.5 h-3.5 text-zinc-400 group-hover:text-white transition-colors shrink-0" />
+                  <span className="text-xs sm:text-sm font-semibold text-white group-hover:text-zinc-200 transition-colors truncate">
+                    {repo.name}
+                  </span>
+                </div>
+                <ExternalLink className="w-3.5 h-3.5 text-zinc-500 group-hover:text-zinc-300 transition-colors shrink-0" />
+              </div>
+
+              <p className="text-xs text-zinc-400 line-clamp-2 mb-4 leading-relaxed">
+                {repo.description || 'Public software repository on GitHub.'}
+              </p>
+            </div>
+
+            <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500 pt-3 border-t border-zinc-900">
+              <span className="flex items-center gap-1.5 text-zinc-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-zinc-400" />
+                <span>{repo.language || 'Code'}</span>
+              </span>
+
+              <div className="flex items-center gap-3">
+                <span className="flex items-center gap-1">
+                  <Star className="w-3 h-3 text-zinc-500" />
+                  <span>{repo.stargazers_count}</span>
+                </span>
+                <span className="flex items-center gap-1">
+                  <GitFork className="w-3 h-3 text-zinc-500" />
+                  <span>{repo.forks_count}</span>
+                </span>
+              </div>
+            </div>
+          </motion.a>
+        ))}
+      </motion.div>
     </section>
   );
 };
