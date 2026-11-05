@@ -32,20 +32,20 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
         {/* Main 2-Column Hero Header matching Inspired Design video */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10 items-start">
           
-          {/* Left: Square Portrait Image with comfortable headroom for hair */}
+          {/* Left: Square Portrait Image */}
           <motion.div
             variants={fadeInUp}
             className="md:col-span-5 flex justify-center md:justify-start"
           >
-            <div className="relative aspect-square w-full max-w-[260px] sm:max-w-[300px] rounded-2xl overflow-hidden bg-transparent border border-zinc-800/80 shadow-2xl flex items-end justify-center pt-4">
+            <div className="relative aspect-square w-full max-w-[260px] sm:max-w-[300px] rounded-2xl overflow-hidden bg-transparent border border-zinc-800/80 shadow-2xl">
               <img
                 src={PERSONAL_INFO.profileImage}
                 alt={PERSONAL_INFO.name}
-                className="w-full h-full object-contain object-bottom scale-[0.90] origin-bottom drop-shadow-xl"
+                className="w-full h-full object-contain object-bottom drop-shadow-xl"
               />
               
               {/* Subtle status tag */}
-              <div className="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-zinc-950/80 backdrop-blur-md border border-zinc-800 text-[10px] font-mono text-zinc-300 flex items-center gap-1.5 z-10">
+              <div className="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-zinc-950/80 backdrop-blur-md border border-zinc-800 text-[10px] font-mono text-zinc-300 flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                 <span>Available</span>
               </div>
