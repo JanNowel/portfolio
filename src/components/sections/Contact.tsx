@@ -89,7 +89,7 @@ export const Contact: React.FC = () => {
     <section id="contact" className="pt-4 border-t border-zinc-900">
       {/* Section Header */}
       <SectionHeading
-        badge="08 — contact & inquiry"
+        badge="07 — contact & inquiry"
         title="Start a Conversation."
         titleHighlight="Let's Build Together."
         subtitle="Have a software project, commission, or full-stack role in mind? Reach me directly through my verified channels."

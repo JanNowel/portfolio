@@ -4,6 +4,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 import { triggerConfetti } from '../../utils/confetti';
 import { fadeInUp, staggerContainer } from '../../utils/animations';
+import { TechMarquee } from '../ui/TechMarquee';
 
 interface HeroProps {
   onOpenCVModal?: () => void;
@@ -19,17 +20,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
       contactEl?.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
-  const techLogos = [
-    { name: 'React', label: 'React' },
-    { name: 'TypeScript', label: 'TypeScript' },
-    { name: 'React Native', label: 'React Native' },
-    { name: 'Flutter', label: 'Flutter' },
-    { name: 'Node.js', label: 'Node.js' },
-    { name: 'Express.js', label: 'Express.js' },
-    { name: 'MongoDB', label: 'MongoDB' },
-    { name: 'Supabase', label: 'Supabase' },
-  ];
 
   return (
     <section id="home" className="pt-8 sm:pt-12 pb-14 bg-black">
@@ -128,19 +118,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCVModal }) => {
           </motion.div>
         </div>
 
-        {/* Tech Marquee Strip below Hero matching reference video (frame_00_t0s.jpg) */}
-        <motion.div
-          variants={fadeInUp}
-          className="py-4 border-t border-b border-zinc-900 flex items-center justify-between gap-4 overflow-x-auto no-scrollbar text-xs font-mono text-zinc-400"
-        >
-          {techLogos.map((tech) => (
-            <span
-              key={tech.name}
-              className="px-3 py-1.5 rounded-lg bg-zinc-950 border border-zinc-900 text-zinc-400 hover:text-zinc-200 hover:border-zinc-800 transition-colors shrink-0"
-            >
-              {tech.label}
-            </span>
-          ))}
+        {/* Seamless Infinite Tech Marquee */}
+        <motion.div variants={fadeInUp} className="w-full">
+          <TechMarquee />
         </motion.div>
       </motion.div>
     </section>

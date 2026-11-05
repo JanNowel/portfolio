@@ -18,7 +18,7 @@ export const Services: React.FC = () => {
   return (
     <section id="services" className="pt-4 border-t border-zinc-900">
       <SectionHeading
-        badge="06 — services & commissions"
+        badge="05 — services & commissions"
         title="Engineering Services."
         titleHighlight="Available for Work."
         subtitle="Specialized development capabilities for freelance commissions, technical contracts, and team collaboration."

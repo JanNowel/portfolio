@@ -383,12 +383,12 @@ export const TIMELINE_DATA: TimelineItem[] = [
 export const CERTIFICATIONS: Certification[] = [
   {
     id: 'cert-fullstack-dev',
-    title: 'Full-Stack Web Development & Architecture',
-    issuer: 'Technical Capstone & Independent Software Projects',
-    date: '2024',
+    title: 'Full-Stack Web Development',
+    issuer: 'School Project & Independent Software Projects',
+    date: '2025',
     category: 'Full-Stack',
     skills: ['React', 'TypeScript', 'Node.js', 'MongoDB', 'REST APIs'],
-    credentialId: 'JNB-FS-2024-CAPSTONE',
+    credentialId: 'JNB-FS-2025-School Project',
   },
   {
     id: 'cert-mobile-eng',
