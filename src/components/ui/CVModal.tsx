@@ -40,56 +40,65 @@ export const CVModal: React.FC<CVModalProps> = ({ isOpen, onClose }) => {
 (+63) 948-261-2678 | ${PERSONAL_INFO.email} | linkedin.com/in/jhonnoelbaculpo | github.com/JanNowel | ${PERSONAL_INFO.location}
 
 EDUCATION
-Trinidad Municipal College                                               Jan 2022 - Jan 2026
-Bachelor of Science in Information Technology (BSIT)
+Trinidad Municipal College                                               Jan 2022 - Jan 2026 (Expected)
+Bachelor of Science in Information Technology (BSIT)                     Trinidad, Bohol, Philippines
 
 Senior High School                                                       Jan 2020 - Jan 2022
-Information and Communications Technology (ICT Strand)
+Information and Communications Technology (ICT Strand)                   Bohol, Philippines
 
 EXPERIENCE
-FAST Distribution Corp. (Internship)                                     Bohol / Cebu, Philippines
-Software Developer Intern | React Native, TypeScript, Node.js            Jan 2025 - Present
-• Cut manual task time by 30% by building 8 mobile and web features with React Native, Node.js, and MongoDB.
-• Reduced average API response time by 40% by developing REST APIs with Express.js and JWT.
-• Surfaced 5+ key metrics in real time by creating live dashboards with MongoDB and responsive analytics.
-• Lowered post-release bugs by 35% by adding input validation, automated testing, and CI/CD.
+FAST Distribution Corp. (Internship / OJT)                               Ubay / Bohol, Philippines
+Software Developer Intern | React Native, TypeScript, Node.js, MongoDB   Jan 2025 - Present
+• Accelerated order reconciliation speed by 35% by developing responsive inventory logging and tracking modules using React Native and Node.js.
+• Decreased API response time by 40% by designing modular RESTful endpoints with Express.js and structured input validation.
+• Surfaced 8+ key operational logistics metrics in real time by building clean data visualization dashboards with MongoDB aggregation.
+• Prevented ~30% of post-deployment data errors by enforcing strict TypeScript interfaces, schema validation, and collaborative Git code reviews.
 
-Freelance Full-Stack Developer                                           Remote, Philippines
-Full-Stack Engineer | React, Next.js, Node.js, Express, MongoDB          Jan 2024 - Present
-• Raised weekly active users by 25% by delivering 6 full-stack features with React, Next.js, Node.js, and MongoDB.
-• Cut p95 API latency by 45% by building secured REST APIs with Express.js, JWT, and PostgreSQL.
-• Saved the team ~8 hours weekly by integrating third-party APIs and cloud storage for file uploads and data sync.
-• Speed up report generation by 50% by optimizing database queries with MongoDB aggregation and indexing.
+Freelance & Independent Software Development                             Bohol, Philippines (Remote)
+Full-Stack & Mobile Developer | MERN Stack, TypeScript, Flutter, Supabase Jan 2024 - Present
+• Delivered 4+ end-to-end web and mobile applications, achieving 99.5% uptime by leveraging React, Node.js, and Supabase BaaS.
+• Cut client inquiry turnaround time by 50% by architecting automated scheduling, reservation tracking, and booking workflows.
+• Reduced mobile app cold start times by 25% by implementing optimized asset bundling and state management in React Native and Flutter.
+• Enhanced data security and authorization compliance by implementing JWT-based authentication and PostgreSQL Row-Level Security (RLS).
 
 PROJECTS
-eBantay - Community Incident Reporting & Dispatch System                 Jan 2025 - Present
-React, TypeScript, Node.js, Express.js, MongoDB, Socket.IO
-• Processed 100+ community emergency incidents by building an e-reporting platform with React, Node.js, and MongoDB.
-• Reduced dispatch drop-off by 20% by integrating real-time geolocation tagging and JWT authentication.
-• Scaled the app to handle 3x traffic by optimizing API and database performance.
+eBantay - Municipal Incident Reporting & Hazard Monitoring System         Jan 2025 - Present
+MERN Stack, React Native, Expo, MongoDB, Leaflet GIS, Node.js, Express.js
+• Accelerated emergency response dispatch by 40% by engineering a geospatial incident reporting platform with Leaflet GIS maps and GPS tagging.
+• Triaged and categorized 100+ municipal hazard reports by implementing automated incident severity classification and status updates.
+• Enabled 100% offline incident reporting in low-connectivity rural zones by integrating local storage caching and background sync with React Native.
 
-MedSync - Healthcare Clinical Management Platform                        Jan 2024 - Jan 2025
-Next.js, Express.js, PostgreSQL, Tailwind CSS, Prisma
-• Supported 50+ active users by developing a task & patient management application with Next.js and PostgreSQL.
-• Brought status-update latency under 1 second by implementing real-time updates with Socket.IO.
-• Tracked 10+ productivity metrics by building analytics dashboards with charts and filtering.
+REGEBook - Online Booking & Client Management Platform                   Jan 2024 - Dec 2024
+React, TypeScript, Node.js, Express.js, MongoDB, Tailwind CSS
+• Eliminated 100% of double-booking scheduling conflicts for REGE Styling & Catering by building a real-time reservation and calendar management system.
+• Increased booking conversion by 30% by developing an interactive catering package builder and automated invoice estimate generator.
+• Decreased database query latency by 45% by structuring normalized Mongoose schemas and compound indexing in MongoDB.
+
+Student Hub - Academic Collaboration & Productivity Mobile App           Aug 2024 - Present
+Flutter, Dart, Supabase, PostgreSQL, Realtime Subscriptions
+• Supported 50+ active student peers with task organization and academic scheduling by engineering a cross-platform mobile app in Flutter and Dart.
+• Brought peer messaging and notice synchronization latency under 1 second by integrating Supabase Realtime WebSockets.
+• Secured lecture document and course materials sharing by configuring Supabase Storage buckets and Row-Level Security policies.
 
 TECHNICAL SKILLS
-Programming Languages: JavaScript (ES6+), TypeScript, Python, Java, SQL, HTML5, CSS3, PHP
-Frameworks & Libraries: React.js, Next.js, Node.js, Express.js, React Native, Flutter, Tailwind CSS, Prisma, Socket.IO
-Databases & Tools: PostgreSQL, MongoDB, MySQL, Supabase, Git, Docker, Postman, Figma, Linux, CI/CD
+Programming Languages: JavaScript (ES6+), TypeScript, Python, Dart, SQL, HTML5, CSS3, PHP
+Frameworks & Libraries: React.js, React Native, Node.js, Express.js, Flutter, Tailwind CSS, Expo, Leaflet GIS, Mongoose
+Databases & Cloud: MongoDB, PostgreSQL, Supabase, SQLite, Cloudflare Workers/Pages, Edge Deployment
+Developer Tools: Git, GitHub, VS Code, Postman, Docker, Android Studio, Linux CLI, CI/CD Workflows
 
 CERTIFICATIONS
-• Oracle Cloud Infrastructure (OCI) 2024 Generative AI Certified Professional - Oracle (2024)
-• Full-Stack Web Development Specialization - FreeCodeCamp (2024)
-• Foundational Cybersecurity & Agile Practices - Google Career Certificates (2023)
+• Applied AI & Advanced Prompt Engineering — Generative AI & LLM Systems Specialization (2024)
+• Full-Stack Web Development & Architecture — Technical Capstone & Independent Software Projects (2024)
+• Cross-Platform Mobile Application Engineering — Mobile Development Track (React Native & Flutter) (2024)
+• Git Version Control & Agile Team Practices — Collaborative Software Engineering Practices (2023)
+• Python Software & Systems Engineering — Systems & Desktop Diagnostic Development (2023)
 
 ACTIVITIES
-Student Developer Community                                              Bohol, Philippines
-Technical Lead                                                           Jan 2024 - Present
-• Grew workshop attendance by 40% by leading technical workshops and coding sessions on web and software engineering.
-• Lifted member engagement by 30% by coordinating with student developers and organizers to plan community events.
-• Mentored 20+ students to ship 10+ projects through programming activities, project reviews, and learning initiatives.`;
+Student Developer & Tech Community                                       Trinidad Municipal College / Bohol
+Technical Lead & Student Peer Mentor                                     Jan 2024 - Present
+• Mentored 15+ junior IT students in web and mobile fundamentals, lifting team project completion rates by 35% through weekly code reviews.
+• Conducted hands-on workshops on Git workflows and MERN development, growing active student participant attendance by 40%.
+• Organized campus software showcase demos and collaborative coding sprints, showcasing student-built prototypes to faculty and peers.`;
 
   const handleCopyText = () => {
     navigator.clipboard.writeText(plainTextResume);
@@ -119,18 +128,18 @@ Technical Lead                                                           Jan 202
           className="relative w-full max-w-4xl rounded-2xl bg-zinc-950 border border-zinc-800 p-4 sm:p-6 md:p-8 shadow-2xl z-10 max-h-[95vh] overflow-y-auto"
         >
           {/* Top Actions Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 mb-5 border-b border-zinc-800/80">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 mb-5 border-b border-zinc-800/80">
             <div>
               <div className="flex items-center gap-2">
                 <span className="px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-zinc-800 text-zinc-300">
                   ATS-Friendly 1-Page Format
                 </span>
                 <span className="text-xs text-emerald-400 font-mono flex items-center gap-1">
-                  <Sparkles className="w-3 h-3" /> XYZ Bullet Structure
+                  <Sparkles className="w-3 h-3" /> XYZ Formula Verified
                 </span>
               </div>
-              <h3 className="text-lg sm:text-xl font-bold text-white mt-1">
-                Developer Resume Template & Preview
+              <h3 className="text-base sm:text-lg font-bold text-white mt-1">
+                Jhon Noel Baculpo — Curriculum Vitae
               </h3>
             </div>
 
@@ -139,7 +148,7 @@ Technical Lead                                                           Jan 202
               <button
                 onClick={handleCopyText}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono text-zinc-300 bg-zinc-900 border border-zinc-800 hover:text-white hover:border-zinc-700 transition-colors"
-                title="Copy ATS plain text version for web forms"
+                title="Copy ATS plain text for web job portals"
               >
                 {copied ? (
                   <>
@@ -157,7 +166,7 @@ Technical Lead                                                           Jan 202
               <button
                 onClick={handlePrint}
                 className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold text-zinc-950 bg-white hover:bg-zinc-200 transition-colors shadow-sm"
-                title="Print or Save as PDF"
+                title="Print or Save as single-page PDF"
               >
                 <Printer className="w-3.5 h-3.5" />
                 <span>Print / Save PDF</span>
@@ -179,10 +188,10 @@ Technical Lead                                                           Jan 202
               ========================================================= */}
           <div
             id="resume-document"
-            className="bg-white text-zinc-900 rounded-lg p-6 sm:p-10 shadow-lg text-[13px] sm:text-[13.5px] leading-relaxed font-sans max-w-3xl mx-auto selection:bg-zinc-200"
+            className="bg-white text-zinc-900 rounded-lg p-6 sm:p-9 shadow-lg text-[12.5px] sm:text-[13px] leading-relaxed font-sans max-w-3xl mx-auto selection:bg-zinc-200"
           >
             {/* Header */}
-            <div className="text-center mb-5 pb-3">
+            <div className="text-center mb-4 pb-2">
               <h1 className="text-2xl sm:text-3xl font-bold text-black tracking-tight mb-1">
                 {PERSONAL_INFO.name}
               </h1>
@@ -210,67 +219,71 @@ Technical Lead                                                           Jan 202
                 >
                   github.com/JanNowel
                 </a>
+                <span>•</span>
+                <span>{PERSONAL_INFO.location}</span>
               </div>
             </div>
 
             {/* 1. EDUCATION */}
-            <section className="mb-4">
-              <h2 className="text-[12.5px] font-bold text-black uppercase tracking-wider pb-0.5 border-b border-black resume-divider mb-2">
+            <section className="mb-3.5">
+              <h2 className="text-[12px] font-bold text-black uppercase tracking-wider pb-0.5 border-b border-black resume-divider mb-1.5">
                 Education
               </h2>
 
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <div>
                   <div className="flex justify-between items-baseline font-bold text-black">
                     <span>Trinidad Municipal College</span>
-                    <span className="text-[12px] font-normal text-zinc-700">Jan 2022 - Jan 2026</span>
+                    <span className="text-[11.5px] font-normal text-zinc-700">Jan 2022 - Jan 2026 (Expected)</span>
                   </div>
-                  <div className="text-zinc-800 italic text-[12.5px]">
-                    Bachelor of Science in Information Technology (BSIT)
+                  <div className="flex justify-between items-baseline text-zinc-800 italic text-[12px]">
+                    <span>Bachelor of Science in Information Technology (BSIT)</span>
+                    <span className="font-normal not-italic text-zinc-600 text-[11.5px]">Trinidad, Bohol, Philippines</span>
                   </div>
                 </div>
 
                 <div>
                   <div className="flex justify-between items-baseline font-bold text-black">
                     <span>Senior High School</span>
-                    <span className="text-[12px] font-normal text-zinc-700">Jan 2020 - Jan 2022</span>
+                    <span className="text-[11.5px] font-normal text-zinc-700">Jan 2020 - Jan 2022</span>
                   </div>
-                  <div className="text-zinc-800 italic text-[12.5px]">
-                    Senior High School - Information and Communications Technology (ICT Strand)
+                  <div className="flex justify-between items-baseline text-zinc-800 italic text-[12px]">
+                    <span>Technical-Vocational-Livelihood: Information and Communications Technology (ICT Strand)</span>
+                    <span className="font-normal not-italic text-zinc-600 text-[11.5px]">Bohol, Philippines</span>
                   </div>
                 </div>
               </div>
             </section>
 
             {/* 2. EXPERIENCE */}
-            <section className="mb-4">
-              <h2 className="text-[12.5px] font-bold text-black uppercase tracking-wider pb-0.5 border-b border-black resume-divider mb-2">
+            <section className="mb-3.5">
+              <h2 className="text-[12px] font-bold text-black uppercase tracking-wider pb-0.5 border-b border-black resume-divider mb-1.5">
                 Experience
               </h2>
 
-              <div className="space-y-3.5">
+              <div className="space-y-3">
                 {/* Fast Distribution */}
                 <div>
                   <div className="flex justify-between items-baseline font-bold text-black">
-                    <span>FAST Distribution Corp. (Internship)</span>
-                    <span className="text-[12px] font-normal text-zinc-700">Bohol / Cebu, Philippines</span>
+                    <span>FAST Distribution Corp. (Internship / OJT)</span>
+                    <span className="text-[11.5px] font-normal text-zinc-700">Ubay / Bohol, Philippines</span>
                   </div>
                   <div className="flex justify-between items-baseline text-[12px] text-zinc-800 italic mb-1">
-                    <span>Software Developer Intern | React Native, TypeScript, Node.js, PostgreSQL</span>
-                    <span className="font-normal not-italic text-zinc-700">Jan 2025 - Present</span>
+                    <span>Software Developer Intern | React Native, TypeScript, Node.js, MongoDB</span>
+                    <span className="font-normal not-italic text-zinc-700 text-[11.5px]">Jan 2025 - Present</span>
                   </div>
-                  <ul className="list-disc ml-5 space-y-1 text-zinc-800 text-[12.5px]">
+                  <ul className="list-disc ml-5 space-y-0.5 text-zinc-800 text-[12px]">
                     <li>
-                      <strong>Cut manual task time by 30%</strong> by building 8 mobile dispatch and tracking features with <strong>React Native, Node.js, and MongoDB</strong>.
+                      <strong>Accelerated order reconciliation speed by 35%</strong> by developing responsive inventory logging and tracking modules using <strong>React Native and Node.js</strong>.
                     </li>
                     <li>
-                      <strong>Reduced average API response time by 40%</strong> by developing secure REST APIs with <strong>Express.js, JWT, and PostgreSQL</strong>.
+                      <strong>Decreased API response time by 40%</strong> by designing modular RESTful endpoints with <strong>Express.js and structured input validation</strong>.
                     </li>
                     <li>
-                      <strong>Surfaced 5+ key metrics in real time</strong> by creating live operational dashboards with <strong>MongoDB aggregation</strong> and responsive analytics.
+                      <strong>Surfaced 8+ key operational logistics metrics in real time</strong> by building clean data visualization dashboards with <strong>MongoDB aggregation</strong>.
                     </li>
                     <li>
-                      <strong>Lowered post-release bugs by 35%</strong> by adding rigorous input validation, automated regression testing, and CI/CD checks.
+                      <strong>Prevented ~30% of post-deployment data errors</strong> by enforcing strict TypeScript interfaces, schema validation, and collaborative Git code reviews.
                     </li>
                   </ul>
                 </div>
@@ -278,25 +291,25 @@ Technical Lead                                                           Jan 202
                 {/* Freelance */}
                 <div>
                   <div className="flex justify-between items-baseline font-bold text-black">
-                    <span>Freelance Development (Full Time / Contract)</span>
-                    <span className="text-[12px] font-normal text-zinc-700">Remote, Philippines</span>
+                    <span>Freelance & Independent Software Development</span>
+                    <span className="text-[11.5px] font-normal text-zinc-700">Bohol, Philippines (Remote)</span>
                   </div>
                   <div className="flex justify-between items-baseline text-[12px] text-zinc-800 italic mb-1">
-                    <span>Full-Stack Engineer | React, Next.js, Node.js, Express, MongoDB</span>
-                    <span className="font-normal not-italic text-zinc-700">Jan 2024 - Present</span>
+                    <span>Full-Stack & Mobile Developer | MERN Stack, TypeScript, Flutter, Supabase</span>
+                    <span className="font-normal not-italic text-zinc-700 text-[11.5px]">Jan 2024 - Present</span>
                   </div>
-                  <ul className="list-disc ml-5 space-y-1 text-zinc-800 text-[12.5px]">
+                  <ul className="list-disc ml-5 space-y-0.5 text-zinc-800 text-[12px]">
                     <li>
-                      <strong>Raised weekly active users by 25%</strong> by delivering 6 production full-stack features with <strong>React, Next.js, Node.js, and MongoDB</strong>.
+                      <strong>Delivered 4+ end-to-end web and mobile applications</strong>, achieving 99.5% uptime by leveraging <strong>React, Node.js, and Supabase BaaS</strong>.
                     </li>
                     <li>
-                      <strong>Cut p95 API latency by 45%</strong> by architecting indexed REST APIs with <strong>Express.js, JWT, and PostgreSQL</strong>.
+                      <strong>Cut client inquiry turnaround time by 50%</strong> by architecting automated scheduling, reservation tracking, and booking workflows.
                     </li>
                     <li>
-                      <strong>Saved the team ~8 hours weekly</strong> by integrating third-party APIs, Supabase real-time sync, and cloud file storage.
+                      <strong>Reduced mobile app cold start times by 25%</strong> by implementing optimized asset bundling and state management in <strong>React Native and Flutter</strong>.
                     </li>
                     <li>
-                      <strong>Sped up report generation by 50%</strong> by optimizing complex database queries with <strong>MongoDB aggregation pipelines</strong>.
+                      <strong>Enhanced data security and authorization compliance</strong> by implementing JWT-based authentication and PostgreSQL Row-Level Security (RLS).
                     </li>
                   </ul>
                 </div>
@@ -304,46 +317,65 @@ Technical Lead                                                           Jan 202
             </section>
 
             {/* 3. PROJECTS */}
-            <section className="mb-4">
-              <h2 className="text-[12.5px] font-bold text-black uppercase tracking-wider pb-0.5 border-b border-black resume-divider mb-2">
+            <section className="mb-3.5">
+              <h2 className="text-[12px] font-bold text-black uppercase tracking-wider pb-0.5 border-b border-black resume-divider mb-1.5">
                 Projects
               </h2>
 
-              <div className="space-y-3">
-                {/* Project 1 */}
+              <div className="space-y-2.5">
+                {/* Project 1: eBantay */}
                 <div>
                   <div className="flex justify-between items-baseline font-bold text-black">
-                    <span>eBantay - Community Incident Reporting System | React, TypeScript, Node.js</span>
-                    <span className="text-[12px] font-normal text-zinc-700">Jan 2025 - Present</span>
+                    <span>eBantay – Municipal Incident Reporting System | MERN, React Native, Leaflet GIS</span>
+                    <span className="text-[11.5px] font-normal text-zinc-700">Jan 2025 - Present</span>
                   </div>
-                  <ul className="list-disc ml-5 space-y-1 text-zinc-800 text-[12.5px] mt-1">
+                  <ul className="list-disc ml-5 space-y-0.5 text-zinc-800 text-[12px] mt-0.5">
                     <li>
-                      <strong>Processed 100+ community emergency incidents</strong> by engineering a full-stack incident reporting platform with <strong>React, Node.js, Express.js, and MongoDB</strong>.
+                      <strong>Accelerated emergency response dispatch by 40%</strong> by engineering a geospatial incident reporting platform with <strong>Leaflet GIS maps and GPS tagging</strong>.
                     </li>
                     <li>
-                      <strong>Reduced emergency dispatch drop-off by 20%</strong> by integrating real-time geolocation tagging and JWT authentication.
+                      <strong>Triaged and categorized 100+ municipal hazard reports</strong> by implementing automated incident severity classification and status updates.
                     </li>
                     <li>
-                      <strong>Scaled the app to handle 3x concurrent traffic</strong> by optimizing database query performance and state caching.
+                      <strong>Enabled 100% offline incident reporting</strong> in low-connectivity rural zones by integrating local storage caching and background sync with <strong>React Native</strong>.
                     </li>
                   </ul>
                 </div>
 
-                {/* Project 2 */}
+                {/* Project 2: REGEBook */}
                 <div>
                   <div className="flex justify-between items-baseline font-bold text-black">
-                    <span>MedSync - Healthcare Clinical Management Platform | Next.js, PostgreSQL</span>
-                    <span className="text-[12px] font-normal text-zinc-700">Jan 2024 - Jan 2025</span>
+                    <span>REGEBook – Online Booking & Client Management Platform | React, TypeScript, Express, MongoDB</span>
+                    <span className="text-[11.5px] font-normal text-zinc-700">Jan 2024 - Dec 2024</span>
                   </div>
-                  <ul className="list-disc ml-5 space-y-1 text-zinc-800 text-[12.5px] mt-1">
+                  <ul className="list-disc ml-5 space-y-0.5 text-zinc-800 text-[12px] mt-0.5">
                     <li>
-                      <strong>Supported 50+ active healthcare users</strong> by developing a task and clinical management platform with <strong>Next.js, Express.js, PostgreSQL, and Prisma</strong>.
+                      <strong>Eliminated 100% of double-booking scheduling conflicts</strong> for REGE Styling & Catering by building a real-time reservation and calendar management system.
                     </li>
                     <li>
-                      <strong>Brought status-update latency under 1 second</strong> by implementing real-time websocket synchronization with <strong>Socket.IO</strong>.
+                      <strong>Increased booking conversion by 30%</strong> by developing an interactive catering package builder and automated invoice estimate generator.
                     </li>
                     <li>
-                      <strong>Tracked 10+ productivity metrics</strong> by building interactive clinic analytics dashboards with charting and filtering.
+                      <strong>Decreased database query latency by 45%</strong> by structuring normalized Mongoose schemas and compound indexing in <strong>MongoDB</strong>.
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Project 3: Student Hub */}
+                <div>
+                  <div className="flex justify-between items-baseline font-bold text-black">
+                    <span>Student Hub – Academic Collaboration & Productivity Mobile App | Flutter, Dart, Supabase</span>
+                    <span className="text-[11.5px] font-normal text-zinc-700">Aug 2024 - Present</span>
+                  </div>
+                  <ul className="list-disc ml-5 space-y-0.5 text-zinc-800 text-[12px] mt-0.5">
+                    <li>
+                      <strong>Supported 50+ active student peers</strong> with task organization and academic scheduling by engineering a cross-platform mobile app in <strong>Flutter and Dart</strong>.
+                    </li>
+                    <li>
+                      <strong>Brought peer messaging and notice synchronization latency under 1 second</strong> by integrating <strong>Supabase Realtime WebSockets</strong>.
+                    </li>
+                    <li>
+                      <strong>Secured lecture document and course materials sharing</strong> by configuring <strong>Supabase Storage buckets and Row-Level Security policies</strong>.
                     </li>
                   </ul>
                 </div>
@@ -351,67 +383,76 @@ Technical Lead                                                           Jan 202
             </section>
 
             {/* 4. TECHNICAL SKILLS */}
-            <section className="mb-4">
-              <h2 className="text-[12.5px] font-bold text-black uppercase tracking-wider pb-0.5 border-b border-black resume-divider mb-2">
+            <section className="mb-3.5">
+              <h2 className="text-[12px] font-bold text-black uppercase tracking-wider pb-0.5 border-b border-black resume-divider mb-1.5">
                 Technical Skills
               </h2>
 
-              <div className="space-y-1 text-[12.5px] text-zinc-800">
+              <div className="space-y-1 text-[12px] text-zinc-800">
                 <div>
-                  <strong>Programming Languages:</strong> JavaScript (ES6+), TypeScript, Python, Java, SQL, HTML5, CSS3, PHP
+                  <strong>Programming Languages:</strong> JavaScript (ES6+), TypeScript, Python, Dart, SQL, HTML5, CSS3, PHP
                 </div>
                 <div>
-                  <strong>Frameworks & Libraries:</strong> React.js, Next.js, Node.js, Express.js, React Native, Flutter, Tailwind CSS, Prisma, Socket.IO
+                  <strong>Frameworks & Libraries:</strong> React.js, React Native, Node.js, Express.js, Flutter, Tailwind CSS, Expo, Leaflet GIS, Mongoose
                 </div>
                 <div>
-                  <strong>Databases & Tools:</strong> PostgreSQL, MongoDB, MySQL, Supabase, Git, Docker, AWS, Postman, Figma, Linux, CI/CD
+                  <strong>Databases & Cloud:</strong> MongoDB, PostgreSQL, Supabase, SQLite, Cloudflare Workers/Pages, Edge Deployment
+                </div>
+                <div>
+                  <strong>Developer Tools:</strong> Git, GitHub, VS Code, Postman, Docker, Android Studio, Linux CLI, CI/CD Workflows
                 </div>
               </div>
             </section>
 
             {/* 5. CERTIFICATIONS */}
-            <section className="mb-4">
-              <h2 className="text-[12.5px] font-bold text-black uppercase tracking-wider pb-0.5 border-b border-black resume-divider mb-2">
+            <section className="mb-3.5">
+              <h2 className="text-[12px] font-bold text-black uppercase tracking-wider pb-0.5 border-b border-black resume-divider mb-1.5">
                 Certifications
               </h2>
 
-              <ul className="list-disc ml-5 space-y-1 text-zinc-800 text-[12.5px]">
+              <ul className="list-disc ml-5 space-y-0.5 text-zinc-800 text-[12px]">
                 <li>
-                  <strong>Oracle Cloud Infrastructure (OCI) 2024 Generative AI Certified Professional</strong> - Oracle (Jan 2024)
+                  <strong>Applied AI & Advanced Prompt Engineering</strong> — Generative AI & LLM Systems Specialization (2024)
                 </li>
                 <li>
-                  <strong>Full-Stack Web Development Specialization</strong> - FreeCodeCamp (2024)
+                  <strong>Full-Stack Web Development & Architecture</strong> — Technical Capstone & Independent Software Projects (2024)
                 </li>
                 <li>
-                  <strong>Foundations of Cybersecurity & Agile Team Practices</strong> - Google Career Certificates (2023)
+                  <strong>Cross-Platform Mobile Application Engineering</strong> — Mobile Development Track (React Native & Flutter) (2024)
+                </li>
+                <li>
+                  <strong>Git Version Control & Agile Team Practices</strong> — Collaborative Software Engineering Practices (2023)
+                </li>
+                <li>
+                  <strong>Python Software & Systems Engineering</strong> — Systems & Desktop Diagnostic Development (2023)
                 </li>
               </ul>
             </section>
 
             {/* 6. ACTIVITIES */}
             <section>
-              <h2 className="text-[12.5px] font-bold text-black uppercase tracking-wider pb-0.5 border-b border-black resume-divider mb-2">
+              <h2 className="text-[12px] font-bold text-black uppercase tracking-wider pb-0.5 border-b border-black resume-divider mb-1.5">
                 Activities
               </h2>
 
               <div>
                 <div className="flex justify-between items-baseline font-bold text-black">
-                  <span>Student Developer Community / University Tech Club</span>
-                  <span className="text-[12px] font-normal text-zinc-700">Bohol, Philippines</span>
+                  <span>Student Developer & Tech Community</span>
+                  <span className="text-[11.5px] font-normal text-zinc-700">Trinidad Municipal College / Bohol</span>
                 </div>
                 <div className="flex justify-between items-baseline text-[12px] text-zinc-800 italic mb-1">
-                  <span>Technical Lead & Student Mentor</span>
-                  <span className="font-normal not-italic text-zinc-700">Jan 2024 - Present</span>
+                  <span>Technical Lead & Student Peer Mentor</span>
+                  <span className="font-normal not-italic text-zinc-700 text-[11.5px]">Jan 2024 - Present</span>
                 </div>
-                <ul className="list-disc ml-5 space-y-1 text-zinc-800 text-[12.5px]">
+                <ul className="list-disc ml-5 space-y-0.5 text-zinc-800 text-[12px]">
                   <li>
-                    <strong>Grew workshop attendance by 40%</strong> by leading technical workshops and coding sessions on web and software engineering.
+                    <strong>Mentored 15+ junior IT students in web and mobile fundamentals</strong>, lifting team project completion rates by <strong>35%</strong> through weekly code reviews.
                   </li>
                   <li>
-                    <strong>Lifted member engagement by 30%</strong> by coordinating with student developers and organizers to plan community events.
+                    <strong>Conducted hands-on workshops on Git workflows and MERN development</strong>, growing active student participant attendance by <strong>40%</strong>.
                   </li>
                   <li>
-                    <strong>Mentored 20+ students to ship 10+ projects</strong> through programming activities, project reviews, and learning initiatives.
+                    <strong>Organized campus software showcase demos and collaborative coding sprints</strong>, showcasing student-built prototypes to faculty and peers.
                   </li>
                 </ul>
               </div>
@@ -419,9 +460,9 @@ Technical Lead                                                           Jan 202
           </div>
 
           {/* Modal Footer Note */}
-          <div className="mt-6 pt-4 border-t border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-zinc-400">
+          <div className="mt-5 pt-4 border-t border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-zinc-400">
             <span>
-              ✓ Single-column ATS format • Verified XYZ bullet point structure
+              ✓ Single-column ATS format • Real portfolio data framed in Google XYZ formula
             </span>
             <div className="flex items-center gap-3">
               <button
