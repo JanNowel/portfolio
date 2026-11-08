@@ -12,7 +12,7 @@ export interface MonthHeader {
 
 export const GITHUB_MONTHS: MonthHeader[] = [
   {
-    "span": 5,
+    "span": 4,
     "name": "Nov"
   },
   {
@@ -60,49 +60,12 @@ export const GITHUB_MONTHS: MonthHeader[] = [
     "name": "Oct"
   },
   {
-    "span": 1,
+    "span": 2,
     "name": "Nov"
   }
 ];
 
 export const GITHUB_CONTRIBUTION_WEEKS: CalendarDay[][] = [
-  [
-    {
-      "date": "2025-11-02",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-11-03",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-11-04",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-11-05",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-11-06",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-11-07",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-11-08",
-      "count": 0,
-      "level": 0
-    }
-  ],
   [
     {
       "date": "2025-11-09",
@@ -2023,6 +1986,13 @@ export const GITHUB_CONTRIBUTION_WEEKS: CalendarDay[][] = [
     },
     {
       "date": "2026-11-07",
+      "count": 0,
+      "level": 0
+    }
+  ],
+  [
+    {
+      "date": "2026-11-08",
       "count": 0,
       "level": 0
     }
