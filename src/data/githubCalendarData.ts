@@ -1728,7 +1728,7 @@ export const GITHUB_CONTRIBUTION_WEEKS: CalendarDay[][] = [
     {
       "date": "2026-10-03",
       "count": 7,
-      "level": 3
+      "level": 2
     }
   ],
   [
@@ -1782,7 +1782,7 @@ export const GITHUB_CONTRIBUTION_WEEKS: CalendarDay[][] = [
     {
       "date": "2026-10-13",
       "count": 7,
-      "level": 3
+      "level": 2
     },
     {
       "date": "2026-10-14",
@@ -1809,7 +1809,7 @@ export const GITHUB_CONTRIBUTION_WEEKS: CalendarDay[][] = [
     {
       "date": "2026-10-18",
       "count": 7,
-      "level": 3
+      "level": 2
     },
     {
       "date": "2026-10-19",
@@ -1865,13 +1865,13 @@ export const GITHUB_CONTRIBUTION_WEEKS: CalendarDay[][] = [
     },
     {
       "date": "2026-10-29",
-      "count": 3,
-      "level": 1
+      "count": 5,
+      "level": 2
     },
     {
       "date": "2026-10-30",
       "count": 7,
-      "level": 3
+      "level": 2
     },
     {
       "date": "2026-10-31",
@@ -1887,12 +1887,12 @@ export const GITHUB_CONTRIBUTION_WEEKS: CalendarDay[][] = [
     },
     {
       "date": "2026-11-02",
-      "count": 10,
+      "count": 12,
       "level": 4
     },
     {
       "date": "2026-11-03",
-      "count": 11,
+      "count": 13,
       "level": 4
     },
     {
@@ -1902,7 +1902,7 @@ export const GITHUB_CONTRIBUTION_WEEKS: CalendarDay[][] = [
     },
     {
       "date": "2026-11-05",
-      "count": 13,
+      "count": 15,
       "level": 4
     },
     {
@@ -1929,8 +1929,8 @@ export const GITHUB_CONTRIBUTION_WEEKS: CalendarDay[][] = [
     },
     {
       "date": "2026-11-10",
-      "count": 0,
-      "level": 0
+      "count": 2,
+      "level": 1
     },
     {
       "date": "2026-11-11",
@@ -1939,8 +1939,8 @@ export const GITHUB_CONTRIBUTION_WEEKS: CalendarDay[][] = [
     },
     {
       "date": "2026-11-12",
-      "count": 0,
-      "level": 0
+      "count": 2,
+      "level": 1
     },
     {
       "date": "2026-11-13",
@@ -1966,8 +1966,8 @@ export const GITHUB_CONTRIBUTION_WEEKS: CalendarDay[][] = [
     },
     {
       "date": "2026-11-17",
-      "count": 0,
-      "level": 0
+      "count": 2,
+      "level": 1
     },
     {
       "date": "2026-11-18",
@@ -1976,8 +1976,8 @@ export const GITHUB_CONTRIBUTION_WEEKS: CalendarDay[][] = [
     },
     {
       "date": "2026-11-19",
-      "count": 0,
-      "level": 0
+      "count": 2,
+      "level": 1
     },
     {
       "date": "2026-11-20",
@@ -1993,8 +1993,8 @@ export const GITHUB_CONTRIBUTION_WEEKS: CalendarDay[][] = [
   [
     {
       "date": "2026-11-22",
-      "count": 0,
-      "level": 0
+      "count": 2,
+      "level": 1
     },
     {
       "date": "2026-11-23",
@@ -2003,8 +2003,8 @@ export const GITHUB_CONTRIBUTION_WEEKS: CalendarDay[][] = [
     },
     {
       "date": "2026-11-24",
-      "count": 0,
-      "level": 0
+      "count": 2,
+      "level": 1
     },
     {
       "date": "2026-11-25",
@@ -2018,10 +2018,15 @@ export const GITHUB_CONTRIBUTION_WEEKS: CalendarDay[][] = [
     },
     {
       "date": "2026-11-27",
-      "count": 0,
-      "level": 0
+      "count": 2,
+      "level": 1
+    },
+    {
+      "date": "2026-11-28",
+      "count": 1,
+      "level": 1
     }
   ]
 ];
 
-export const GITHUB_TOTAL_CONTRIBUTIONS = 255;
+export const GITHUB_TOTAL_CONTRIBUTIONS = 278;
